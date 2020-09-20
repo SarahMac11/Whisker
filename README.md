@@ -1,5 +1,10 @@
 # Whisker
 
+### Helpful links for Ionic and Angular
+https://ionicframework.com/docs
+https://angular.io/docs
+
+
 ## Communication Plan
 Meet Tuesdays after class until 3:15pm via Zoom
 Meet Fridays via Zoom
