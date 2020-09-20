@@ -1,3 +1,29 @@
 <ion-app>
   <ion-router-outlet></ion-router-outlet>
+  <ion-tabs>
+
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="login" [disabled]='loginService.isLoggedIn()'>
+        <ion-icon name="triangle"></ion-icon>
+        <ion-label>Login</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="register" [disabled]='loginService.isLoggedIn()'>
+        <ion-icon name="ellipse"></ion-icon>
+        <ion-label>Register</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button (click)='logout()' [disabled]='!loginService.isLoggedIn()'>
+        <ion-icon name="square"></ion-icon>
+        <ion-label>Logout</ion-label>
+      </ion-tab-button>
+      <ion-tab-button (click)='changeTheme()'>
+        <ion-icon name='sunny-outline' *ngIf='!settingsService.isDarkMode()'></ion-icon>
+        <ion-icon name="moon-outline" *ngIf='settingsService.isDarkMode()'></ion-icon>
+        <ion-label>Change Theme</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  
+  </ion-tabs>
+  
 </ion-app>

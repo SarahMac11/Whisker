@@ -1,0 +1,45 @@
+.centered {
+    margin: 15% 0% 0% 0%;
+    --border-radius: 0 !important;
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 10%;
+    width: 100%;
+}
+#login-group {
+    margin: 5vh 15% 0 15%;
+}
+#password-item,#remember-me-item,#login-button-item,#login-spinner-item {
+    margin-top: 25px;
+}
+#remember-me-item,#login-spinner-item,#login-error-item {
+    max-width: fit-content;
+    min-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+#back {
+    margin-top: 2vh;
+    margin-left: 2vw;
+}
+.signin-text {
+    margin-right: 10px;
+}
+#back-button-text {
+    margin-left: 10px;
+}
+#login-button {
+    margin: auto;
+}
+#login-spinner {
+    width: 40px !important;
+    height: 40px !important;
+}
+ion-item {
+    --background: none !important;
+}
+.error-text {
+    margin-left: 10px;
+}

@@ -5,6 +5,31 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'confirm-registration',
+    loadChildren: () => import('./pages/confirm-registration/confirm-registration.module').then( m => m.ConfirmRegistrationPageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'session-expired',
+    loadChildren: () => import('./pages/session-expired/session-expired.module').then( m => m.SessionExpiredPageModule)
+  },
+  {
+    path: 'verify',
+    loadChildren: () => import('./pages/verify/verify.module').then( m => m.VerifyPageModule)
+  },
+  // wildcard, redirect non-recognized routes to the base route
+  {
+    path: '**',
+    redirectTo: ''
   }
 ];
 @NgModule({
