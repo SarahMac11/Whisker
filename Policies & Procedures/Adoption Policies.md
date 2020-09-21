@@ -5,7 +5,8 @@
 - Barn Cat Specific: Adopters agree they are able to provide shelter with cool and warm environments for their cat.
 - Dog Specific: Adopters agree they are able to provide shelter with cool and warm environments for their dog.  
   
-**ANIMAL**
+**ANIMAL/RESCUES**
+- Rescues must be 501(c)(3) non-profit organizations able to pass an inspection by Whisker members
 - All animals must be spayed or neutered at the time of adoption
 - All animals must be up to date on vaccinations at the time of adoption
 - All animals must be microchipped at the time of adoption
