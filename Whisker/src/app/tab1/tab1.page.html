@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
       Home
@@ -14,4 +14,34 @@
   </ion-header>
 
   <app-explore-container name="Tab 1 page"></app-explore-container>
+</ion-content> -->
+
+<ion-content>
+  <ion-card class="welcome-card">
+    <img src="/assets/icon/dog_favicon.png" alt="dog" />
+    <img src="/assets/icon/cat_favicon.png" alt="cat" />
+    <ion-card-header>
+      <ion-card-title>Whisker</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>"Pairing People with Pets"</p>
+    </ion-card-content>
+  </ion-card>
+  <ion-list lines="none">
+    <ion-list-header>
+      <ion-label>Resources</ion-label>
+    </ion-list-header>
+    <ion-item href="https://mu.verbacompare.com/">
+      <ion-icon slot="start" color="medium" name="school"></ion-icon>
+      <ion-label>University of Missouri Bookstore</ion-label>
+    </ion-item>
+    <ion-item href="https://www.ebay.com/b/School-Textbooks-Study-Guides/171223/bn_223819">
+      <ion-icon slot="start" color="medium" name="journal"></ion-icon>
+      <ion-label>eBay Textbooks and Study Guides</ion-label>
+    </ion-item>
+    <ion-item href="https://www.amazon.com/New-Used-Textbooks-Books/b/?node=465600&tag=googhydr-20&hvadid=194747599812&hvpos=1t1&hvexid=&hvnetw=g&hvrand=12100803246243686993&hvpone=&hvptwo=&hvqmt=e&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9023535&hvtargid=aud-647846986281:kwd-943592081&ref=pd_sl_81m59a70bo_e">
+      <ion-icon slot="start" color="medium" name="basket"></ion-icon>
+      <ion-label>Amazon Textbooks</ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
