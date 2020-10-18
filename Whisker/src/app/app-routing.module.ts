@@ -2,14 +2,12 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
-  // },
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '',
+    loadChildren: () => import('./pages/start/start.module').then(m => m.StartPageModule)
+  },
   {
     path: 'home',
-    loadChildren: () => import('./tab1/tab1.module').then( m => m.Tab1PageModule) 
+    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
   },
   {
     path: 'browse',
@@ -20,7 +18,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
   {
-    path: 'confirm-registration',
+    path: 'confirmRegistration',
     loadChildren: () => import('./pages/confirm-registration/confirm-registration.module').then( m => m.ConfirmRegistrationPageModule)
   },
   {
@@ -28,7 +26,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
   },
   {
-    path: 'session-expired',
+    path: 'sessionExpired',
     loadChildren: () => import('./pages/session-expired/session-expired.module').then( m => m.SessionExpiredPageModule)
   },
   {
@@ -40,6 +38,7 @@ const routes: Routes = [
     path: '**',
     redirectTo: ''
   }
+  
 ];
 @NgModule({
   imports: [

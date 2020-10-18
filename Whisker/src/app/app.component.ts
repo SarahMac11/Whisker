@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { LoginService } from './services/login.service';
 import { SettingsService } from './services/settings.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,8 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private loginService: LoginService,
-    private settingsService: SettingsService
+    private settingsService: SettingsService,
+    private router: Router
   ) {
     this.initializeApp();
   }
@@ -28,7 +30,11 @@ export class AppComponent {
       this.splashScreen.hide();
     });
   }
+  get isLoggedIn(): boolean {
+    return (this.loginService.user && this.loginService.isLoggedIn());
+  }
   logout() {
+    this.router.navigateByUrl('/');
     this.loginService.logout();
   }
   changeTheme() {

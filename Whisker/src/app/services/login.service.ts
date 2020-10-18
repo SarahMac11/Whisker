@@ -78,9 +78,9 @@ export class LoginService {
    logout() {
      if (this.loggedIn) {
       this.storage.remove('loggedIn');
-     this.tokenPresent = false;
-     this.loggedIn = false;
-     this.router.navigate(["/"]);
+      this.user = undefined;
+      this.tokenPresent = false;
+      this.loggedIn = false;
      }
    }
    searchUser(username: String) {
