@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { StartPageRoutingModule } from './start-routing.module';
 
 import { StartPage } from './start.page';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    StartPageRoutingModule
+    StartPageRoutingModule,
+    RouterModule
   ],
   declarations: [StartPage]
 })

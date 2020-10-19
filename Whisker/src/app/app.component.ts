@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { MenuController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { LoginService } from './services/login.service';
@@ -19,7 +19,8 @@ export class AppComponent {
     private statusBar: StatusBar,
     private loginService: LoginService,
     private settingsService: SettingsService,
-    private router: Router
+    private router: Router,
+    private menuCtl: MenuController
   ) {
     this.initializeApp();
   }
@@ -36,9 +37,19 @@ export class AppComponent {
   logout() {
     this.router.navigateByUrl('/');
     this.loginService.logout();
+    this.closeMenu();
   }
   changeTheme() {
     this.settingsService.toggleDarkMode();
+  }
+  isMobile(): boolean {
+    return (this.platform.width() < 768)
+  }
+  async openMenu() {
+    return await this.menuCtl.open('main');
+  }
+  async closeMenu() {
+    return await this.menuCtl.close('main');
   }
 
 }
