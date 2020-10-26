@@ -15,7 +15,7 @@ export class LoginService {
   user: User;
 
   // CHANGE THIS TO WHISKER'S, HAVE THIS HERE FOR A BASE TO WORK WITH
-  apiUrl = 'https://www.practirio.com:9000/';
+  apiUrl = 'https://www.whiskerapp.org:9000/';
 
   constructor(private http: HttpClient, private storage: Storage, private router: Router) {
     this.storage.get('loggedIn').then((user) => {
