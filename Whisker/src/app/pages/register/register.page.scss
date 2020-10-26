@@ -1,0 +1,60 @@
+#back {
+    margin-top: 2vh;
+    margin-left: 2vw;
+}
+#back-button-text {
+    margin-left: 10px;
+}
+.form-field-group {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 15%;
+    align-items: center;
+    justify-content: center;
+}
+.error-field-group {
+    margin: 3vh 15%;
+    align-items: center;
+    justify-content: center;
+}
+.form-field {
+    margin: 10px;
+    flex-basis: content;
+    min-width: 40%;
+}
+ion-item {
+    --background: none !important;
+}
+.left-margin {
+    margin-left: 10px;
+}
+.alert-icon {
+    margin-right: 10px;
+}
+.error-field {
+    width: 90%;
+    word-wrap: break-word;
+    margin: auto;
+}
+#create-account-button {
+    margin: 2vh auto;
+}
+.small-spinner {
+    width: 1em;
+    height: 1em;
+}
+#register-spinner {
+    width: 40px !important;
+    height: 40px !important;
+}
+#register-spinner-item {
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+
+}
+.link {
+    text-align: center;
+    margin: auto;
+}

@@ -1,0 +1,30 @@
+<ion-content>
+  <div *ngIf='loading' id='loading-div'>
+    <ion-spinner id='loading' name="dots"></ion-spinner>
+  </div>
+  <div id='text' *ngIf='!loading && verified'>
+<ion-text id="thank-you"><h2>Your Whisker Account has been verified!</h2></ion-text><br>
+<ion-text id="message">Thank you for verifying your email address! You can now log in to Whisker.</ion-text>
+<ion-buttons id='buttons'>
+  <ion-button routerLink="/" id="back-button">
+    <ion-icon name="arrow-back-outline" size="large"></ion-icon>
+    <span id="back-button-text">Home</span>
+  </ion-button>
+  <ion-button routerLink="/login" id="login-button">
+    <span id="login-button-text">Login</span>
+    <ion-icon name="arrow-forward-outline" size="large">
+    </ion-icon>
+  </ion-button>
+</ion-buttons>
+</div>
+<div id='text' *ngIf='!loading && !verified'>
+  <ion-text id='thank-you'><h2>{{message}}</h2></ion-text>
+  <ion-text id="message">We weren't able to verify your account. Make sure to use the link sent to your email address.</ion-text>
+  <ion-buttons id='buttons'>
+    <ion-button routerLink="/" id="back-button">
+      <ion-icon name="arrow-back-outline" size="large"></ion-icon>
+      <span id="back-button-text">Home</span>
+    </ion-button>
+  </ion-buttons>
+</div>
+</ion-content>

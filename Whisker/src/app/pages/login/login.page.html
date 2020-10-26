@@ -1,0 +1,42 @@
+<ion-content padding>
+  <ion-buttons id="back">
+    <ion-button routerLink="/" id="back-button">
+      <ion-icon name="arrow-back-outline" size="large"></ion-icon>
+      <span id="back-button-text">Back</span>
+    </ion-button>
+  </ion-buttons>
+  <ion-text class="ion-text-center">
+    <h2>Login</h2>
+  </ion-text>
+  <form name=loginForm [formGroup]='loginForm' (ngSubmit)='login()'>
+    <ion-item-group id="login-group">
+      <ion-item id='login-error-item' lines="none">
+        <ion-icon *ngIf='didLoginFail' name='alert-circle-outline' color="danger"></ion-icon>
+        <ion-text *ngIf='didLoginFail' class='error-text'>{{errorMessage}}</ion-text>
+      </ion-item>
+    <ion-item>
+      <ion-icon name="person" slot="start" color="secondary"></ion-icon>
+      <ion-label position="stacked">Username / Email</ion-label>
+      <ion-input formControlName='username' name=username required [disabled]="isLoggingIn">
+      </ion-input>
+    </ion-item>
+    
+    <ion-item id="password-item"> 
+      <ion-icon name='key-outline' slot="start" color="tertiary"></ion-icon>
+      <ion-label position="stacked">Password</ion-label>
+      <ion-input type=password name=password required formControlName='password' [disabled]="isLoggingIn" (keyup)='keyUp($event)'></ion-input>
+    </ion-item>
+
+    <ion-item id="remember-me-item" lines="none">
+      <ion-label class="ion-text-right signin-text">Stay Signed In</ion-label>
+      <ion-checkbox formControlName='staySignedIn' [disabled]="isLoggingIn"></ion-checkbox>
+    </ion-item>
+    <ion-item id="login-button-item" lines="none">
+      <ion-button size="medium" type=submit [disabled]='!loginForm.valid || isLoggingIn' id="login-button">Login<ion-icon name="log-in-outline"></ion-icon></ion-button>
+    </ion-item>
+    <ion-item id="login-spinner-item" lines="none">
+      <ion-spinner id="login-spinner" *ngIf="loginService.isLoggingIn()" name="dots"></ion-spinner>
+    </ion-item>
+  </ion-item-group>
+  </form>
+</ion-content>

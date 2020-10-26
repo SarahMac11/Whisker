@@ -1,0 +1,68 @@
+.desktop-w {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3em;
+    color: white;
+    margin-left: 1%;
+}
+.mobile-w {
+    font-family: 'Dancing Script', cursive;
+    text-align: center;
+    color: white;
+}
+.desktop-bar, .mobile-bar{
+    --background: rgb(226,166,75) !important;
+}
+.desktop-nav-buttons {
+    margin-left: 25px;
+}
+.desktop-nav-button {
+    color: white;
+}
+.desktop-nav-button.active{
+    border-bottom: 2px solid rgb(28, 233, 35);
+}
+.app-avatar {
+    border: 2px solid rgb(0, 0, 0);
+    transition: border 0.5s;
+    background-color: white;
+    max-height: 50px;
+    max-width: 50px;
+    margin-right: 15px;
+    cursor: pointer;
+}
+.app-avatar.mobile {
+    position: absolute;
+    top: 10%;
+    right: 0;
+}
+.app-avatar:hover {
+    border: 2px solid rgba(28,233,35);
+    transition: border 0.5s;
+}
+.menu-icon {
+    margin-right: 10px;
+}
+.menu-item {
+    margin: 0 10% 0 5%;
+    border-bottom: 1px solid rgba(155,155,155, 0);
+    transition: border 0.3s;
+    pointer-events: auto !important;
+}
+.menu-item:hover {
+    border-bottom: 1px solid rgba(200, 200, 200, 0.7);
+    transition: border 0.3s;
+    cursor: pointer;
+}
+.active-item {
+    border-bottom: 1px solid rgba(87, 200, 87, 0.7);
+    transition: border 0.3s;
+}
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+}
