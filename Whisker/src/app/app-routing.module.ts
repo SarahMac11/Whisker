@@ -45,6 +45,10 @@ const routes: Routes = [
   {
     path: '**',
     redirectTo: ''
+  },
+  {
+    path: 'add',
+    loadChildren: () => import('./pages/add/add.module').then( m => m.AddPageModule)
   }
   
 ];

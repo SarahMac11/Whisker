@@ -1,0 +1,103 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add Animal</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="animal">
+    <ion-item>
+      <ion-label>Type</ion-label>
+      <ion-select interface="popover" formControlName="type">
+        <ion-select-option value="cat">Cat</ion-select-option>
+        <ion-select-option value="dog">Dog</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Breed(s)</ion-label>
+      <ion-select interface="popover" multiple="true" formControlName="breeds">
+        <ion-select-option></ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Weight</ion-label>
+      <ion-select interface="popover" formControlName="weight">
+        <ion-select-option>Under 10 lbs</ion-select-option>
+        <ion-select-option>10 - 20 lbs</ion-select-option>
+        <ion-select-option>20 - 30 lbs</ion-select-option>
+        <ion-select-option>30 - 40 lbs</ion-select-option>
+        <ion-select-option>40 - 50 lbs</ion-select-option>
+        <ion-select-option>Over 50 lbs</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Date of Birth</ion-label>
+      <ion-datetime displayFormat="MM/DD/YYYY" formControlName="dob"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Gender</ion-label>
+      <ion-select interface="popover" formControlName="gender">
+        <ion-select-option value="male">Male</ion-select-option>
+        <ion-select-option female='female'>Female</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Declawed</ion-label>
+      <ion-select interface="popover" formControlName="declawed">
+        <ion-select-option value="yes">Yes</ion-select-option>
+        <ion-select-option value="no">No</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Special Needs</ion-label>
+      <ion-select interface="popover" formControlName="specialNeeds">
+        <ion-select-option value="yes">Yes</ion-select-option>
+        <ion-select-option value="no">No</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Reason</ion-label>
+      <ion-textarea formControlName="specialNeedsReason"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label>Hair Length</ion-label>
+      <ion-select interface="popover" formControlName="hair">
+        <ion-select-option value="short">Short</ion-select-option>
+        <ion-select-option value="medium">Medium</ion-select-option>
+        <ion-select-option value="long">Long</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Good with Cats</ion-label>
+      <ion-select interface="popover" formControlName="goodWithCats">
+        <ion-select-option value="yes">Yes</ion-select-option>
+        <ion-select-option value="no">No</ion-select-option>
+        <ion-select-option value="unknown">Unknown</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Good with Dogs</ion-label>
+      <ion-select interface="popover" formControlName="goodWithDogs">
+        <ion-select-option value="yes">Yes</ion-select-option>
+        <ion-select-option value="no">No</ion-select-option>
+        <ion-select-option value="unknown">Unknown</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Good with Kids</ion-label>
+      <ion-select interface="popover" formControlName="goodWithKids">
+        <ion-select-option value="yes">Yes</ion-select-option>
+        <ion-select-option value="no">No</ion-select-option>
+        <ion-select-option value="unknown">Unknown</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Status</ion-label>
+      <ion-select interface="popover" formControlName="status">
+        <ion-select-option value="available">Available</ion-select-option>
+        <ion-select-option value="onHold">On Hold</ion-select-option>
+        <ion-select-option value="adopted">Adopted</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </form>
+</ion-content>
