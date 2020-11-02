@@ -41,15 +41,20 @@ const routes: Routes = [
     path: 'verify',
     loadChildren: () => import('./pages/verify/verify.module').then( m => m.VerifyPageModule)
   },
+  {
+    path: 'add',
+    loadChildren: () => import('./pages/add/add.module').then( m => m.AddPageModule)
+  },
   // wildcard, redirect non-recognized routes to the base route
   {
     path: '**',
     redirectTo: ''
   },
   {
-    path: 'add',
-    loadChildren: () => import('./pages/add/add.module').then( m => m.AddPageModule)
-  }
+    path: 'provider',
+    loadChildren: () => import('./pages/provider/provider.module').then( m => m.ProviderPageModule)
+  },
+
   
 ];
 @NgModule({

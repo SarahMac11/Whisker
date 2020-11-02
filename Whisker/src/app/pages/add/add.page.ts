@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import catBreeds from 'src/assets/catBreeds.json';
+import dogBreeds from 'src/assets/dogBreeds.json';
 
 @Component({
   selector: 'app-add',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddPage implements OnInit {
 
-  constructor() { }
+  catBreeds: Array<String> = catBreeds;
+  dogBreeds: Array<String> = dogBreeds;
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
-
 }
