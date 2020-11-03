@@ -13,6 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { RouterModule } from '@angular/router';
 
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -28,6 +30,7 @@ import { RouterModule } from '@angular/router';
   providers: [
     StatusBar,
     SplashScreen,
+    GooglePlus,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
