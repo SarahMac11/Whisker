@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Form, FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import catBreeds from 'src/assets/catBreeds.json';
 import dogBreeds from 'src/assets/dogBreeds.json';
 
@@ -17,14 +17,27 @@ export class AddPage implements OnInit {
   petFormGroup: FormGroup;
   constructor(private formBuilder: FormBuilder) {
     this.petFormGroup = formBuilder.group({
-      type: "",
-      status: "",
+      type: ["", Validators.required],
+      name: ["", Validators.required],
+      catBreeds: "",
+      dogBreeds: "",
+      weight: ["", Validators.required],
+      dob: ["", Validators.required],
+      gender: ["", Validators.required],
+      declawed: "",
+      specialNeeds: ["", Validators.required],
+      specialNeedsReason: "",
+      hair: ["", Validators.required],
+      goodWithCats: ["", Validators.required],
+      goodWithDogs: ["", Validators.required],
+      goodWithKids: ["", Validators.required],
+      status: ["", Validators.required]
     });
   }
 
   ngOnInit() {
   }
   submit() {
-    console.dir(this.petFormGroup.value["type"]);
+    console.log(this.petFormGroup.value);
   }
 }

@@ -8,63 +8,63 @@
   <form [formGroup]='petFormGroup'>
     <ion-item>
       <ion-label>Type</ion-label>
-      <ion-select interface="popover" id="type" name="type" formControlName="type">
+      <ion-select id="type" name="type" formControlName="type">
         <ion-select-option>Cat</ion-select-option>
         <ion-select-option>Dog</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label>Name</ion-label>
-      <ion-input type="text" id="name" name="name"></ion-input>
+      <ion-input type="text" id="name" name="name" formControlName="name"></ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf='this.petFormGroup.value["type"] === "Cat"'>
       <ion-label>Cat Breed(s)</ion-label>
-      <ion-select interface="popover" multiple="true" id="catBreeds" name="catBreeds">
+      <ion-select multiple="true" id="catBreeds" name="catBreeds" formControlName="catBreeds">
         <ion-select-option *ngFor="let catBreed of catBreeds">{{ catBreed }}</ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf='this.petFormGroup.value["type"] === "Dog"'>
       <ion-label>Dog Breed(s)</ion-label>
-      <ion-select interface="popover" multiple="true" id="dogBreeds" name="dogBreeds">
+      <ion-select multiple="true" id="dogBreeds" name="dogBreeds" formControlName="dogBreeds">
         <ion-select-option *ngFor="let dogBreed of dogBreeds">{{ dogBreed }}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label>Weight</ion-label>
-      <ion-input type="number" id="weight" name="weight"></ion-input>
+      <ion-input type="number" id="weight" name="weight" formControlName="weight"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Date of Birth</ion-label>
-      <ion-datetime displayFormat="MM/DD/YYYY" id="dob" name="dob"></ion-datetime>
+      <ion-datetime displayFormat="MM/DD/YYYY" id="dob" name="dob" formControlName="dob"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label>Gender</ion-label>
-      <ion-select interface="popover" id="gender" name="gender">
+      <ion-select id="gender" name="gender" formControlName="gender">
         <ion-select-option>Male</ion-select-option>
         <ion-select-option>Female</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item *ngIf='this.petFormGroup.value["type"] === "Cat"'>
       <ion-label>Declawed</ion-label>
-      <ion-select interface="popover" id="declawed" name="declawed">
+      <ion-select id="declawed" name="declawed" formControlName="declawed">
         <ion-select-option>Yes</ion-select-option>
         <ion-select-option>No</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label>Special Needs</ion-label>
-      <ion-select interface="popover" id="specialNeeds" name="specialNeeds">
+      <ion-select id="specialNeeds" name="specialNeeds" formControlName="specialNeeds">
         <ion-select-option>Yes</ion-select-option>
         <ion-select-option>No</ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf='this.petFormGroup.value["specialNeeds"] === "Yes"'>
       <ion-label>Reason</ion-label>
-      <ion-textarea name="specialNeedsReason" id="specialNeedsReason" name="specialNeedsReason"></ion-textarea>
+      <ion-input name="specialNeedsReason" id="specialNeedsReason" name="specialNeedsReason" formControlName="specialNeedsReason"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Hair Length</ion-label>
-      <ion-select interface="popover" id="hair" name="hair">
+      <ion-select id="hair" name="hair" formControlName="hair">
         <ion-select-option>Short</ion-select-option>
         <ion-select-option>Medium</ion-select-option>
         <ion-select-option>Long</ion-select-option>
@@ -72,7 +72,7 @@
     </ion-item>
     <ion-item>
       <ion-label>Good with Cats</ion-label>
-      <ion-select interface="popover" id="goodWithCats" name="goodWithCats">
+      <ion-select id="goodWithCats" name="goodWithCats" formControlName="goodWithCats">
         <ion-select-option>Yes</ion-select-option>
         <ion-select-option>No</ion-select-option>
         <ion-select-option>Unknown</ion-select-option>
@@ -80,7 +80,7 @@
     </ion-item>
     <ion-item>
       <ion-label>Good with Dogs</ion-label>
-      <ion-select interface="popover" id="goodWithDogs" name="goodWithDogs">
+      <ion-select id="goodWithDogs" name="goodWithDogs" formControlName="goodWithDogs">
         <ion-select-option>Yes</ion-select-option>
         <ion-select-option>No</ion-select-option>
         <ion-select-option>Unknown</ion-select-option>
@@ -88,7 +88,7 @@
     </ion-item>
     <ion-item>
       <ion-label>Good with Kids</ion-label>
-      <ion-select interface="popover" id="goodWithKids" name="goodWithKids">
+      <ion-select id="goodWithKids" name="goodWithKids" formControlName="goodWithKids">
         <ion-select-option>Yes</ion-select-option>
         <ion-select-option>No</ion-select-option>
         <ion-select-option>Unknown</ion-select-option>
@@ -96,12 +96,12 @@
     </ion-item>
     <ion-item>
       <ion-label>Status</ion-label>
-      <ion-select interface="popover" id="status" name="status">
+      <ion-select id="status" name="status" formControlName="status">
         <ion-select-option>Available</ion-select-option>
         <ion-select-option>On Hold</ion-select-option>
         <ion-select-option>Adopted</ion-select-option>
       </ion-select>
     </ion-item>
   </form>
-  <button (click)='submit()'>Submit</button>
+  <ion-button expand="full" color="dark" (click)="submit()">Submit</ion-button>
 </ion-content>
