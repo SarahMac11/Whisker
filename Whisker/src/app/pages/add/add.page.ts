@@ -13,10 +13,10 @@ export class AddPage implements OnInit {
   catBreeds: Array<String> = catBreeds;
   dogBreeds: Array<String> = dogBreeds;
 
-
-  petFormGroup: FormGroup;
-  constructor(private formBuilder: FormBuilder) {
-    this.petFormGroup = formBuilder.group({
+  addAnimal: FormGroup;
+  
+  constructor(private fb: FormBuilder) {
+    this.addAnimal = fb.group({
       type: ["", Validators.required],
       name: ["", Validators.required],
       catBreeds: "",
@@ -37,7 +37,8 @@ export class AddPage implements OnInit {
 
   ngOnInit() {
   }
+
   submit() {
-    console.log(this.petFormGroup.value);
+    console.log(this.addAnimal.value);
   }
 }

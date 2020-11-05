@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <form [formGroup]='petFormGroup'>
+  <form [formGroup]='addAnimal'>
     <ion-item>
       <ion-label>Type</ion-label>
       <ion-select id="type" name="type" formControlName="type">
@@ -15,15 +15,15 @@
     </ion-item>
     <ion-item>
       <ion-label>Name</ion-label>
-      <ion-input type="text" id="name" name="name" formControlName="name"></ion-input>
+      <ion-input class="ion-text-right" type="text" id="name" name="name" formControlName="name"></ion-input>
     </ion-item>
-    <ion-item *ngIf='this.petFormGroup.value["type"] === "Cat"'>
+    <ion-item *ngIf='this.addAnimal.value["type"] === "Cat"'>
       <ion-label>Cat Breed(s)</ion-label>
       <ion-select multiple="true" id="catBreeds" name="catBreeds" formControlName="catBreeds">
         <ion-select-option *ngFor="let catBreed of catBreeds">{{ catBreed }}</ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-item *ngIf='this.petFormGroup.value["type"] === "Dog"'>
+    <ion-item *ngIf='this.addAnimal.value["type"] === "Dog"'>
       <ion-label>Dog Breed(s)</ion-label>
       <ion-select multiple="true" id="dogBreeds" name="dogBreeds" formControlName="dogBreeds">
         <ion-select-option *ngFor="let dogBreed of dogBreeds">{{ dogBreed }}</ion-select-option>
@@ -31,7 +31,8 @@
     </ion-item>
     <ion-item>
       <ion-label>Weight</ion-label>
-      <ion-input type="number" id="weight" name="weight" formControlName="weight"></ion-input>
+      <ion-input class="ion-text-right" type="number" id="weight" name="weight" formControlName="weight"></ion-input>
+      <span>lbs</span>
     </ion-item>
     <ion-item>
       <ion-label>Date of Birth</ion-label>
@@ -44,7 +45,7 @@
         <ion-select-option>Female</ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-item *ngIf='this.petFormGroup.value["type"] === "Cat"'>
+    <ion-item *ngIf='this.addAnimal.value["type"] === "Cat"'>
       <ion-label>Declawed</ion-label>
       <ion-select id="declawed" name="declawed" formControlName="declawed">
         <ion-select-option>Yes</ion-select-option>
@@ -58,9 +59,9 @@
         <ion-select-option>No</ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-item *ngIf='this.petFormGroup.value["specialNeeds"] === "Yes"'>
-      <ion-label>Reason</ion-label>
-      <ion-input name="specialNeedsReason" id="specialNeedsReason" name="specialNeedsReason" formControlName="specialNeedsReason"></ion-input>
+    <ion-item *ngIf='this.addAnimal.value["specialNeeds"] === "Yes"'>
+      <ion-label>Special Needs Reason</ion-label>
+      <ion-input class="ion-text-right" name="specialNeedsReason" id="specialNeedsReason" name="specialNeedsReason" formControlName="specialNeedsReason"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Hair Length</ion-label>

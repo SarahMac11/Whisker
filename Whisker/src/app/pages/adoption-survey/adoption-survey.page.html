@@ -1,0 +1,491 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Adoption Survey</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  <form [formGroup]='adoptionSurvey'>
+    <ion-slides scrollbar="true" #mySlider>
+      <ion-slide>
+        <ion-item-group>
+          <ion-item>
+            <ion-title class="ion-text-center">Contact Information</ion-title>
+          </ion-item>
+          <ion-item>
+            <ion-label>First Name</ion-label>
+            <ion-input class="ion-text-right" type="text" id="first" name="first" formControlName="first"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Last Name</ion-label>
+            <ion-input class="ion-text-right" type="text" id="last" name="last" formControlName="last"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Email</ion-label>
+            <ion-input class="ion-text-right" type="email" id="email" name="email" formControlName="email"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Phone Number</ion-label>
+            <ion-input class="ion-text-right" type="tel" id="phone" name="phone" formControlName="phone"></ion-input>
+          </ion-item>
+          <ion-button expand="full" color="dark" (click)="swipeNext()">Next</ion-button>
+        </ion-item-group>
+      </ion-slide>
+      <ion-slide>
+        <ion-item-group>
+          <ion-item>
+            <ion-title class="ion-text-center">Address</ion-title>
+          </ion-item>
+          <ion-item>
+            <ion-label>Street Address</ion-label>
+            <ion-input class="ion-text-right" type="text" id="street" name="street" formControlName="street"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>City</ion-label>
+            <ion-input class="ion-text-right" type="text" id="city" name="city" formControlName="city"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>State</ion-label>
+            <ion-input class="ion-text-right" type="text" id="state" name="state" formControlName="state"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>ZIP</ion-label>
+            <ion-input class="ion-text-right" type="number" id="zip" name="zip" formControlName="zip"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Country</ion-label>
+            <ion-input class="ion-text-right" type="text" id="country" name="country" formControlName="country"></ion-input>
+          </ion-item>
+          <ion-button expand="full" color="dark" (click)="swipeNext()">Next</ion-button>
+        </ion-item-group>
+      </ion-slide>
+      <ion-slide>
+        <ion-item-group>
+          <ion-item>
+            <ion-title class="ion-text-center">Housing</ion-title>
+          </ion-item>
+          <ion-item>
+            <ion-label>Housing Ownership</ion-label>
+            <ion-select id="housingOwnership" name="housingOwnership" formControlName="housingOwnership">
+              <ion-select-option>Own</ion-select-option>
+              <ion-select-option>Rent</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>Do you have any pet restrictions?</ion-label>
+            <ion-select id="housingRestrictionsYesNo" name="housingRestrictionsYesNo" formControlName="housingRestrictionsYesNo">
+              <ion-select-option>Yes</ion-select-option>
+              <ion-select-option>No</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item *ngIf='this.adoptionSurvey.value["housingRestrictionsYesNo"] === "Yes"'>
+            <ion-label>Select the Pet Restriction(s)</ion-label>
+            <ion-select multiple="true" id="housingRestrictionsSelections" name="housingRestrictionsSelections" formControlName="housingRestrictionsSelections">
+              <ion-select-option>Breed Restrictions</ion-select-option>
+              <ion-select-option>Limited Number</ion-select-option>
+              <ion-select-option>Limited Weight</ion-select-option>
+              <ion-select-option>Must be Declawed</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-button expand="full" color="dark" (click)="swipeNext()">Next</ion-button>
+        </ion-item-group>
+        <ion-item-group *ngIf='this.adoptionSurvey.value["housingOwnership"] === "Rent"'>
+          <ion-item>
+            <ion-title class="ion-text-center">Landlord Contact</ion-title>
+          </ion-item>
+          <ion-item>
+            <ion-label>Landlord Name</ion-label>
+            <ion-input class="ion-text-right" type="text" id="landlordName" name="landlordName" formControlName="landlordName"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Landlord Phone Number</ion-label>
+            <ion-input class="ion-text-right" type="tel" id="landlordPhone" name="landlordPhone" formControlName="landlordPhone"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Landlord Email</ion-label>
+            <ion-input class="ion-text-right" type="tel" id="landlordEmail" name="landlordEmail" formControlName="landlordEmail"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>May we contact your landlord?</ion-label>
+            <ion-select id="contactLandlord" name="contactLandlord" formControlName="contactLandlord">
+              <ion-select-option>Yes</ion-select-option>
+              <ion-select-option>No</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item *ngIf='this.adoptionSurvey.value["contactLandlord"] === "No"'>
+            <ion-label>Please Provide a Reason</ion-label>
+            <ion-input class="ion-text-right" type="text" id="contactLandlordReason" name="contactLandlordReason" formControlName="contactLandlordReason"></ion-input>
+          </ion-item>
+          <ion-button expand="full" color="dark" (click)="swipeNext()">Next</ion-button>
+        </ion-item-group>
+      </ion-slide>
+      <ion-slide>
+        <ion-item-group>
+          <ion-item>
+            <ion-title class="ion-text-center">Prior Pet Experience</ion-title>
+          </ion-item>
+          <ion-item>
+            <ion-label>Experience Owning an Animal</ion-label>
+            <ion-select id="ownershipExperience" name="ownershipExperience" formControlName="ownershipExperience">
+              <ion-select-option>None</ion-select-option>
+              <ion-select-option>Some</ion-select-option>
+              <ion-select-option>A Lot</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-button expand="full" color="dark" (click)="swipeNext()">Next</ion-button>
+        </ion-item-group>
+        <ion-item-group *ngIf='this.adoptionSurvey.value["ownershipExperience"] === "Some" || this.adoptionSurvey.value["ownershipExperience"] === "A Lot"'>
+          <ion-item>
+            <ion-label>Veterinary Care Experience</ion-label>
+            <ion-select multiple="true" id="vetExperience" name="vetExperience" formControlName="vetExperience">
+              <ion-select-option>I have taken my pet in for annual exams</ion-select-option>
+              <ion-select-option>I have taken my pet in for annual vaccinations</ion-select-option>
+              <ion-select-option>I am comfortable medicating my pet if needed</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>Veterinarian Name</ion-label>
+            <ion-input class="ion-text-right" type="text" id="vetName" name="vetName" formControlName="vetName"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Veterinarian Phone Number</ion-label>
+            <ion-input class="ion-text-right" type="tel" id="vetPhone" name="vetPhone" formControlName="vetPhone"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Have You Ever Surrendered an Animal?</ion-label>
+            <ion-select id="surrendered" name="surrendered" formControlName="surrendered">
+              <ion-select-option>Yes</ion-select-option>
+              <ion-select-option>No</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item *ngIf='this.adoptionSurvey.value["surrendered"] === "Yes"'>
+            <ion-label>Why?</ion-label>
+            <ion-input class="ion-text-right" type="text" id="surrenderedReason" name="surrenderedReason" formControlName="surrenderedReason"></ion-input>
+          </ion-item>
+          <ion-button expand="full" color="dark" (click)="swipeNext()">Next</ion-button>
+        </ion-item-group>
+      </ion-slide>
+      <ion-slide>
+        <ion-item-group>
+          <ion-item>
+            <ion-title class="ion-text-center">Household Makeup</ion-title>
+          </ion-item>
+          <ion-item>
+            <ion-label>Are there any pet allergies?</ion-label>
+            <ion-select id="allergies" name="allergies" formControlName="allergies">
+              <ion-select-option>Yes</ion-select-option>
+              <ion-select-option>No</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item *ngIf='this.adoptionSurvey.value["allergies"] === "Yes"'>
+            <ion-label>Please Specify</ion-label>
+            <ion-input class="ion-text-right" id="allergiesSpecified" name="allergiesSpecified" formControlName="allergiesSpecified"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Home Energy Level</ion-label>
+            <ion-select id="energyLevel" name="energyLevel" formControlName="energyLevel">
+              <ion-select-option>High</ion-select-option>
+              <ion-select-option>Moderate</ion-select-option>
+              <ion-select-option>Low</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-button expand="full" color="dark" (click)="swipeNext()">Next</ion-button>
+        </ion-item-group>
+      </ion-slide>
+      <ion-slide>
+        <ion-item-group>
+          <ion-item>
+            <ion-title class="ion-text-center">Build Your Ideal Pet</ion-title>
+          </ion-item>
+          <ion-item>
+            <ion-label>Species</ion-label>
+            <ion-select id="species" name="species" formControlName="species">
+              <ion-select-option>Barn Cat</ion-select-option>
+              <ion-select-option>Cat</ion-select-option>
+              <ion-select-option>Dog</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-button expand="full" color="dark" (click)="swipeNext()">Next</ion-button>
+        </ion-item-group>
+      </ion-slide>
+      <ion-slide>
+        <ion-item-group>
+          <ion-item>
+            <ion-label>Gender</ion-label>
+            <ion-select multiple="true" id="gender" name="gender" formControlName="gender">
+              <ion-select-option>Male</ion-select-option>
+              <ion-select-option>Female</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>How important is gender to you?</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-range min="0" max="10" step="1" snaps="true" color="dark" id="genderRating" name="genderRating" formControlName="genderRating">
+              <ion-label color="dark" slot="start">Not Important</ion-label>
+              <ion-label color="dark" slot="end">Very Important</ion-label>
+            </ion-range>
+          </ion-item>
+          <ion-item>
+            <ion-label>Age</ion-label>
+            <ion-select multiple="true" id="age" name="age" formControlName="age">
+              <ion-select-option>Young</ion-select-option>
+              <ion-select-option>Adult</ion-select-option>
+              <ion-select-option>Senior</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>How important is age to you?</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-range min="0" max="10" step="1" snaps="true" color="dark" id="ageRating" name="ageRating" formControlName="ageRating">
+              <ion-label color="dark" slot="start">Not Important</ion-label>
+              <ion-label color="dark" slot="end">Very Important</ion-label>
+            </ion-range>
+          </ion-item>
+          <ion-button expand="full" color="dark" (click)="swipeNext()">Next</ion-button>
+        </ion-item-group>
+      </ion-slide>
+      <ion-slide>
+        <ion-item-group>
+          <ion-item>
+            <ion-label>Hair Length</ion-label>
+            <ion-select multiple="true" id="hair" name="hair" formControlName="hair">
+              <ion-select-option>Short</ion-select-option>
+              <ion-select-option>Medium</ion-select-option>
+              <ion-select-option>Long</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>How important is hair length to you?</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-range min="0" max="10" step="1" snaps="true" color="dark" id="hairRating" name="hairRating" formControlName="hairRating">
+              <ion-label color="dark" slot="start">Not Important</ion-label>
+              <ion-label color="dark" slot="end">Very Important</ion-label>
+            </ion-range>
+          </ion-item>
+          <ion-item *ngIf='this.adoptionSurvey.value["species"] === "Barn Cat" || this.adoptionSurvey.value["species"] === "Cat"'>
+            <ion-label>Color(s)</ion-label>
+            <ion-select multiple="true" id="catColors" name="catColors" formControlName="catColors">
+              <ion-select-option>Black</ion-select-option>
+              <ion-select-option>Brown Tabby</ion-select-option>
+              <ion-select-option>Buff</ion-select-option>
+              <ion-select-option>Calico</ion-select-option>
+              <ion-select-option>Color Point</ion-select-option>
+              <ion-select-option>Dilute</ion-select-option>
+              <ion-select-option>Grey</ion-select-option>
+              <ion-select-option>Grey Tabby</ion-select-option>
+              <ion-select-option>Orange</ion-select-option>
+              <ion-select-option>Tortoiseshell</ion-select-option>
+              <ion-select-option>White</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item *ngIf='this.adoptionSurvey.value["species"] === "Dog"'>
+            <ion-label>Color(s)</ion-label>
+            <ion-select multiple="true" id="dogColors" name="dogColors" formControlName="dogColors">
+              <ion-select-option>Black</ion-select-option>
+              <ion-select-option>Brindle</ion-select-option>
+              <ion-select-option>Brown</ion-select-option>
+              <ion-select-option>Grey</ion-select-option>
+              <ion-select-option>Red</ion-select-option>
+              <ion-select-option>White</ion-select-option>
+              <ion-select-option>Yellow</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>How important is color to you?</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-range min="0" max="10" step="1" snaps="true" color="dark" id="colorRating" name="colorRating" formControlName="colorRating">
+              <ion-label color="dark" slot="start">Not Important</ion-label>
+              <ion-label color="dark" slot="end">Very Important</ion-label>
+            </ion-range>
+          </ion-item>
+          <ion-button expand="full" color="dark" (click)="swipeNext()">Next</ion-button>
+        </ion-item-group>
+      </ion-slide>
+      <ion-slide>
+        <ion-item-group>
+          <ion-item *ngIf='this.adoptionSurvey.value["species"] === "Barn Cat" || this.adoptionSurvey.value["species"] === "Cat"'>
+            <ion-label>Breed(s)</ion-label>
+            <ion-select multiple="true" id="catBreeds" name="catBreeds" formControlName="catBreeds">
+              <ion-select-option></ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item *ngIf='this.adoptionSurvey.value["species"] === "Dog"'>
+            <ion-label>Breed(s)</ion-label>
+            <ion-select multiple="true" id="dogBreeds" name="dogBreeds" formControlName="dogBreeds">
+              <ion-select-option></ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>How important is breed to you?</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-range min="0" max="10" step="1" snaps="true" color="dark" id="breedRating" name="breedRating" formControlName="breedRating">
+              <ion-label color="dark" slot="start">Not Important</ion-label>
+              <ion-label color="dark" slot="end">Very Important</ion-label>
+            </ion-range>
+          </ion-item>
+          <ion-item>
+            <ion-label>Weight</ion-label>
+            <ion-select multiple="true" id="weight" name="weight" formControlName="weight">
+              <ion-select-option>0 - 10 lbs</ion-select-option>
+              <ion-select-option>10 - 20 lbs</ion-select-option>
+              <ion-select-option *ngIf='this.adoptionSurvey.value["species"] === "Dog"'>20 - 30 lbs</ion-select-option>
+              <ion-select-option *ngIf='this.adoptionSurvey.value["species"] === "Dog"'>30 - 40 lbs</ion-select-option>
+              <ion-select-option *ngIf='this.adoptionSurvey.value["species"] === "Dog"'>40 - 50 lbs</ion-select-option>
+              <ion-select-option *ngIf='this.adoptionSurvey.value["species"] === "Dog"'>50 - 60 lbs</ion-select-option>
+              <ion-select-option *ngIf='this.adoptionSurvey.value["species"] === "Dog"'>60 - 70 lbs</ion-select-option>
+              <ion-select-option *ngIf='this.adoptionSurvey.value["species"] === "Dog"'>70 - 80 lbs</ion-select-option>
+              <ion-select-option *ngIf='this.adoptionSurvey.value["species"] === "Dog"'>80 - 90 lbs</ion-select-option>
+              <ion-select-option *ngIf='this.adoptionSurvey.value["species"] === "Dog"'>90 - 100 lbs</ion-select-option>
+              <ion-select-option *ngIf='this.adoptionSurvey.value["species"] === "Dog"'>100+ lbs</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>How important is weight to you?</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-range min="0" max="10" step="1" snaps="true" color="dark" id="weightRating" name="weightRating" formControlName="weightRating">
+              <ion-label color="dark" slot="start">Not Important</ion-label>
+              <ion-label color="dark" slot="end">Very Important</ion-label>
+            </ion-range>
+          </ion-item>
+          <ion-button expand="full" color="dark" (click)="swipeNext()">Next</ion-button>
+        </ion-item-group>
+      </ion-slide>
+      <ion-slide>
+        <ion-item-group>
+          <ion-item>
+            <ion-title class="ion-text-center">Future Plans</ion-title>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Are there any reasons you would return an animal?</ion-label>
+            <ion-textarea id="reasonsToReturn" name="reasonsToReturn" formControlName="reasonsToReturn"></ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-label>Are you a student?</ion-label>
+            <ion-select id="student" name="student" formControlName="student">
+              <ion-select-option>Yes</ion-select-option>
+              <ion-select-option>No</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item *ngIf='this.adoptionSurvey.value["student"] === "Yes"'>
+            <ion-label>When is your expected graduation date?</ion-label>
+            <ion-datetime displayFormat="MM/YYYY" id="graduationDate" name="graduationDate" formControlName="graduationDate"></ion-datetime>
+          </ion-item>
+          <ion-item>
+            <ion-label>Will you be moving out of the country?</ion-label>
+            <ion-select id="moving" name="moving" formControlName="moving">
+              <ion-select-option>Yes</ion-select-option>
+              <ion-select-option>No</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item *ngIf='this.adoptionSurvey.value["moving"] === "Yes"'>
+            <ion-label>When will you be moving?</ion-label>
+            <ion-datetime displayFormat="MM/YYYY" id="moveDate" name="moveDate" formControlName="moveDate"></ion-datetime>
+          </ion-item>
+          <ion-button expand="full" color="dark" (click)="swipeNext()">Next</ion-button>
+        </ion-item-group>
+      </ion-slide>
+      <ion-slide>
+        <ion-item-group *ngIf='this.adoptionSurvey.value["species"] === "Barn Cat"'>
+          <ion-item>
+            <ion-title class="ion-text-center">Barn Cat Specific</ion-title>
+          </ion-item>
+          <ion-item>
+            <ion-label>Cat Housing Type</ion-label>
+            <ion-select id="catHousing" name="catHousing" formControlName="catHousing">
+              <ion-select-option>Barn or Farm</ion-select-option>
+              <ion-select-option>Residence with Garage or Shed</ion-select-option>
+              <ion-select-option>Warehouse</ion-select-option>
+              <ion-select-option>Other</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item *ngIf='this.adoptionSurvey.value["catHousing"] === "Other"'>
+            <ion-label>Please Specify</ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Is someone living full-time at the property?</ion-label>
+            <ion-select id="livingFullTime" name="livingFullTime" formControlName="livingFullTime">
+              <ion-select-option>Yes</ion-select-option>
+              <ion-select-option>No</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>Who is the primary caregiver?</ion-label>
+            <ion-select id="primaryCaregiver" name="primaryCaregiver" formControlName="primaryCaregiver">
+              <ion-select-option>Me</ion-select-option>
+              <ion-select-option>Someone Else</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>Is there a property caregiver?</ion-label>
+            <ion-select id="propertyCaregiver" name="propertyCaregiver" formControlName="propertyCaregiver">
+              <ion-select-option>Yes</ion-select-option>
+              <ion-select-option>No</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>Are there other owned animals on the property?</ion-label>
+            <ion-select id="otherOwnedAnimalsYesNo" name="otherOwnedAnimalsYesNo" formControlName="otherOwnedAnimalsYesNo">
+              <ion-select-option>Yes</ion-select-option>
+              <ion-select-option>No</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Please Specify</ion-label>
+            <ion-textarea id="otherOwnedAnimals" name="otherOwnedAnimals" formControlName="otherOwnedAnimals"></ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-label>Preferred Personality</ion-label>
+            <ion-select multiple="true" id="barnCatPersonality" name="barnCatPersonality" formControlName="barnCatPersonality">
+              <ion-select-option>Feral</ion-select-option>
+              <ion-select-option>Semi-Feral</ion-select-option>
+              <ion-select-option>Friendly</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">What precautions will be taken to keep the cat safe?</ion-label>
+            <ion-textarea id="barnCatPrecautions" name="barnCatPrecautions" formControlName="barnCatPrecautions"></ion-textarea>
+          </ion-item>
+          <ion-button expand="full" color="dark" (click)="submit()">Submit</ion-button>
+        </ion-item-group>
+        <ion-item-group *ngIf='this.adoptionSurvey.value["species"] === "Cat"'>
+          <ion-item>
+            <ion-title class="ion-text-center">Cat Specific</ion-title>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">How do you feel about declawing?</ion-label>
+            <ion-textarea id="declawing" name="declawing" formControlName="declawing"></ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-label>Will your cat be kept indoors or outdoors?</ion-label>
+            <ion-select id="catIndoorOutdoor" name="catIndoorOutdoor" formControlName="catIndoorOutdoor">
+              <ion-select-option>Indoor</ion-select-option>
+              <ion-select-option>Outdoor</ion-select-option>
+            </ion-select>
+            <ion-button expand="full" color="dark" (click)="submit()">Submit</ion-button>
+          </ion-item>
+        </ion-item-group>
+        <ion-item-group *ngIf='this.adoptionSurvey.value["species"] === "Dog"'>
+          <ion-item>
+            <ion-title class="ion-text-center">Dog Specific</ion-title>
+          </ion-item>
+          <ion-item>
+            <ion-label>Where will the dog stay?</ion-label>
+            <ion-select id="dogIndoorOutdoor" name="dogIndoorOutdoor" formControlName="dogIndoorOutdoor">
+              <ion-select-option>Indoor</ion-select-option>
+              <ion-select-option>Outdoor</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-button expand="full" color="dark" (click)="submit()">Submit</ion-button>
+        </ion-item-group>
+      </ion-slide>
+    </ion-slides>
+  </form>
+</ion-content>

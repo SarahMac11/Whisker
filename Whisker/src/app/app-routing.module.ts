@@ -41,17 +41,19 @@ const routes: Routes = [
     path: 'add',
     loadChildren: () => import('./pages/add/add.module').then( m => m.AddPageModule)
   },
+  {
+    path: 'provider',
+    loadChildren: () => import('./pages/provider/provider.module').then( m => m.ProviderPageModule)
+  },
+  {
+    path: 'adoption-survey',
+    loadChildren: () => import('./pages/adoption-survey/adoption-survey.module').then( m => m.AdoptionSurveyPageModule)
+  },
   // wildcard, redirect non-recognized routes to the base route
   {
     path: '**',
     redirectTo: ''
   },
-  {
-    path: 'provider',
-    loadChildren: () => import('./pages/provider/provider.module').then( m => m.ProviderPageModule)
-  },
-
-  
 ];
 @NgModule({
   imports: [
