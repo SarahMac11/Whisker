@@ -5,7 +5,11 @@
 </ion-header>
 
 <ion-content>
-  
+  <div class='main-content' [class.hidden]='this.slideNumber === undefined && this.numSlides === undefined'>
+
+  <ion-text class='ion-text-center'>
+    <h4>{{this.slideNumber + " of " + this.numSlides}}</h4>
+  </ion-text>
   <form [formGroup]='adoptionSurvey'>
     <ion-slides scrollbar="true" #mySlider>
       <ion-slide>
@@ -29,7 +33,7 @@
             <ion-label>Phone Number</ion-label>
             <ion-input class="ion-text-right" type="tel" id="phone" name="phone" formControlName="phone"></ion-input>
           </ion-item>
-          <ion-button expand="full" color="dark" (click)="swipeNext()">Next</ion-button>
+            <ion-button expand="full" color="dark" (click)="swipeNext()" *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
         </ion-item-group>
       </ion-slide>
       <ion-slide>
@@ -57,7 +61,8 @@
             <ion-label>Country</ion-label>
             <ion-input class="ion-text-right" type="text" id="country" name="country" formControlName="country"></ion-input>
           </ion-item>
-          <ion-button expand="full" color="dark" (click)="swipeNext()">Next</ion-button>
+          <ion-button expand="full" color="dark" (click)="swipeNext()" *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+          <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back</ion-button>
         </ion-item-group>
       </ion-slide>
       <ion-slide>
@@ -117,7 +122,8 @@
             <ion-label>Please Provide a Reason</ion-label>
             <ion-input class="ion-text-right" type="text" id="contactLandlordReason" name="contactLandlordReason" formControlName="contactLandlordReason"></ion-input>
           </ion-item>
-          <ion-button expand="full" color="dark" (click)="swipeNext()">Next</ion-button>
+          <ion-button expand="full" color="dark" (click)="swipeNext()" *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+          <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back</ion-button>
         </ion-item-group>
       </ion-slide>
       <ion-slide>
@@ -133,7 +139,8 @@
               <ion-select-option>A Lot</ion-select-option>
             </ion-select>
           </ion-item>
-          <ion-button expand="full" color="dark" (click)="swipeNext()">Next</ion-button>
+          <ion-button expand="full" color="dark" (click)="swipeNext()" *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+          <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back</ion-button>
         </ion-item-group>
         <ion-item-group *ngIf='this.adoptionSurvey.value["ownershipExperience"] === "Some" || this.adoptionSurvey.value["ownershipExperience"] === "A Lot"'>
           <ion-item>
@@ -163,7 +170,8 @@
             <ion-label>Why?</ion-label>
             <ion-input class="ion-text-right" type="text" id="surrenderedReason" name="surrenderedReason" formControlName="surrenderedReason"></ion-input>
           </ion-item>
-          <ion-button expand="full" color="dark" (click)="swipeNext()">Next</ion-button>
+          <ion-button expand="full" color="dark" (click)="swipeNext()" *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+          <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back</ion-button>
         </ion-item-group>
       </ion-slide>
       <ion-slide>
@@ -244,7 +252,8 @@
               <ion-label color="dark" slot="end">Very Important</ion-label>
             </ion-range>
           </ion-item>
-          <ion-button expand="full" color="dark" (click)="swipeNext()">Next</ion-button>
+          <ion-button expand="full" color="dark" (click)="swipeNext()" *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+          <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back</ion-button>
         </ion-item-group>
       </ion-slide>
       <ion-slide>
@@ -303,7 +312,8 @@
               <ion-label color="dark" slot="end">Very Important</ion-label>
             </ion-range>
           </ion-item>
-          <ion-button expand="full" color="dark" (click)="swipeNext()">Next</ion-button>
+          <ion-button expand="full" color="dark" (click)="swipeNext()" *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+          <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back</ion-button>
         </ion-item-group>
       </ion-slide>
       <ion-slide>
@@ -354,7 +364,8 @@
               <ion-label color="dark" slot="end">Very Important</ion-label>
             </ion-range>
           </ion-item>
-          <ion-button expand="full" color="dark" (click)="swipeNext()">Next</ion-button>
+          <ion-button expand="full" color="dark" (click)="swipeNext()" *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+          <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back</ion-button>
         </ion-item-group>
       </ion-slide>
       <ion-slide>
@@ -388,7 +399,8 @@
             <ion-label>When will you be moving?</ion-label>
             <ion-datetime displayFormat="MM/YYYY" id="moveDate" name="moveDate" formControlName="moveDate"></ion-datetime>
           </ion-item>
-          <ion-button expand="full" color="dark" (click)="swipeNext()">Next</ion-button>
+          <ion-button expand="full" color="dark" (click)="swipeNext()" *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+          <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back</ion-button>
         </ion-item-group>
       </ion-slide>
       <ion-slide>
@@ -454,6 +466,7 @@
             <ion-textarea id="barnCatPrecautions" name="barnCatPrecautions" formControlName="barnCatPrecautions"></ion-textarea>
           </ion-item>
           <ion-button expand="full" color="dark" (click)="submit()">Submit</ion-button>
+          <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back</ion-button>
         </ion-item-group>
         <ion-item-group *ngIf='this.adoptionSurvey.value["species"] === "Cat"'>
           <ion-item>
@@ -470,6 +483,7 @@
               <ion-select-option>Outdoor</ion-select-option>
             </ion-select>
             <ion-button expand="full" color="dark" (click)="submit()">Submit</ion-button>
+            <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back</ion-button>
           </ion-item>
         </ion-item-group>
         <ion-item-group *ngIf='this.adoptionSurvey.value["species"] === "Dog"'>
@@ -484,8 +498,10 @@
             </ion-select>
           </ion-item>
           <ion-button expand="full" color="dark" (click)="submit()">Submit</ion-button>
+          <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back</ion-button>
         </ion-item-group>
       </ion-slide>
     </ion-slides>
   </form>
+</div>
 </ion-content>

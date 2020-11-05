@@ -14,6 +14,11 @@ export class AdoptionSurveyPage implements OnInit {
   
   adoptionSurvey: FormGroup;
 
+  slideNumber: number;
+  numSlides: number;
+
+  locked: boolean = false;
+
   constructor(private fb: FormBuilder) {
     this.adoptionSurvey = fb.group({
       first: ["", Validators.required],
@@ -78,13 +83,35 @@ export class AdoptionSurveyPage implements OnInit {
   }
 
   ngOnInit() {
+    setTimeout(() => {
+      if(this.slides) {
+        this.slides.lockSwipes(true);
+        this.slides.length().then(num => {this.numSlides = num; });
+        this.slides.getActiveIndex().then(num => {this.slideNumber = ++num; });
+      }
+      else setTimeout(() => {
+        this.slides.lockSwipes(true);
+        this.slides.length().then(num => {this.numSlides = num; });
+        this.slides.getActiveIndex().then(num => {this.slideNumber = ++num; });
+      }, 1000);
+    }, 1000);
   }
 
   submit() {
     console.log(this.adoptionSurvey.value);
   }
 
+
   swipeNext(){
+    this.slides.lockSwipes(false);
     this.slides.slideNext();
+    this.slideNumber++;
+    this.slides.lockSwipes(true);
+  }
+  swipePrev(){
+    this.slides.lockSwipes(false);
+    this.slides.slidePrev();
+    this.slideNumber--;
+    this.slides.lockSwipes(true);
   }
 }

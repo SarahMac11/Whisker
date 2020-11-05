@@ -1,3 +1,15 @@
 ion-slides { 
     height: 100%;
 }
+.center-spinner {
+    margin: auto;
+    width: max-content;
+}
+.main-content.hidden {
+    opacity: 0;
+}
+.main-content {
+    opacity: 1;
+    transition: opacity 0.75s;
+    margin-top: 10vh;
+}
