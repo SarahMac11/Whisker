@@ -7,43 +7,57 @@
 <ion-content>
   <div class='main-content' [class.hidden]='this.slideNumber === undefined && this.numSlides === undefined'>
 
-  <ion-text class='ion-text-center'>
-    <h4>{{this.slideNumber + " of " + this.numSlides}}</h4>
-  </ion-text>
-  <form [formGroup]='adoptionSurvey'>
+    <ion-text class='ion-text-center'>
+      <h4>{{this.slideNumber + " of " + this.numSlides}}</h4>
+    </ion-text>
+
     <ion-slides scrollbar="true" #mySlider>
       <ion-slide>
-        <ion-item-group>
+        <form [formGroup]="contact">
           <ion-item>
             <ion-title class="ion-text-center">Contact Information</ion-title>
           </ion-item>
           <ion-item>
             <ion-label>First Name</ion-label>
-            <ion-input class="ion-text-right" type="text" id="first" name="first" formControlName="first"></ion-input>
+            <ion-input class="ion-text-right" type="text" id="first" name="first" formControlName="first" required>
+            </ion-input>
           </ion-item>
           <ion-item>
             <ion-label>Last Name</ion-label>
-            <ion-input class="ion-text-right" type="text" id="last" name="last" formControlName="last"></ion-input>
+            <ion-input class="ion-text-right" type="text" id="last" name="last" formControlName="last" required>
+            </ion-input>
           </ion-item>
           <ion-item>
             <ion-label>Email</ion-label>
-            <ion-input class="ion-text-right" type="email" id="email" name="email" formControlName="email"></ion-input>
+            <ion-input class="ion-text-right" type="email" id="email" name="email" formControlName="email" required>
+            </ion-input>
           </ion-item>
           <ion-item>
             <ion-label>Phone Number</ion-label>
-            <ion-input class="ion-text-right" type="tel" id="phone" name="phone" formControlName="phone"></ion-input>
+            <ion-input class="ion-text-right" type="tel" id="phone" name="phone" formControlName="phone" required>
+            </ion-input>
           </ion-item>
-            <ion-button expand="full" color="dark" (click)="swipeNext()" *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
-        </ion-item-group>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+              </ion-col>
+              <ion-col>
+                <ion-button expand="full" color="dark" (click)="swipeNext(contact)"
+                  *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
       </ion-slide>
       <ion-slide>
-        <ion-item-group>
+        <form [formGroup]="address">
           <ion-item>
             <ion-title class="ion-text-center">Address</ion-title>
           </ion-item>
           <ion-item>
             <ion-label>Street Address</ion-label>
-            <ion-input class="ion-text-right" type="text" id="street" name="street" formControlName="street"></ion-input>
+            <ion-input class="ion-text-right" type="text" id="street" name="street" formControlName="street">
+            </ion-input>
           </ion-item>
           <ion-item>
             <ion-label>City</ion-label>
@@ -59,14 +73,25 @@
           </ion-item>
           <ion-item>
             <ion-label>Country</ion-label>
-            <ion-input class="ion-text-right" type="text" id="country" name="country" formControlName="country"></ion-input>
+            <ion-input class="ion-text-right" type="text" id="country" name="country" formControlName="country">
+            </ion-input>
           </ion-item>
-          <ion-button expand="full" color="dark" (click)="swipeNext()" *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
-          <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back</ion-button>
-        </ion-item-group>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button expand="full" color="dark" (click)="swipeNext(address)"
+                  *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
       </ion-slide>
       <ion-slide>
-        <ion-item-group>
+        <form [formGroup]="housing">
           <ion-item>
             <ion-title class="ion-text-center">Housing</ion-title>
           </ion-item>
@@ -79,37 +104,55 @@
           </ion-item>
           <ion-item>
             <ion-label>Do you have any pet restrictions?</ion-label>
-            <ion-select id="housingRestrictionsYesNo" name="housingRestrictionsYesNo" formControlName="housingRestrictionsYesNo">
+            <ion-select id="housingRestrictionsYesNo" name="housingRestrictionsYesNo"
+              formControlName="housingRestrictionsYesNo">
               <ion-select-option>Yes</ion-select-option>
               <ion-select-option>No</ion-select-option>
             </ion-select>
           </ion-item>
-          <ion-item *ngIf='this.adoptionSurvey.value["housingRestrictionsYesNo"] === "Yes"'>
+          <ion-item *ngIf='this.housing.value["housingRestrictionsYesNo"] === "Yes"'>
             <ion-label>Select the Pet Restriction(s)</ion-label>
-            <ion-select multiple="true" id="housingRestrictionsSelections" name="housingRestrictionsSelections" formControlName="housingRestrictionsSelections">
+            <ion-select multiple="true" id="housingRestrictionsSelections" name="housingRestrictionsSelections"
+              formControlName="housingRestrictionsSelections">
               <ion-select-option>Breed Restrictions</ion-select-option>
               <ion-select-option>Limited Number</ion-select-option>
               <ion-select-option>Limited Weight</ion-select-option>
               <ion-select-option>Must be Declawed</ion-select-option>
             </ion-select>
           </ion-item>
-          <ion-button expand="full" color="dark" (click)="swipeNext()">Next</ion-button>
-        </ion-item-group>
-        <ion-item-group *ngIf='this.adoptionSurvey.value["housingOwnership"] === "Rent"'>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button expand="full" color="dark" (click)="swipeNext(housing)"
+                  *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </ion-slide>
+      <ion-slide *ngIf='this.housing.value["housingOwnership"] === "Rent"'>
+        <form [formGroup]="landlord">
           <ion-item>
             <ion-title class="ion-text-center">Landlord Contact</ion-title>
           </ion-item>
           <ion-item>
             <ion-label>Landlord Name</ion-label>
-            <ion-input class="ion-text-right" type="text" id="landlordName" name="landlordName" formControlName="landlordName"></ion-input>
+            <ion-input class="ion-text-right" type="text" id="landlordName" name="landlordName"
+              formControlName="landlordName"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label>Landlord Phone Number</ion-label>
-            <ion-input class="ion-text-right" type="tel" id="landlordPhone" name="landlordPhone" formControlName="landlordPhone"></ion-input>
+            <ion-input class="ion-text-right" type="tel" id="landlordPhone" name="landlordPhone"
+              formControlName="landlordPhone"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label>Landlord Email</ion-label>
-            <ion-input class="ion-text-right" type="tel" id="landlordEmail" name="landlordEmail" formControlName="landlordEmail"></ion-input>
+            <ion-input class="ion-text-right" type="tel" id="landlordEmail" name="landlordEmail"
+              formControlName="landlordEmail"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label>May we contact your landlord?</ion-label>
@@ -118,16 +161,27 @@
               <ion-select-option>No</ion-select-option>
             </ion-select>
           </ion-item>
-          <ion-item *ngIf='this.adoptionSurvey.value["contactLandlord"] === "No"'>
+          <ion-item *ngIf='this.landlord.value["contactLandlord"] === "No"'>
             <ion-label>Please Provide a Reason</ion-label>
-            <ion-input class="ion-text-right" type="text" id="contactLandlordReason" name="contactLandlordReason" formControlName="contactLandlordReason"></ion-input>
+            <ion-input class="ion-text-right" type="text" id="contactLandlordReason" name="contactLandlordReason"
+              formControlName="contactLandlordReason"></ion-input>
           </ion-item>
-          <ion-button expand="full" color="dark" (click)="swipeNext()" *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
-          <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back</ion-button>
-        </ion-item-group>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button expand="full" color="dark" (click)="swipeNext(landlord)"
+                  *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
       </ion-slide>
       <ion-slide>
-        <ion-item-group>
+        <form [formGroup]="experience">
           <ion-item>
             <ion-title class="ion-text-center">Prior Pet Experience</ion-title>
           </ion-item>
@@ -139,13 +193,27 @@
               <ion-select-option>A Lot</ion-select-option>
             </ion-select>
           </ion-item>
-          <ion-button expand="full" color="dark" (click)="swipeNext()" *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
-          <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back</ion-button>
-        </ion-item-group>
-        <ion-item-group *ngIf='this.adoptionSurvey.value["ownershipExperience"] === "Some" || this.adoptionSurvey.value["ownershipExperience"] === "A Lot"'>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button expand="full" color="dark" (click)="swipeNext(experience)"
+                  *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </ion-slide>
+      <ion-slide
+        *ngIf='this.experience.value["ownershipExperience"] === "Some" || this.experience.value["ownershipExperience"] === "A Lot"'>
+        <form [formGroup]="vetExperience">
           <ion-item>
             <ion-label>Veterinary Care Experience</ion-label>
-            <ion-select multiple="true" id="vetExperience" name="vetExperience" formControlName="vetExperience">
+            <ion-select multiple="true" id="vetExperience" name="vetExperience" formControlName="vetExperience"
+              class="increase-width">
               <ion-select-option>I have taken my pet in for annual exams</ion-select-option>
               <ion-select-option>I have taken my pet in for annual vaccinations</ion-select-option>
               <ion-select-option>I am comfortable medicating my pet if needed</ion-select-option>
@@ -153,11 +221,13 @@
           </ion-item>
           <ion-item>
             <ion-label>Veterinarian Name</ion-label>
-            <ion-input class="ion-text-right" type="text" id="vetName" name="vetName" formControlName="vetName"></ion-input>
+            <ion-input class="ion-text-right" type="text" id="vetName" name="vetName" formControlName="vetName">
+            </ion-input>
           </ion-item>
           <ion-item>
             <ion-label>Veterinarian Phone Number</ion-label>
-            <ion-input class="ion-text-right" type="tel" id="vetPhone" name="vetPhone" formControlName="vetPhone"></ion-input>
+            <ion-input class="ion-text-right" type="tel" id="vetPhone" name="vetPhone" formControlName="vetPhone">
+            </ion-input>
           </ion-item>
           <ion-item>
             <ion-label>Have You Ever Surrendered an Animal?</ion-label>
@@ -166,16 +236,27 @@
               <ion-select-option>No</ion-select-option>
             </ion-select>
           </ion-item>
-          <ion-item *ngIf='this.adoptionSurvey.value["surrendered"] === "Yes"'>
+          <ion-item *ngIf='this.vetExperience.value["surrendered"] === "Yes"'>
             <ion-label>Why?</ion-label>
-            <ion-input class="ion-text-right" type="text" id="surrenderedReason" name="surrenderedReason" formControlName="surrenderedReason"></ion-input>
+            <ion-input class="ion-text-right" type="text" id="surrenderedReason" name="surrenderedReason"
+              formControlName="surrenderedReason"></ion-input>
           </ion-item>
-          <ion-button expand="full" color="dark" (click)="swipeNext()" *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
-          <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back</ion-button>
-        </ion-item-group>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button expand="full" color="dark" (click)="swipeNext(vetExperience)"
+                  *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
       </ion-slide>
       <ion-slide>
-        <ion-item-group>
+        <form [formGroup]="household">
           <ion-item>
             <ion-title class="ion-text-center">Household Makeup</ion-title>
           </ion-item>
@@ -186,9 +267,10 @@
               <ion-select-option>No</ion-select-option>
             </ion-select>
           </ion-item>
-          <ion-item *ngIf='this.adoptionSurvey.value["allergies"] === "Yes"'>
+          <ion-item *ngIf='this.household.value["allergies"] === "Yes"'>
             <ion-label>Please Specify</ion-label>
-            <ion-input class="ion-text-right" id="allergiesSpecified" name="allergiesSpecified" formControlName="allergiesSpecified"></ion-input>
+            <ion-input class="ion-text-right" id="allergiesSpecified" name="allergiesSpecified"
+              formControlName="allergiesSpecified"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label>Home Energy Level</ion-label>
@@ -198,27 +280,49 @@
               <ion-select-option>Low</ion-select-option>
             </ion-select>
           </ion-item>
-          <ion-button expand="full" color="dark" (click)="swipeNext()">Next</ion-button>
-        </ion-item-group>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button expand="full" color="dark" (click)="swipeNext(household)"
+                  *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
       </ion-slide>
       <ion-slide>
-        <ion-item-group>
+        <form [formGroup]="species">
           <ion-item>
             <ion-title class="ion-text-center">Build Your Ideal Pet</ion-title>
           </ion-item>
           <ion-item>
             <ion-label>Species</ion-label>
-            <ion-select id="species" name="species" formControlName="species">
+            <ion-select multiple="true" id="species" name="species" formControlName="species">
               <ion-select-option>Barn Cat</ion-select-option>
               <ion-select-option>Cat</ion-select-option>
               <ion-select-option>Dog</ion-select-option>
             </ion-select>
           </ion-item>
-          <ion-button expand="full" color="dark" (click)="swipeNext()">Next</ion-button>
-        </ion-item-group>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button expand="full" color="dark" (click)="swipeNext(species)"
+                  *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
       </ion-slide>
       <ion-slide>
-        <ion-item-group>
+        <form [formGroup]="genderAge">
           <ion-item>
             <ion-label>Gender</ion-label>
             <ion-select multiple="true" id="gender" name="gender" formControlName="gender">
@@ -230,7 +334,8 @@
             <ion-label>How important is gender to you?</ion-label>
           </ion-item>
           <ion-item>
-            <ion-range min="0" max="10" step="1" snaps="true" color="dark" id="genderRating" name="genderRating" formControlName="genderRating">
+            <ion-range min="0" max="10" step="1" snaps="true" color="dark" id="genderRating" name="genderRating"
+              formControlName="genderRating">
               <ion-label color="dark" slot="start">Not Important</ion-label>
               <ion-label color="dark" slot="end">Very Important</ion-label>
             </ion-range>
@@ -247,17 +352,28 @@
             <ion-label>How important is age to you?</ion-label>
           </ion-item>
           <ion-item>
-            <ion-range min="0" max="10" step="1" snaps="true" color="dark" id="ageRating" name="ageRating" formControlName="ageRating">
+            <ion-range min="0" max="10" step="1" snaps="true" color="dark" id="ageRating" name="ageRating"
+              formControlName="ageRating">
               <ion-label color="dark" slot="start">Not Important</ion-label>
               <ion-label color="dark" slot="end">Very Important</ion-label>
             </ion-range>
           </ion-item>
-          <ion-button expand="full" color="dark" (click)="swipeNext()" *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
-          <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back</ion-button>
-        </ion-item-group>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button expand="full" color="dark" (click)="swipeNext(genderAge)"
+                  *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
       </ion-slide>
       <ion-slide>
-        <ion-item-group>
+        <form [formGroup]="hairColor">
           <ion-item>
             <ion-label>Hair Length</ion-label>
             <ion-select multiple="true" id="hair" name="hair" formControlName="hair">
@@ -270,13 +386,15 @@
             <ion-label>How important is hair length to you?</ion-label>
           </ion-item>
           <ion-item>
-            <ion-range min="0" max="10" step="1" snaps="true" color="dark" id="hairRating" name="hairRating" formControlName="hairRating">
+            <ion-range min="0" max="10" step="1" snaps="true" color="dark" id="hairRating" name="hairRating"
+              formControlName="hairRating">
               <ion-label color="dark" slot="start">Not Important</ion-label>
               <ion-label color="dark" slot="end">Very Important</ion-label>
             </ion-range>
           </ion-item>
-          <ion-item *ngIf='this.adoptionSurvey.value["species"] === "Barn Cat" || this.adoptionSurvey.value["species"] === "Cat"'>
-            <ion-label>Color(s)</ion-label>
+          <ion-item
+            *ngIf='this.species.value["species"].includes("Barn Cat") || this.species.value["species"].includes("Cat")'>
+            <ion-label>Cat Color(s)</ion-label>
             <ion-select multiple="true" id="catColors" name="catColors" formControlName="catColors">
               <ion-select-option>Black</ion-select-option>
               <ion-select-option>Brown Tabby</ion-select-option>
@@ -291,8 +409,8 @@
               <ion-select-option>White</ion-select-option>
             </ion-select>
           </ion-item>
-          <ion-item *ngIf='this.adoptionSurvey.value["species"] === "Dog"'>
-            <ion-label>Color(s)</ion-label>
+          <ion-item *ngIf='this.species.value["species"].includes("Dog")'>
+            <ion-label>Dog Color(s)</ion-label>
             <ion-select multiple="true" id="dogColors" name="dogColors" formControlName="dogColors">
               <ion-select-option>Black</ion-select-option>
               <ion-select-option>Brindle</ion-select-option>
@@ -307,25 +425,37 @@
             <ion-label>How important is color to you?</ion-label>
           </ion-item>
           <ion-item>
-            <ion-range min="0" max="10" step="1" snaps="true" color="dark" id="colorRating" name="colorRating" formControlName="colorRating">
+            <ion-range min="0" max="10" step="1" snaps="true" color="dark" id="colorRating" name="colorRating"
+              formControlName="colorRating">
               <ion-label color="dark" slot="start">Not Important</ion-label>
               <ion-label color="dark" slot="end">Very Important</ion-label>
             </ion-range>
           </ion-item>
-          <ion-button expand="full" color="dark" (click)="swipeNext()" *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
-          <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back</ion-button>
-        </ion-item-group>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button expand="full" color="dark" (click)="swipeNext(hairColor)"
+                  *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
       </ion-slide>
       <ion-slide>
-        <ion-item-group>
-          <ion-item *ngIf='this.adoptionSurvey.value["species"] === "Barn Cat" || this.adoptionSurvey.value["species"] === "Cat"'>
-            <ion-label>Breed(s)</ion-label>
+        <form [formGroup]="breedWeight">
+          <ion-item
+            *ngIf='this.species.value["species"].includes("Barn Cat") || this.species.value["species"].includes("Cat")'>
+            <ion-label>Cat Breed(s)</ion-label>
             <ion-select multiple="true" id="catBreeds" name="catBreeds" formControlName="catBreeds">
               <ion-select-option></ion-select-option>
             </ion-select>
           </ion-item>
-          <ion-item *ngIf='this.adoptionSurvey.value["species"] === "Dog"'>
-            <ion-label>Breed(s)</ion-label>
+          <ion-item *ngIf='this.species.value["species"].includes("Dog")'>
+            <ion-label>Dog Breed(s)</ion-label>
             <ion-select multiple="true" id="dogBreeds" name="dogBreeds" formControlName="dogBreeds">
               <ion-select-option></ion-select-option>
             </ion-select>
@@ -334,7 +464,8 @@
             <ion-label>How important is breed to you?</ion-label>
           </ion-item>
           <ion-item>
-            <ion-range min="0" max="10" step="1" snaps="true" color="dark" id="breedRating" name="breedRating" formControlName="breedRating">
+            <ion-range min="0" max="10" step="1" snaps="true" color="dark" id="breedRating" name="breedRating"
+              formControlName="breedRating">
               <ion-label color="dark" slot="start">Not Important</ion-label>
               <ion-label color="dark" slot="end">Very Important</ion-label>
             </ion-range>
@@ -344,32 +475,43 @@
             <ion-select multiple="true" id="weight" name="weight" formControlName="weight">
               <ion-select-option>0 - 10 lbs</ion-select-option>
               <ion-select-option>10 - 20 lbs</ion-select-option>
-              <ion-select-option *ngIf='this.adoptionSurvey.value["species"] === "Dog"'>20 - 30 lbs</ion-select-option>
-              <ion-select-option *ngIf='this.adoptionSurvey.value["species"] === "Dog"'>30 - 40 lbs</ion-select-option>
-              <ion-select-option *ngIf='this.adoptionSurvey.value["species"] === "Dog"'>40 - 50 lbs</ion-select-option>
-              <ion-select-option *ngIf='this.adoptionSurvey.value["species"] === "Dog"'>50 - 60 lbs</ion-select-option>
-              <ion-select-option *ngIf='this.adoptionSurvey.value["species"] === "Dog"'>60 - 70 lbs</ion-select-option>
-              <ion-select-option *ngIf='this.adoptionSurvey.value["species"] === "Dog"'>70 - 80 lbs</ion-select-option>
-              <ion-select-option *ngIf='this.adoptionSurvey.value["species"] === "Dog"'>80 - 90 lbs</ion-select-option>
-              <ion-select-option *ngIf='this.adoptionSurvey.value["species"] === "Dog"'>90 - 100 lbs</ion-select-option>
-              <ion-select-option *ngIf='this.adoptionSurvey.value["species"] === "Dog"'>100+ lbs</ion-select-option>
+              <ion-select-option *ngIf='this.species.value["species"].includes("Dog")'>20 - 30 lbs</ion-select-option>
+              <ion-select-option *ngIf='this.species.value["species"].includes("Dog")'>30 - 40 lbs</ion-select-option>
+              <ion-select-option *ngIf='this.species.value["species"].includes("Dog")'>40 - 50 lbs</ion-select-option>
+              <ion-select-option *ngIf='this.species.value["species"].includes("Dog")'>50 - 60 lbs</ion-select-option>
+              <ion-select-option *ngIf='this.species.value["species"].includes("Dog")'>60 - 70 lbs</ion-select-option>
+              <ion-select-option *ngIf='this.species.value["species"].includes("Dog")'>70 - 80 lbs</ion-select-option>
+              <ion-select-option *ngIf='this.species.value["species"].includes("Dog")'>80 - 90 lbs</ion-select-option>
+              <ion-select-option *ngIf='this.species.value["species"].includes("Dog")'>90 - 100 lbs</ion-select-option>
+              <ion-select-option *ngIf='this.species.value["species"].includes("Dog")'>100+ lbs</ion-select-option>
             </ion-select>
           </ion-item>
           <ion-item>
             <ion-label>How important is weight to you?</ion-label>
           </ion-item>
           <ion-item>
-            <ion-range min="0" max="10" step="1" snaps="true" color="dark" id="weightRating" name="weightRating" formControlName="weightRating">
+            <ion-range min="0" max="10" step="1" snaps="true" color="dark" id="weightRating" name="weightRating"
+              formControlName="weightRating">
               <ion-label color="dark" slot="start">Not Important</ion-label>
               <ion-label color="dark" slot="end">Very Important</ion-label>
             </ion-range>
           </ion-item>
-          <ion-button expand="full" color="dark" (click)="swipeNext()" *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
-          <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back</ion-button>
-        </ion-item-group>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button expand="full" color="dark" (click)="swipeNext(breedWeight)"
+                  *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
       </ion-slide>
       <ion-slide>
-        <ion-item-group>
+        <form [formGroup]="future">
           <ion-item>
             <ion-title class="ion-text-center">Future Plans</ion-title>
           </ion-item>
@@ -384,9 +526,10 @@
               <ion-select-option>No</ion-select-option>
             </ion-select>
           </ion-item>
-          <ion-item *ngIf='this.adoptionSurvey.value["student"] === "Yes"'>
+          <ion-item *ngIf='this.future.value["student"] === "Yes"'>
             <ion-label>When is your expected graduation date?</ion-label>
-            <ion-datetime displayFormat="MM/YYYY" id="graduationDate" name="graduationDate" formControlName="graduationDate"></ion-datetime>
+            <ion-datetime displayFormat="MM/YYYY" id="graduationDate" name="graduationDate"
+              formControlName="graduationDate"></ion-datetime>
           </ion-item>
           <ion-item>
             <ion-label>Will you be moving out of the country?</ion-label>
@@ -395,16 +538,27 @@
               <ion-select-option>No</ion-select-option>
             </ion-select>
           </ion-item>
-          <ion-item *ngIf='this.adoptionSurvey.value["moving"] === "Yes"'>
+          <ion-item *ngIf='this.future.value["moving"] === "Yes"'>
             <ion-label>When will you be moving?</ion-label>
-            <ion-datetime displayFormat="MM/YYYY" id="moveDate" name="moveDate" formControlName="moveDate"></ion-datetime>
+            <ion-datetime displayFormat="MM/YYYY" id="moveDate" name="moveDate" formControlName="moveDate">
+            </ion-datetime>
           </ion-item>
-          <ion-button expand="full" color="dark" (click)="swipeNext()" *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
-          <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back</ion-button>
-        </ion-item-group>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button expand="full" color="dark" (click)="swipeNext(future)"
+                  *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
       </ion-slide>
-      <ion-slide>
-        <ion-item-group *ngIf='this.adoptionSurvey.value["species"] === "Barn Cat"'>
+      <ion-slide *ngIf='this.species.value["species"].includes("Barn Cat")'>
+        <form [formGroup]="barnCat">
           <ion-item>
             <ion-title class="ion-text-center">Barn Cat Specific</ion-title>
           </ion-item>
@@ -417,7 +571,7 @@
               <ion-select-option>Other</ion-select-option>
             </ion-select>
           </ion-item>
-          <ion-item *ngIf='this.adoptionSurvey.value["catHousing"] === "Other"'>
+          <ion-item *ngIf='this.barnCat.value["catHousing"] === "Other"'>
             <ion-label>Please Specify</ion-label>
             <ion-input type="text"></ion-input>
           </ion-item>
@@ -444,18 +598,21 @@
           </ion-item>
           <ion-item>
             <ion-label>Are there other owned animals on the property?</ion-label>
-            <ion-select id="otherOwnedAnimalsYesNo" name="otherOwnedAnimalsYesNo" formControlName="otherOwnedAnimalsYesNo">
+            <ion-select id="otherOwnedAnimalsYesNo" name="otherOwnedAnimalsYesNo"
+              formControlName="otherOwnedAnimalsYesNo">
               <ion-select-option>Yes</ion-select-option>
               <ion-select-option>No</ion-select-option>
             </ion-select>
           </ion-item>
           <ion-item>
             <ion-label position="floating">Please Specify</ion-label>
-            <ion-textarea id="otherOwnedAnimals" name="otherOwnedAnimals" formControlName="otherOwnedAnimals"></ion-textarea>
+            <ion-textarea id="otherOwnedAnimals" name="otherOwnedAnimals" formControlName="otherOwnedAnimals">
+            </ion-textarea>
           </ion-item>
           <ion-item>
             <ion-label>Preferred Personality</ion-label>
-            <ion-select multiple="true" id="barnCatPersonality" name="barnCatPersonality" formControlName="barnCatPersonality">
+            <ion-select multiple="true" id="barnCatPersonality" name="barnCatPersonality"
+              formControlName="barnCatPersonality">
               <ion-select-option>Feral</ion-select-option>
               <ion-select-option>Semi-Feral</ion-select-option>
               <ion-select-option>Friendly</ion-select-option>
@@ -463,12 +620,25 @@
           </ion-item>
           <ion-item>
             <ion-label position="floating">What precautions will be taken to keep the cat safe?</ion-label>
-            <ion-textarea id="barnCatPrecautions" name="barnCatPrecautions" formControlName="barnCatPrecautions"></ion-textarea>
+            <ion-textarea id="barnCatPrecautions" name="barnCatPrecautions" formControlName="barnCatPrecautions">
+            </ion-textarea>
           </ion-item>
-          <ion-button expand="full" color="dark" (click)="submit()">Submit</ion-button>
-          <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back</ion-button>
-        </ion-item-group>
-        <ion-item-group *ngIf='this.adoptionSurvey.value["species"] === "Cat"'>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button expand="full" color="dark" (click)="swipeNext(barnCat)"
+                  *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </ion-slide>
+      <ion-slide *ngIf='this.species.value["species"].includes("Cat")'>
+        <form [formGroup]="cat">
           <ion-item>
             <ion-title class="ion-text-center">Cat Specific</ion-title>
           </ion-item>
@@ -482,11 +652,23 @@
               <ion-select-option>Indoor</ion-select-option>
               <ion-select-option>Outdoor</ion-select-option>
             </ion-select>
-            <ion-button expand="full" color="dark" (click)="submit()">Submit</ion-button>
-            <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back</ion-button>
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back
+                  </ion-button>
+                </ion-col>
+                <ion-col>
+                  <ion-button expand="full" color="dark" (click)="swipeNext(cat)"
+                    *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
           </ion-item>
-        </ion-item-group>
-        <ion-item-group *ngIf='this.adoptionSurvey.value["species"] === "Dog"'>
+        </form>
+      </ion-slide>
+      <ion-slide *ngIf='this.species.value["species"].includes("Dog")'>
+        <form [formGroup]="dog">
           <ion-item>
             <ion-title class="ion-text-center">Dog Specific</ion-title>
           </ion-item>
@@ -498,10 +680,19 @@
             </ion-select>
           </ion-item>
           <ion-button expand="full" color="dark" (click)="submit()">Submit</ion-button>
-          <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back</ion-button>
-        </ion-item-group>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button expand="full" color="dark" (click)="validInputs(dog)">Submit</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
       </ion-slide>
     </ion-slides>
-  </form>
-</div>
+  </div>
 </ion-content>
