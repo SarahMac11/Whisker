@@ -1,6 +1,7 @@
-ion-slides { 
-    height: 100%;
+ion-slide >:first-child {
+    width: 90%;
 }
+
 .center-spinner {
     margin: auto;
     width: max-content;
