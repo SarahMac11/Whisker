@@ -7,7 +7,7 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { Facebook } from '@ionic-native/facebook/ngx';
 
 @Component({
-  providers: [GooglePlus]
+  providers: [GooglePlus, Facebook]
 })
 
 @Injectable({
@@ -19,6 +19,8 @@ export class LoginService {
   private loggingIn: boolean = false;
   private loginFail: boolean = false;
   private tokenPresent: boolean = false;
+  private fbLogin: boolean = false;
+  private googeLogin: boolean = false;
   user: User;
 
   // CHANGE THIS TO WHISKER'S, HAVE THIS HERE FOR A BASE TO WORK WITH
@@ -133,33 +135,28 @@ export class LoginService {
        this.setLoggedIn(obj);
        console.log(obj);
        this.router.navigate(['/home']);
+       this.googeLogin = true;
      });
    }
 
    async signInWithFacebook() {
-  //   FB.getLoginStatus(function(response) {
-  //     statusChangeCallback(response);
-  // });
-    //  await this.fb.getLoginStatus(function(res) {
-    //     console.log(res);
-    // //     status: 'connected',
-    // //     authResponse: {
-    // //     accessToken: '...',
-    // //     expiresIn:'...',
-    // //     signedRequest:'...',
-    // //     userID:'...'
-    // // }
-    //  });
-    //  await this.fb.login(['email']).then(res => {
-    //   console.log(res);
-      // var obj = {
-      //   id: res.userId,
-      //   username: res.email,
-      //   password: res.serverAuthCode,
-      //   email: res.email,
-      //   firstname: res.givenName,
-      //   lastname: res.familyName
-      // }
-    // });
+     this.fb.getLoginStatus().then(async res => {
+       console.log(res);
+       console.log(res.status);
+       if(res.status == 'connect') {
+         await this.fb.login(['email', 'public_profile']).then(res => {
+           console.log(res);
+          //  var obj = {
+          //    id = res.authResponse.userID
+          //  }
+         });
+         this.router.navigate(['/home']);
+       } else {
+         this.failedLogin();
+       }
+     })
+     .catch(e => console.log(e));
    }
+
+   
 }
