@@ -28,6 +28,17 @@ export class StartPage implements OnInit {
     } catch(e) {
       console.log(e);
     }
- }
+  }
+
+  async fbLogin() {
+    try {
+      await this.loginService.signInWithFacebook().then(()=> {
+        this.router.navigate(['/home']);
+      });
+    } catch(e) {
+      console.log(e);
+    }
+  }
+
 
 }

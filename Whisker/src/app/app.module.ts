@@ -14,6 +14,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { RouterModule } from '@angular/router';
 
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { Facebook } from '@ionic-native/facebook/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,6 +32,7 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
     StatusBar,
     SplashScreen,
     GooglePlus,
+    Facebook,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

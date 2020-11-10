@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { Facebook } from '@ionic-native/facebook/ngx';
 
 @Component({
   providers: [GooglePlus]
@@ -23,7 +24,7 @@ export class LoginService {
   // CHANGE THIS TO WHISKER'S, HAVE THIS HERE FOR A BASE TO WORK WITH
   apiUrl = 'https://www.whiskerapp.org:9000/';
 
-  constructor(private http: HttpClient, private storage: Storage, private router: Router, private googlePlus: GooglePlus) {
+  constructor(private http: HttpClient, private storage: Storage, private router: Router, private googlePlus: GooglePlus, private fb: Facebook) {
     this.storage.get('loggedIn').then((user) => {
       this.loggingIn = true;
       if (user && user.id !== undefined && user.currentSessionId !== undefined) {
@@ -119,8 +120,46 @@ export class LoginService {
 
    async signInWithGoogle() {
      await this.googlePlus.login({}).then(res => {
-       console.log(res);
-       
+        console.log(res);
+        var obj = {
+          id: res.userId,
+          username: res.email,
+          password: res.serverAuthCode,
+          email: res.email,
+          firstname: res.givenName,
+          lastname: res.familyName
+          //photo: res.imageURL;
+       }
+       this.setLoggedIn(obj);
+       console.log(obj);
+       this.router.navigate(['/home']);
      });
+   }
+
+   async signInWithFacebook() {
+  //   FB.getLoginStatus(function(response) {
+  //     statusChangeCallback(response);
+  // });
+    //  await this.fb.getLoginStatus(function(res) {
+    //     console.log(res);
+    // //     status: 'connected',
+    // //     authResponse: {
+    // //     accessToken: '...',
+    // //     expiresIn:'...',
+    // //     signedRequest:'...',
+    // //     userID:'...'
+    // // }
+    //  });
+    //  await this.fb.login(['email']).then(res => {
+    //   console.log(res);
+      // var obj = {
+      //   id: res.userId,
+      //   username: res.email,
+      //   password: res.serverAuthCode,
+      //   email: res.email,
+      //   firstname: res.givenName,
+      //   lastname: res.familyName
+      // }
+    // });
    }
 }
