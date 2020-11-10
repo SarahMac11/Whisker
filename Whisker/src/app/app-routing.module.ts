@@ -18,10 +18,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/messages/messages.module').then( m => m.MessagesPageModule)
   },
   {
-    path: 'browse',
-    loadChildren: () => import('./tab2/tab2.module').then( m => m.Tab2PageModule)
-  },
-  {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },

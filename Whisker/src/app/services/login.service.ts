@@ -1,8 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 import { User } from '../interfaces/User';
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
+
+@Component({
+  providers: [GooglePlus]
+})
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +23,7 @@ export class LoginService {
   // CHANGE THIS TO WHISKER'S, HAVE THIS HERE FOR A BASE TO WORK WITH
   apiUrl = 'https://www.whiskerapp.org:9000/';
 
-  constructor(private http: HttpClient, private storage: Storage, private router: Router) {
+  constructor(private http: HttpClient, private storage: Storage, private router: Router, private googlePlus: GooglePlus) {
     this.storage.get('loggedIn').then((user) => {
       this.loggingIn = true;
       if (user && user.id !== undefined && user.currentSessionId !== undefined) {
@@ -110,5 +115,12 @@ export class LoginService {
    }
    isTokenPresent(): boolean {
      return this.tokenPresent;
+   }
+
+   async signInWithGoogle() {
+     await this.googlePlus.login({}).then(res => {
+       console.log(res);
+       
+     });
    }
 }

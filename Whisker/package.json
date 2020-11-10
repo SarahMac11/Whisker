@@ -25,6 +25,7 @@
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^5.0.0",
     "@ionic/storage": "^2.3.1",
+    "cordova-browser": "6.0.0",
     "cordova-plugin-facebook4": "6.4.0",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
@@ -41,7 +42,14 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
+    "cordova-android": "^9.0.0",
+    "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-googleplus": "^8.5.1",
+    "cordova-plugin-ionic-keyboard": "^2.2.0",
+    "cordova-plugin-ionic-webview": "^4.2.1",
+    "cordova-plugin-splashscreen": "^5.0.2",
+    "cordova-plugin-statusbar": "^2.4.2",
+    "cordova-plugin-whitelist": "^1.3.3",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~5.0.0",
@@ -61,7 +69,15 @@
       "cordova-plugin-facebook4": {
         "APP_ID": "803611323765143",
         "APP_NAME": "Whisker"
-      }
+      },
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-device": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-ionic-webview": {
+        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
+      },
+      "cordova-plugin-ionic-keyboard": {}
     }
   }
 }
