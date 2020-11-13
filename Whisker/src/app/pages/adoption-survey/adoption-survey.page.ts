@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IonSlides } from '@ionic/angular';
 import { ViewChild } from '@angular/core';
+import catBreeds from 'src/assets/catBreeds.json';
+import dogBreeds from 'src/assets/dogBreeds.json';
 
 @Component({
   selector: 'app-adoption-survey',
@@ -10,7 +12,10 @@ import { ViewChild } from '@angular/core';
 })
 export class AdoptionSurveyPage implements OnInit {
 
-  @ViewChild('mySlider')  slides: IonSlides;
+  catBreeds: Array<String> = catBreeds;
+  dogBreeds: Array<String> = dogBreeds;
+
+  @ViewChild('slider')  slides: IonSlides;
 
   contact: FormGroup;
   address: FormGroup;
@@ -145,7 +150,8 @@ export class AdoptionSurveyPage implements OnInit {
         this.slides.length().then(num => {this.numSlides = num; });
         this.slides.getActiveIndex().then(num => {this.slideNumber = ++num; });
       }
-      else setTimeout(() => {
+      else
+      setTimeout(() => {
         this.slides.lockSwipes(true);
         this.slides.length().then(num => {this.numSlides = num; });
         this.slides.getActiveIndex().then(num => {this.slideNumber = ++num; });
@@ -158,11 +164,11 @@ export class AdoptionSurveyPage implements OnInit {
   }
 
   validInputs(page: FormGroup) {
-    this.print(page);
-    if(!page.valid) {
-      alert("Invalid input");
-      return false;
-    }
+    // this.print(page);
+    // if(!page.valid) {
+    //   alert("Invalid input");
+    //   return false;
+    // }
     return true;
   }
 

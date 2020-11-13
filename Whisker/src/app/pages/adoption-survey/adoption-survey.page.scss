@@ -1,5 +1,10 @@
 ion-slide >:first-child {
-    width: 90%;
+    min-width: 90%;
+    max-width: 100%;
+}
+
+ion-button {
+    margin-bottom: 0;
 }
 
 .center-spinner {
