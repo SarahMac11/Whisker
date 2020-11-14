@@ -1,0 +1,722 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Adoption Survey</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class='main-content' [class.hidden]='this.slideNumber === undefined && this.numSlides === undefined'>
+
+    <ion-text class='ion-text-center'>
+      <h4>{{this.slideNumber + " of " + this.numSlides}}</h4>
+    </ion-text>
+    <ion-slides scrollbar="true" #slider>
+      <ion-slide>
+        <form [formGroup]="contact">
+          <ion-item>
+            <ion-title class="ion-text-center">Contact Information</ion-title>
+          </ion-item>
+          <ion-item>
+            <ion-label>First Name</ion-label>
+            <ion-input class="ion-text-right" type="text" id="first" name="first" formControlName="first" required>
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Last Name</ion-label>
+            <ion-input class="ion-text-right" type="text" id="last" name="last" formControlName="last" required>
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Email</ion-label>
+            <ion-input class="ion-text-right" type="email" id="email" name="email" formControlName="email" required>
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Phone Number</ion-label>
+            <ion-input class="ion-text-right" type="tel" id="phone" name="phone" formControlName="phone" required>
+            </ion-input>
+          </ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+              </ion-col>
+              <ion-col>
+                <ion-button expand="full" color="dark" (click)="swipeNext(contact)"
+                  *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </ion-slide>
+      <ion-slide>
+        <form [formGroup]="address">
+          <ion-item>
+            <ion-title class="ion-text-center">Address</ion-title>
+          </ion-item>
+          <ion-item>
+            <ion-label>Street Address</ion-label>
+            <ion-input class="ion-text-right" type="text" id="street" name="street" formControlName="street">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>City</ion-label>
+            <ion-input class="ion-text-right" type="text" id="city" name="city" formControlName="city"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>State</ion-label>
+            <ion-input class="ion-text-right" type="text" id="state" name="state" formControlName="state"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>ZIP</ion-label>
+            <ion-input class="ion-text-right" type="number" id="zip" name="zip" formControlName="zip"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Country</ion-label>
+            <ion-input class="ion-text-right" type="text" id="country" name="country" formControlName="country">
+            </ion-input>
+          </ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button expand="full" color="dark" (click)="swipeNext(address)"
+                  *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </ion-slide>
+      <ion-slide>
+        <form [formGroup]="housing">
+          <ion-item>
+            <ion-title class="ion-text-center">Housing</ion-title>
+          </ion-item>
+          <ion-item>
+            <ion-label text-wrap>Housing Ownership</ion-label>
+            <ion-select class="ion-text-right" id="housingOwnership" name="housingOwnership"
+              formControlName="housingOwnership"interface="popover">
+              <ion-select-option>Own</ion-select-option>
+              <ion-select-option>Rent</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label text-wrap>Do you have any pet restrictions?</ion-label>
+            <ion-select class="ion-text-right" id="housingRestrictionsYesNo" name="housingRestrictionsYesNo"
+              formControlName="housingRestrictionsYesNo" [interfaceOptions]="customPopoverOptions" interface="popover">
+              <ion-select-option>Yes</ion-select-option>
+              <ion-select-option>No</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item *ngIf='this.housing.value["housingRestrictionsYesNo"] === "Yes"'>
+            <ion-label text-wrap>Select the Pet Restriction(s)</ion-label>
+            <ion-select class="ion-text-right" multiple="true" id="housingRestrictionsSelections"
+              name="housingRestrictionsSelections" formControlName="housingRestrictionsSelections"
+              [interfaceOptions]="customPopoverOptions" interface="popover">
+              <ion-select-option>Breed Restrictions</ion-select-option>
+              <ion-select-option>Limited Number</ion-select-option>
+              <ion-select-option>Limited Weight</ion-select-option>
+              <ion-select-option>Must be Declawed</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button expand="full" color="dark" (click)="swipeNext(housing)"
+                  *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </ion-slide>
+      <ion-slide *ngIf='this.housing.value["housingOwnership"] === "Rent"'>
+        <form [formGroup]="landlord">
+          <ion-item>
+            <ion-title class="ion-text-center">Landlord Contact</ion-title>
+          </ion-item>
+          <ion-item>
+            <ion-label text-wrap>Landlord Name</ion-label>
+            <ion-input class="ion-text-right" type="text" id="landlordName" name="landlordName"
+              formControlName="landlordName"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label text-wrap>Landlord Phone Number</ion-label>
+            <ion-input class="ion-text-right" type="tel" id="landlordPhone" name="landlordPhone"
+              formControlName="landlordPhone"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label text-wrap>Landlord Email</ion-label>
+            <ion-input class="ion-text-right" type="tel" id="landlordEmail" name="landlordEmail"
+              formControlName="landlordEmail"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label text-wrap>May we contact your landlord?</ion-label>
+            <ion-select class="ion-text-right" id="contactLandlord" name="contactLandlord"
+              formControlName="contactLandlord" [interfaceOptions]="customPopoverOptions" interface="popover">
+              <ion-select-option>Yes</ion-select-option>
+              <ion-select-option>No</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item *ngIf='this.landlord.value["contactLandlord"] === "No"'>
+            <ion-label text-wrap>Please Provide a Reason</ion-label>
+            <ion-input class="ion-text-right" type="text" id="contactLandlordReason" name="contactLandlordReason"
+              formControlName="contactLandlordReason"></ion-input>
+          </ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button expand="full" color="dark" (click)="swipeNext(landlord)"
+                  *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </ion-slide>
+      <ion-slide>
+        <form [formGroup]="experience">
+          <ion-item>
+            <ion-title class="ion-text-center">Prior Pet Experience</ion-title>
+          </ion-item>
+          <ion-item>
+            <ion-label text-wrap>Experience Owning an Animal</ion-label>
+            <ion-select class="ion-text-right" id="ownershipExperience" name="ownershipExperience"
+              formControlName="ownershipExperience" [interfaceOptions]="customPopoverOptions" interface="popover">
+              <ion-select-option>None</ion-select-option>
+              <ion-select-option>Some</ion-select-option>
+              <ion-select-option>A Lot</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button expand="full" color="dark" (click)="swipeNext(experience)"
+                  *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </ion-slide>
+      <ion-slide
+        *ngIf='this.experience.value["ownershipExperience"] === "Some" || this.experience.value["ownershipExperience"] === "A Lot"'>
+        <form [formGroup]="vetExperience">
+          <ion-item>
+            <ion-label text-wrap>Veterinary Care Experience</ion-label>
+            <ion-select class="ion-text-right" multiple="true" id="vetExperience" name="vetExperience"
+              formControlName="vetExperience" class="increase-width" [interfaceOptions]="customPopoverOptions"
+              interface="popover">
+              <ion-select-option>I have taken my pet in for annual exams</ion-select-option>
+              <ion-select-option>I have taken my pet in for annual vaccinations</ion-select-option>
+              <ion-select-option>I am comfortable medicating my pet if needed</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label text-wrap>Veterinarian Name</ion-label>
+            <ion-input class="ion-text-right" type="text" id="vetName" name="vetName" formControlName="vetName">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label text-wrap>Veterinarian Phone Number</ion-label>
+            <ion-input class="ion-text-right" type="tel" id="vetPhone" name="vetPhone" formControlName="vetPhone">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label text-wrap>Have You Ever Surrendered an Animal?</ion-label>
+            <ion-select class="ion-text-right" id="surrendered" name="surrendered" formControlName="surrendered"
+              [interfaceOptions]="customPopoverOptions" interface="popover">
+              <ion-select-option>Yes</ion-select-option>
+              <ion-select-option>No</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item *ngIf='this.vetExperience.value["surrendered"] === "Yes"'>
+            <ion-label>Why?</ion-label>
+            <ion-input class="ion-text-right" type="text" id="surrenderedReason" name="surrenderedReason"
+              formControlName="surrenderedReason"></ion-input>
+          </ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button expand="full" color="dark" (click)="swipeNext(vetExperience)"
+                  *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </ion-slide>
+      <ion-slide>
+        <form [formGroup]="household">
+          <ion-item>
+            <ion-title class="ion-text-center">Household Makeup</ion-title>
+          </ion-item>
+          <ion-item>
+            <ion-label text-wrap>Are there any pet allergies?</ion-label>
+            <ion-select class="ion-text-right" id="allergies" name="allergies" formControlName="allergies"
+              [interfaceOptions]="customPopoverOptions" interface="popover">
+              <ion-select-option>Yes</ion-select-option>
+              <ion-select-option>No</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item *ngIf='this.household.value["allergies"] === "Yes"'>
+            <ion-label>Please Specify</ion-label>
+            <ion-input class="ion-text-right" id="allergiesSpecified" name="allergiesSpecified"
+              formControlName="allergiesSpecified"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label text-wrap>Home Energy Level</ion-label>
+            <ion-select class="ion-text-right" id="energyLevel" name="energyLevel" formControlName="energyLevel"
+              [interfaceOptions]="customPopoverOptions" interface="popover">
+              <ion-select-option>High</ion-select-option>
+              <ion-select-option>Moderate</ion-select-option>
+              <ion-select-option>Low</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button expand="full" color="dark" (click)="swipeNext(household)"
+                  *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </ion-slide>
+      <ion-slide>
+        <form [formGroup]="species">
+          <ion-item>
+            <ion-title class="ion-text-center">Build Your Ideal Pet</ion-title>
+          </ion-item>
+          <ion-item>
+            <ion-label>Species</ion-label>
+            <ion-select class="ion-text-right" multiple="true" id="species" name="species" formControlName="species"
+              [interfaceOptions]="customPopoverOptions" interface="popover">
+              <ion-select-option>Barn Cat</ion-select-option>
+              <ion-select-option>Cat</ion-select-option>
+              <ion-select-option>Dog</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button expand="full" color="dark" (click)="swipeNext(species)"
+                  *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </ion-slide>
+      <ion-slide>
+        <form [formGroup]="genderAge">
+          <ion-item>
+            <ion-label>Gender</ion-label>
+            <ion-select class="ion-text-right" multiple="true" id="gender" name="gender" formControlName="gender"
+              [interfaceOptions]="customPopoverOptions" interface="popover">
+              <ion-select-option>Male</ion-select-option>
+              <ion-select-option>Female</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label text-wrap>How important is gender to you?</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-range min="0" max="10" step="1" snaps="true" color="dark" id="genderRating" name="genderRating"
+              formControlName="genderRating">
+              <ion-label color="dark" slot="start">Not Important</ion-label>
+              <ion-label color="dark" slot="end">Very Important</ion-label>
+            </ion-range>
+          </ion-item>
+          <ion-item>
+            <ion-label>Age</ion-label>
+            <ion-select class="ion-text-right" multiple="true" id="age" name="age" formControlName="age"
+              [interfaceOptions]="customPopoverOptions" interface="popover">
+              <ion-select-option>Young</ion-select-option>
+              <ion-select-option>Adult</ion-select-option>
+              <ion-select-option>Senior</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label text-wrap>How important is age to you?</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-range min="0" max="10" step="1" snaps="true" color="dark" id="ageRating" name="ageRating"
+              formControlName="ageRating">
+              <ion-label color="dark" slot="start">Not Important</ion-label>
+              <ion-label color="dark" slot="end">Very Important</ion-label>
+            </ion-range>
+          </ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button expand="full" color="dark" (click)="swipeNext(genderAge)"
+                  *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </ion-slide>
+      <ion-slide>
+        <form [formGroup]="hairColor">
+          <ion-item>
+            <ion-label>Hair Length</ion-label>
+            <ion-select class="ion-text-right" multiple="true" id="hair" name="hair" formControlName="hair"
+              [interfaceOptions]="customPopoverOptions" interface="popover">
+              <ion-select-option>Short</ion-select-option>
+              <ion-select-option>Medium</ion-select-option>
+              <ion-select-option>Long</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label text-wrap>How important is hair length to you?</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-range min="0" max="10" step="1" snaps="true" color="dark" id="hairRating" name="hairRating"
+              formControlName="hairRating">
+              <ion-label color="dark" slot="start">Not Important</ion-label>
+              <ion-label color="dark" slot="end">Very Important</ion-label>
+            </ion-range>
+          </ion-item>
+          <ion-item
+            *ngIf='this.species.value["species"].includes("Barn Cat") || this.species.value["species"].includes("Cat")'>
+            <ion-label>Cat Color(s)</ion-label>
+            <ion-select class="ion-text-right" multiple="true" id="catColors" name="catColors"
+              formControlName="catColors" [interfaceOptions]="customPopoverOptions" interface="popover">
+              <ion-select-option>Black</ion-select-option>
+              <ion-select-option>Brown Tabby</ion-select-option>
+              <ion-select-option>Buff</ion-select-option>
+              <ion-select-option>Calico</ion-select-option>
+              <ion-select-option>Color Point</ion-select-option>
+              <ion-select-option>Dilute</ion-select-option>
+              <ion-select-option>Grey</ion-select-option>
+              <ion-select-option>Grey Tabby</ion-select-option>
+              <ion-select-option>Orange</ion-select-option>
+              <ion-select-option>Tortoiseshell</ion-select-option>
+              <ion-select-option>White</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item *ngIf='this.species.value["species"].includes("Dog")'>
+            <ion-label>Dog Color(s)</ion-label>
+            <ion-select class="ion-text-right" multiple="true" id="dogColors" name="dogColors"
+              formControlName="dogColors" [interfaceOptions]="customPopoverOptions" interface="popover">
+              <ion-select-option>Black</ion-select-option>
+              <ion-select-option>Brindle</ion-select-option>
+              <ion-select-option>Brown</ion-select-option>
+              <ion-select-option>Grey</ion-select-option>
+              <ion-select-option>Red</ion-select-option>
+              <ion-select-option>White</ion-select-option>
+              <ion-select-option>Yellow</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label text-wrap>How important is color to you?</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-range min="0" max="10" step="1" snaps="true" color="dark" id="colorRating" name="colorRating"
+              formControlName="colorRating">
+              <ion-label color="dark" slot="start">Not Important</ion-label>
+              <ion-label color="dark" slot="end">Very Important</ion-label>
+            </ion-range>
+          </ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button expand="full" color="dark" (click)="swipeNext(hairColor)"
+                  *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </ion-slide>
+      <ion-slide>
+        <form [formGroup]="breedWeight">
+          <ion-item
+            *ngIf='this.species.value["species"].includes("Barn Cat") || this.species.value["species"].includes("Cat")'>
+            <ion-label>Cat Breed(s)</ion-label>
+            <ion-select class="ion-text-right" multiple="true" id="catBreeds" name="catBreeds"
+              formControlName="catBreeds" [interfaceOptions]="customPopoverOptions" interface="popover">
+              <ion-select-option *ngFor="let catBreed of catBreeds">{{ catBreed }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item *ngIf='this.species.value["species"].includes("Dog")'>
+            <ion-label>Dog Breed(s)</ion-label>
+            <ion-select class="ion-text-right" multiple="true" id="dogBreeds" name="dogBreeds"
+              formControlName="dogBreeds" [interfaceOptions]="customPopoverOptions" interface="popover">
+              <ion-select-option *ngFor="let dogBreed of dogBreeds">{{ dogBreed }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label text-wrap>How important is breed to you?</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-range min="0" max="10" step="1" snaps="true" color="dark" id="breedRating" name="breedRating"
+              formControlName="breedRating">
+              <ion-label color="dark" slot="start">Not Important</ion-label>
+              <ion-label color="dark" slot="end">Very Important</ion-label>
+            </ion-range>
+          </ion-item>
+          <ion-item *ngIf='this.species.value["species"].includes("Dog")'>
+            <ion-label>Weight</ion-label>
+            <ion-select class="ion-text-right" multiple="true" id="weight" name="weight" formControlName="weight"
+              [interfaceOptions]="customPopoverOptions" interface="popover">
+              <ion-select-option>0 - 10 lbs</ion-select-option>
+              <ion-select-option>10 - 20 lbs</ion-select-option>
+              <ion-select-option>20 - 30 lbs</ion-select-option>
+              <ion-select-option>30 - 40 lbs</ion-select-option>
+              <ion-select-option>40 - 50 lbs</ion-select-option>
+              <ion-select-option>50 - 60 lbs</ion-select-option>
+              <ion-select-option>60 - 70 lbs</ion-select-option>
+              <ion-select-option>70 - 80 lbs</ion-select-option>
+              <ion-select-option>80 - 90 lbs</ion-select-option>
+              <ion-select-option>90 - 100 lbs</ion-select-option>
+              <ion-select-option>100+ lbs</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item *ngIf='this.species.value["species"].includes("Dog")'>
+            <ion-label text-wrap>How important is weight to you?</ion-label>
+          </ion-item>
+          <ion-item *ngIf='this.species.value["species"].includes("Dog")'>
+            <ion-range min="0" max="10" step="1" snaps="true" color="dark" id="weightRating" name="weightRating"
+              formControlName="weightRating">
+              <ion-label color="dark" slot="start">Not Important</ion-label>
+              <ion-label color="dark" slot="end">Very Important</ion-label>
+            </ion-range>
+          </ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button expand="full" color="dark" (click)="swipeNext(breedWeight)"
+                  *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </ion-slide>
+      <ion-slide>
+        <form [formGroup]="future">
+          <ion-item>
+            <ion-title class="ion-text-center">Future Plans</ion-title>
+          </ion-item>
+          <ion-item>
+            <ion-label text-wrap position="floating">Are there any reasons you would return an animal?</ion-label>
+            <ion-textarea id="reasonsToReturn" name="reasonsToReturn" formControlName="reasonsToReturn"></ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-label text-wrap>Are you a student?</ion-label>
+            <ion-select class="ion-text-right" id="student" name="student" formControlName="student"
+              [interfaceOptions]="customPopoverOptions" interface="popover">
+              <ion-select-option>Yes</ion-select-option>
+              <ion-select-option>No</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item *ngIf='this.future.value["student"] === "Yes"'>
+            <ion-label text-wrap>When is your expected graduation date?</ion-label>
+            <ion-datetime displayFormat="MM/YYYY" id="graduationDate" name="graduationDate"
+              formControlName="graduationDate"></ion-datetime>
+          </ion-item>
+          <ion-item>
+            <ion-label text-wrap>Will you be moving out of the country?</ion-label>
+            <ion-select class="ion-text-right" id="moving" name="moving" formControlName="moving"
+              [interfaceOptions]="customPopoverOptions" interface="popover">
+              <ion-select-option>Yes</ion-select-option>
+              <ion-select-option>No</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item *ngIf='this.future.value["moving"] === "Yes"'>
+            <ion-label text-wrap>When will you be moving?</ion-label>
+            <ion-datetime displayFormat="MM/YYYY" id="moveDate" name="moveDate" formControlName="moveDate">
+            </ion-datetime>
+          </ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button expand="full" color="dark" (click)="swipeNext(future)"
+                  *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </ion-slide>
+      <ion-slide *ngIf='this.species.value["species"].includes("Barn Cat")'>
+        <form [formGroup]="barnCat">
+          <ion-item>
+            <ion-title class="ion-text-center">Barn Cat Specific</ion-title>
+          </ion-item>
+          <ion-item>
+            <ion-label text-wrap>Cat Housing Type</ion-label>
+            <ion-select class="ion-text-right" id="catHousing" name="catHousing" formControlName="catHousing"
+              [interfaceOptions]="customPopoverOptions" interface="popover">
+              <ion-select-option>Barn or Farm</ion-select-option>
+              <ion-select-option>Residence with Garage or Shed</ion-select-option>
+              <ion-select-option>Warehouse</ion-select-option>
+              <ion-select-option>Other</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item *ngIf='this.barnCat.value["catHousing"] === "Other"'>
+            <ion-label>Please Specify</ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label text-wrap>Is someone living full-time at the property?</ion-label>
+            <ion-select class="ion-text-right" id="livingFullTime" name="livingFullTime"
+              formControlName="livingFullTime" [interfaceOptions]="customPopoverOptions" interface="popover">
+              <ion-select-option>Yes</ion-select-option>
+              <ion-select-option>No</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label text-wrap>Who is the primary caregiver?</ion-label>
+            <ion-select class="ion-text-right" id="primaryCaregiver" name="primaryCaregiver"
+              formControlName="primaryCaregiver" [interfaceOptions]="customPopoverOptions" interface="popover">
+              <ion-select-option>Me</ion-select-option>
+              <ion-select-option>Someone Else</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label text-wrap>Is there a property caregiver?</ion-label>
+            <ion-select class="ion-text-right" id="propertyCaregiver" name="propertyCaregiver"
+              formControlName="propertyCaregiver" [interfaceOptions]="customPopoverOptions" interface="popover">
+              <ion-select-option>Yes</ion-select-option>
+              <ion-select-option>No</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label text-wrap>Are there other owned animals on the property?</ion-label>
+            <ion-select class="ion-text-right" id="otherOwnedAnimalsYesNo" name="otherOwnedAnimalsYesNo"
+              formControlName="otherOwnedAnimalsYesNo" [interfaceOptions]="customPopoverOptions" interface="popover">
+              <ion-select-option>Yes</ion-select-option>
+              <ion-select-option>No</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Please Specify</ion-label>
+            <ion-textarea id="otherOwnedAnimals" name="otherOwnedAnimals" formControlName="otherOwnedAnimals">
+            </ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-label text-wrap>Preferred Personality</ion-label>
+            <ion-select class="ion-text-right" multiple="true" id="barnCatPersonality" name="barnCatPersonality"
+              formControlName="barnCatPersonality" [interfaceOptions]="customPopoverOptions" interface="popover">
+              <ion-select-option>Feral</ion-select-option>
+              <ion-select-option>Semi-Feral</ion-select-option>
+              <ion-select-option>Friendly</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label text-wrap position="floating">What precautions will be taken to keep the cat safe?</ion-label>
+            <ion-textarea id="barnCatPrecautions" name="barnCatPrecautions" formControlName="barnCatPrecautions">
+            </ion-textarea>
+          </ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button expand="full" color="dark" (click)="swipeNext(barnCat)"
+                  *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </ion-slide>
+      <ion-slide *ngIf='this.species.value["species"].includes("Cat")'>
+        <form [formGroup]="cat">
+          <ion-item>
+            <ion-title class="ion-text-center">Cat Specific</ion-title>
+          </ion-item>
+          <ion-item>
+            <ion-label text-wrap position="floating">How do you feel about declawing?</ion-label>
+            <ion-textarea id="declawing" name="declawing" formControlName="declawing"></ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-label text-wrap>Will your cat be kept indoors or outdoors?</ion-label>
+            <ion-select class="ion-text-right" id="catIndoorOutdoor" name="catIndoorOutdoor"
+              formControlName="catIndoorOutdoor" [interfaceOptions]="customPopoverOptions" interface="popover">
+              <ion-select-option>Indoor</ion-select-option>
+              <ion-select-option>Outdoor</ion-select-option>
+            </ion-select>
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back
+                  </ion-button>
+                </ion-col>
+                <ion-col>
+                  <ion-button expand="full" color="dark" (click)="swipeNext(cat)"
+                    *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </form>
+      </ion-slide>
+      <ion-slide *ngIf='this.species.value["species"].includes("Dog")'>
+        <form [formGroup]="dog">
+          <ion-item>
+            <ion-title class="ion-text-center">Dog Specific</ion-title>
+          </ion-item>
+          <ion-item>
+            <ion-label text-wrap>Where will the dog stay?</ion-label>
+            <ion-select id="dogIndoorOutdoor" name="dogIndoorOutdoor" formControlName="dogIndoorOutdoor"
+              [interfaceOptions]="customPopoverOptions" interface="popover">
+              <ion-select-option>Indoor</ion-select-option>
+              <ion-select-option>Outdoor</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-button expand="full" color="dark" (click)="submit()">Submit</ion-button>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button expand="full" color="dark" (click)="validInputs(dog)">Submit</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </ion-slide>
+    </ion-slides>
+  </div>
+</ion-content>

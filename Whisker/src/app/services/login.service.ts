@@ -35,7 +35,7 @@ export class LoginService {
           if (res.ok) {
             this.loggedIn = true;
             this.user = user;
-            this.router.navigate(['/home']);
+            // this.router.navigate(['/home']);
           }
           else {
             this.storage.remove('loggedIn');

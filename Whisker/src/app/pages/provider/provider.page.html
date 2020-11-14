@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Provider Application</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]='providerRequest'>
+    <ion-item>
+      <ion-title class="ion-text-center">Rescue Information</ion-title>
+    </ion-item>
+    <ion-item>
+      <ion-label>Rescue Name</ion-label>
+      <ion-input class="ion-text-right" type="text" id="rescue" name="rescue" formControlName="rescue"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Street Address</ion-label>
+      <ion-input class="ion-text-right" type="text" id="street" name="street" formControlName="street"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>City</ion-label>
+      <ion-input class="ion-text-right" type="text" id="city" name="city" formControlName="city"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>State</ion-label>
+      <ion-input class="ion-text-right" type="text" id="state" name="state" formControlName="state"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>ZIP</ion-label>
+      <ion-input class="ion-text-right" type="number" id="zip" name="zip" formControlName="zip"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Country</ion-label>
+      <ion-input class="ion-text-right" type="text" id="country" name="country" formControlName="country"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Website</ion-label>
+      <ion-input class="ion-text-right" type="url" id="website" name="website" formControlName="website"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Rescue Email</ion-label>
+      <ion-input class="ion-text-right" type="email" id="email" name="email" formControlName="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Phone Number</ion-label>
+      <ion-input class="ion-text-right" type="tel" id="phone" name="phone" formControlName="phone"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Available Animals</ion-label>
+      <ion-select multiple="true" id="types" name="types" formControlName="types">
+        <ion-select-option>Cat</ion-select-option>
+        <ion-select-option>Dog</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-title class="ion-text-center">Point of Contact</ion-title>
+    </ion-item>
+    <ion-item>
+      <ion-label>First Name</ion-label>
+      <ion-input class="ion-text-right" type="text" id="first" name="first" formControlName="first"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Last Name</ion-label>
+      <ion-input class="ion-text-right" type="text" id="last" name="last" formControlName="last"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Role</ion-label>
+      <ion-input class="ion-text-right" type="text" id="role" name="role" formControlName="role"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Email</ion-label>
+      <ion-input class="ion-text-right" type="email" id="contactEmail" name="contactEmail" formControlName="contactEmail"></ion-input>
+    </ion-item>
+  </form>
+  <ion-button expand="full" color="dark" (click)="submit()">Submit</ion-button>
+</ion-content>

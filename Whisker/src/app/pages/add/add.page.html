@@ -1,0 +1,108 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add Animal</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]='addAnimal'>
+    <ion-item>
+      <ion-label>Type</ion-label>
+      <ion-select id="type" name="type" formControlName="type">
+        <ion-select-option>Cat</ion-select-option>
+        <ion-select-option>Dog</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Name</ion-label>
+      <ion-input class="ion-text-right" type="text" id="name" name="name" formControlName="name"></ion-input>
+    </ion-item>
+    <ion-item *ngIf='this.addAnimal.value["type"] === "Cat"'>
+      <ion-label>Cat Breed(s)</ion-label>
+      <ion-select multiple="true" id="catBreeds" name="catBreeds" formControlName="catBreeds">
+        <ion-select-option *ngFor="let catBreed of catBreeds">{{ catBreed }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf='this.addAnimal.value["type"] === "Dog"'>
+      <ion-label>Dog Breed(s)</ion-label>
+      <ion-select multiple="true" id="dogBreeds" name="dogBreeds" formControlName="dogBreeds">
+        <ion-select-option *ngFor="let dogBreed of dogBreeds">{{ dogBreed }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Weight</ion-label>
+      <ion-input class="ion-text-right" type="number" id="weight" name="weight" formControlName="weight"></ion-input>
+      <span>lbs</span>
+    </ion-item>
+    <ion-item>
+      <ion-label>Date of Birth</ion-label>
+      <ion-datetime displayFormat="MM/DD/YYYY" id="dob" name="dob" formControlName="dob"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Gender</ion-label>
+      <ion-select id="gender" name="gender" formControlName="gender">
+        <ion-select-option>Male</ion-select-option>
+        <ion-select-option>Female</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf='this.addAnimal.value["type"] === "Cat"'>
+      <ion-label>Declawed</ion-label>
+      <ion-select id="declawed" name="declawed" formControlName="declawed">
+        <ion-select-option>Yes</ion-select-option>
+        <ion-select-option>No</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Special Needs</ion-label>
+      <ion-select id="specialNeeds" name="specialNeeds" formControlName="specialNeeds">
+        <ion-select-option>Yes</ion-select-option>
+        <ion-select-option>No</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf='this.addAnimal.value["specialNeeds"] === "Yes"'>
+      <ion-label>Special Needs Reason</ion-label>
+      <ion-input class="ion-text-right" name="specialNeedsReason" id="specialNeedsReason" name="specialNeedsReason" formControlName="specialNeedsReason"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Hair Length</ion-label>
+      <ion-select id="hair" name="hair" formControlName="hair">
+        <ion-select-option>Short</ion-select-option>
+        <ion-select-option>Medium</ion-select-option>
+        <ion-select-option>Long</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Good with Cats</ion-label>
+      <ion-select id="goodWithCats" name="goodWithCats" formControlName="goodWithCats">
+        <ion-select-option>Yes</ion-select-option>
+        <ion-select-option>No</ion-select-option>
+        <ion-select-option>Unknown</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Good with Dogs</ion-label>
+      <ion-select id="goodWithDogs" name="goodWithDogs" formControlName="goodWithDogs">
+        <ion-select-option>Yes</ion-select-option>
+        <ion-select-option>No</ion-select-option>
+        <ion-select-option>Unknown</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Good with Kids</ion-label>
+      <ion-select id="goodWithKids" name="goodWithKids" formControlName="goodWithKids">
+        <ion-select-option>Yes</ion-select-option>
+        <ion-select-option>No</ion-select-option>
+        <ion-select-option>Unknown</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Status</ion-label>
+      <ion-select id="status" name="status" formControlName="status">
+        <ion-select-option>Available</ion-select-option>
+        <ion-select-option>On Hold</ion-select-option>
+        <ion-select-option>Adopted</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </form>
+  <ion-button expand="full" color="dark" (click)="submit()">Submit</ion-button>
+</ion-content>
