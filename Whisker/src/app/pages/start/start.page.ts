@@ -18,6 +18,11 @@ export class StartPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    setTimeout(() => {
+      if(this.loginService.isLoggedIn()) {
+        this.router.navigateByUrl('/home');
+      }
+    }, 1000);
   }
 
   async googleLogin() {

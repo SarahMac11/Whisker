@@ -1,5 +1,6 @@
 <ion-header>
   <ion-toolbar>
+    <ion-button slot='start' routerLink='/'>Back</ion-button>
     <ion-title>Provider Application</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -11,7 +12,7 @@
     </ion-item>
     <ion-item>
       <ion-label>Rescue Name</ion-label>
-      <ion-input class="ion-text-right" type="text" id="rescue" name="rescue" formControlName="rescue"></ion-input>
+      <ion-input class="ion-text-right" type="text" id="rescue" name="name" formControlName="name"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Street Address</ion-label>
@@ -72,5 +73,5 @@
       <ion-input class="ion-text-right" type="email" id="contactEmail" name="contactEmail" formControlName="contactEmail"></ion-input>
     </ion-item>
   </form>
-  <ion-button expand="full" color="dark" (click)="submit()">Submit</ion-button>
+  <ion-button expand="full" color="dark" (click)="submit()" [disabled]='!providerRequest.valid || this.isSubmitting'>Submit</ion-button>
 </ion-content>
