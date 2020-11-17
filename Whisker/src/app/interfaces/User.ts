@@ -1,3 +1,5 @@
+import { AngularDelegate } from '@ionic/angular';
+
 export interface User {
     valid?: boolean,
     id: String,
@@ -10,5 +12,6 @@ export interface User {
     sessionId?: String,
     expDate?: Date,
     message?: String,
-    admin?: boolean
+    admin?: boolean,
+    imageUrl?: any
 }

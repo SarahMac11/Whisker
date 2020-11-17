@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { LoginService } from './services/login.service';
 import { SettingsService } from './services/settings.service';
 import { Router } from '@angular/router';
+import { User } from './interfaces/User';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,8 @@ export class AppComponent {
     private loginService: LoginService,
     private settingsService: SettingsService,
     private router: Router,
-    private menuCtl: MenuController
+    private menuCtl: MenuController,
+    private currentUser: User
   ) {
     this.initializeApp();
   }
@@ -29,6 +31,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.currentUser = this.loginService.user;
     });
   }
   get isLoggedIn(): boolean {
