@@ -11,6 +11,8 @@
       <ion-button routerLink='/messages' class='desktop-nav-button' routerLinkActive='active'>Messages</ion-button>
     </ion-buttons>
     <ion-avatar slot='end' class='app-avatar' (click)='openMenu()'>
+      <img *ngIf='settingsService.isGoogleLogin()' src='{{this.currentUser.imageUrl}}'>
+      <img *ngIf='settingsService.isFbLogin()' src='{{this.currentUser.imageUrl}}'>
       <img *ngIf='!settingsService.isDarkMode()' src="../assets/icon/dog_favicon.png">
       <img *ngIf='settingsService.isDarkMode()' src="../assets/icon/cat_favicon.png">
     </ion-avatar>

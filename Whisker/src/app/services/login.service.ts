@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
-import { Facebook } from '@ionic-native/facebook/ngx';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 
 @Component({
   providers: [GooglePlus, Facebook]
@@ -123,40 +123,29 @@ export class LoginService {
    async signInWithGoogle() {
      await this.googlePlus.login({}).then(res => {
         console.log(res);
-        var obj = {
-          id: res.userId,
-          username: res.email,
-          password: res.serverAuthCode,
-          email: res.email,
-          firstname: res.givenName,
-          lastname: res.familyName
-          //photo: res.imageURL;
-       }
-       this.setLoggedIn(obj);
-       console.log(obj);
-       this.router.navigate(['/home']);
-       this.googeLogin = true;
+        this.googeLogin = true;
+        return this.http.post(this.apiUrl + '/oauthLogin', res);
      });
    }
 
    async signInWithFacebook() {
-     this.fb.getLoginStatus().then(async res => {
-       console.log(res);
-       console.log(res.status);
-       if(res.status == 'connect') {
-         await this.fb.login(['email', 'public_profile']).then(res => {
-           console.log(res);
-          //  var obj = {
-          //    id = res.authResponse.userID
-          //  }
-         });
-         this.router.navigate(['/home']);
-       } else {
-         this.failedLogin();
-       }
-     })
-     .catch(e => console.log(e));
-   }
+     await this.fb.login(['email', 'public_profile'])
+      .then((res: FacebookLoginResponse) => {
+        console.log('Logged into FB', res);
+        this.fbLogin = true;
+        return this.http.post(this.apiUrl + '/oauthLogin', res);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+    }
 
-   
-}
+    isGoogleLogin(): boolean {
+      return this.googeLogin;
+    }
+
+    isFbLogin(): boolean {
+      return this.fbLogin;
+    }
+
+  }
