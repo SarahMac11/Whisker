@@ -77,7 +77,8 @@ export class LoginService {
       lastname: result.lastname,
       currentSessionId: result.sessionId,
       expDate: result.expDate,
-      admin: result.admin
+      admin: result.admin,
+      imageUrl: result.imageUrl
     };
 
     this.storage.set('loggedIn', this.user);
