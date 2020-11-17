@@ -36,6 +36,7 @@ export class AdoptionSurveyPage implements OnInit {
 
   slideNumber: number;
   numSlides: number;
+  updatingNums: boolean = false;
 
   locked: boolean = false;
 
@@ -60,12 +61,14 @@ export class AdoptionSurveyPage implements OnInit {
       zip: ["", Validators.required],
       country: ["", Validators.required],
     });
+    this.address.valueChanges.subscribe(() => this.updateSlideNums());
 
     this.housing = fb.group({
       housingOwnership: ["", Validators.required],
       housingRestrictionsYesNo: ["", Validators.required],
       housingRestrictionsSelections: "",
     });
+    this.housing.valueChanges.subscribe(() => this.updateSlideNums());
 
     this.landlord = fb.group({
       landlordName: "",
@@ -74,10 +77,12 @@ export class AdoptionSurveyPage implements OnInit {
       contactLandlord: "",
       contactLandlordReason: "",
     });
+    this.landlord.valueChanges.subscribe(() => this.updateSlideNums());
 
     this.experience = fb.group({
       ownershipExperience: ["", Validators.required],
     });
+    this.experience.valueChanges.subscribe(() => this.updateSlideNums());
 
     this.vetExperience = fb.group({
       vetExperience: "",
@@ -86,23 +91,27 @@ export class AdoptionSurveyPage implements OnInit {
       surrendered: "",
       surrenderedReason: "",
     });
+    this.vetExperience.valueChanges.subscribe(() => this.updateSlideNums());
 
     this.household = fb.group({
       allergies: ["", Validators.required],
       allergiesSpecified: "",
       energyLevel: "",
     });
+    this.household.valueChanges.subscribe(() => this.updateSlideNums());
 
     this.species = fb.group({
       species: ["", Validators.required],
     });
+    this.species.valueChanges.subscribe(() => this.updateSlideNums());
 
     this.genderAge = fb.group({
       gender: ["", Validators.required],
       genderRating: ["", Validators.required],
       age: "",
       ageRating: ["", Validators.required],
-    })
+    });
+    this.genderAge.valueChanges.subscribe(() => this.updateSlideNums());
 
     this.hairColor = fb.group({
       hair: ["", Validators.required],
@@ -111,6 +120,7 @@ export class AdoptionSurveyPage implements OnInit {
       dogColors: "",
       colorRating: "",
     });
+    this.hairColor.valueChanges.subscribe(() => this.updateSlideNums());
 
     this.breedWeight = fb.group({
       catBreeds: "",
@@ -119,6 +129,7 @@ export class AdoptionSurveyPage implements OnInit {
       weight: "",
       weightRating: "",
     });
+    this.breedWeight.valueChanges.subscribe(() => this.updateSlideNums());
 
     this.future = fb.group({
       reasonsToReturn: ["", Validators.required],
@@ -127,6 +138,7 @@ export class AdoptionSurveyPage implements OnInit {
       moving: "",
       moveDate: "",
     });
+    this.future.valueChanges.subscribe(() => this.updateSlideNums());
 
     this.barnCat = fb.group({
       catHousing: "",
@@ -139,15 +151,18 @@ export class AdoptionSurveyPage implements OnInit {
       barnCatPersonality: "",
       barnCatPrecautions: "",
     });
+    this.barnCat.valueChanges.subscribe(() => this.updateSlideNums());
 
     this.cat = fb.group({
       declawing: "",
       catIndoorOutdoor: "",
     });
+    this.cat.valueChanges.subscribe(() => this.updateSlideNums());
 
     this.dog = fb.group({
       dogIndoorOutdoor: ""
     });
+    this.dog.valueChanges.subscribe(() => this.updateSlideNums());
   }
 
   ngOnInit() {
@@ -164,6 +179,16 @@ export class AdoptionSurveyPage implements OnInit {
         this.slides.getActiveIndex().then(num => {this.slideNumber = ++num; });
       }, 1000);
     }, 1000);
+  }
+
+  updateSlideNums() {
+    this.updatingNums = true;
+    setTimeout(() => {
+      this.slides.update().then(() => {
+        this.slides.length().then(num => {console.log(num); this.numSlides = num; this.updatingNums = false; });
+        this.slides.getActiveIndex().then(num => {this.slideNumber = ++num; });
+      });
+    }, 500);
   }
   
   print(page: FormGroup) {
