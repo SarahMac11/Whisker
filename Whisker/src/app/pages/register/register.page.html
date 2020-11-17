@@ -6,9 +6,10 @@
     </ion-button>
   </ion-buttons>
   <ion-text class="ion-text-center">
-    <h2>Create Whisker Adopter Account</h2>
+    <h2 *ngIf="this.providerId === ''">Create Whisker Adopter Account</h2>
+    <h2 *ngIf="this.providerId !== ''">Create Whisker Provider Account</h2>
   </ion-text>
-  <ion-text class='link ion-text-center'><h6>New provider or shelter? <a routerLink='/providerApplication'>Apply to Whisker!</a></h6></ion-text>
+  <ion-text class='link ion-text-center'><h6>New provider or shelter? <a routerLink='/provider'>Apply to Whisker!</a></h6></ion-text>
   <form name=registerForm [formGroup]='registerForm' (ngSubmit)='register()'>
     <ion-item-group class="form-field-group">
     <ion-item class="form-field">

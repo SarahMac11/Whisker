@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 
+import { LoginService } from 'src/app/services/login.service';
+
 @Injectable({
   providedIn: 'root'
 })
 export class SettingsService {
 
   whiskerSettings;
-  constructor() {
+  constructor(private loginService: LoginService) {
     if(localStorage.getItem('whiskerSettings') !== null) {
       this.whiskerSettings = JSON.parse(localStorage.getItem('whiskerSettings'));
     }
@@ -30,4 +32,13 @@ export class SettingsService {
   isDarkMode() {
     return this.whiskerSettings.darkMode;
   }
+
+  isGoogleLogin() {
+    return this.loginService.isGoogleLogin();
+  }
+
+  isFbLogin() {
+    return this.loginService.isFbLogin();
+  }
+
 }

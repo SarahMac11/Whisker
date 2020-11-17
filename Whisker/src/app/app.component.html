@@ -10,7 +10,12 @@
       <ion-button routerLink='/browsePets' class='desktop-nav-button' routerLinkActive='active'>Browse Pets</ion-button>
       <ion-button routerLink='/messages' class='desktop-nav-button' routerLinkActive='active'>Messages</ion-button>
     </ion-buttons>
-    <ion-avatar slot='end' class='app-avatar' (click)='openMenu()'><img src='../assets/icon/dog_favicon.png'></ion-avatar>
+    <ion-avatar slot='end' class='app-avatar' (click)='openMenu()'>
+      <img *ngIf='settingsService.isGoogleLogin() && currentUser.imageUrl.length > 1' type="image/png" src="{{currentUser.imageUrl}"; else src="../assets/icon/dog_favicon.png">
+      <img *ngIf='settingsService.isFbLogin() && currentUser.imageUrl.length > 1' type="image/png" src="{{currentUser.imageUrl}}"; else src="../assets/icon/cat_favicon.png">
+      <img *ngIf='!settingsService.isDarkMode()' type="image/png" src="../assets/icon/dog_favicon.png">
+      <img *ngIf='settingsService.isDarkMode()' type="image/png" src="../assets/icon/cat_favicon.png">
+    </ion-avatar>
   </ion-toolbar>
   <ion-router-outlet id='main'></ion-router-outlet>
     <ion-tabs>
@@ -38,6 +43,10 @@
       </ion-header>
       <ion-content>
         <ion-list>
+          <ion-item class='menu-item no-select' lines='none' *ngIf='this.loginService.user && this.loginService.user.admin' routerLink='/admin'>
+            <ion-icon slot='start' name='settings-outline' color='danger' class='menu-icon'></ion-icon>
+              <ion-label>Admin</ion-label>
+          </ion-item>
           <ion-item class='menu-item no-select' lines='none'>
             <ion-icon slot='start' name='person-circle-outline' color='primary' class='menu-icon'></ion-icon>
             <ion-label>My Profile</ion-label>

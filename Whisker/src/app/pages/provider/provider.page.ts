@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
 
 
 @Component({
@@ -10,9 +12,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ProviderPage implements OnInit {
 
   providerRequest: FormGroup;
-  constructor(private fb: FormBuilder) {
+  isSubmitting: boolean = false;
+  constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router) {
     this.providerRequest = fb.group({
-      rescue: ["", Validators.required],
+      name: ["", Validators.required],
       street: ["", Validators.required],
       city: ["", Validators.required],
       state: ["", Validators.required],
@@ -33,6 +36,14 @@ export class ProviderPage implements OnInit {
   }
 
   submit() {
-    console.log(this.providerRequest.value);
+    this.isSubmitting = true;
+    this.loginService.providerApply(this.providerRequest.value).subscribe((res: {success: boolean})=> {
+      if (res.success) {
+        this.router.navigateByUrl('/confirmProviderApplication');
+      }
+      else {
+        this.isSubmitting = false;
+      }
+    });
   }
 }

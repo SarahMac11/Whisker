@@ -4,6 +4,7 @@ import { IonSlides } from '@ionic/angular';
 import { ViewChild } from '@angular/core';
 import catBreeds from 'src/assets/catBreeds.json';
 import dogBreeds from 'src/assets/dogBreeds.json';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-adoption-survey',
@@ -38,13 +39,19 @@ export class AdoptionSurveyPage implements OnInit {
 
   locked: boolean = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private loginService: LoginService) {
     this.contact = fb.group({
       first: ["", Validators.compose([Validators.required, Validators.pattern('[a-zA-Z]*'), Validators.minLength(0)])],
       last: ["", Validators.compose([Validators.required, Validators.pattern('[a-zA-Z]*'), Validators.minLength(0)])],
       email: ["", Validators.compose([Validators.required])],
       phone: ["", Validators.compose([Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(10)])],
     });
+
+    if (this.loginService.user) {
+      this.contact.value.first = this.loginService.user.firstname;
+      this.contact.value['last'] = this.loginService.user.lastname;
+      this.contact.value['email'] = this.loginService.user.email;
+    }
 
     this.address = fb.group({
       street: ["", Validators.required],
