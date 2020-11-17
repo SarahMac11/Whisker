@@ -12,7 +12,7 @@
     </ion-text>
     <ion-slides scrollbar="true" #slider>
       <ion-slide>
-        <form [formGroup]="contact">
+        <form [formGroup]="contact" (change)='updateSlideNums()'>
           <ion-item>
             <ion-title class="ion-text-center">Contact Information</ion-title>
           </ion-item>
@@ -49,7 +49,7 @@
         </form>
       </ion-slide>
       <ion-slide>
-        <form [formGroup]="address">
+        <form [formGroup]="address" (change)='updateSlideNums()'>
           <ion-item>
             <ion-title class="ion-text-center">Address</ion-title>
           </ion-item>
@@ -90,7 +90,7 @@
         </form>
       </ion-slide>
       <ion-slide>
-        <form [formGroup]="housing">
+        <form [formGroup]="housing" (change)='updateSlideNums()'>
           <ion-item>
             <ion-title class="ion-text-center">Housing</ion-title>
           </ion-item>
@@ -136,7 +136,7 @@
         </form>
       </ion-slide>
       <ion-slide *ngIf='this.housing.value["housingOwnership"] === "Rent"'>
-        <form [formGroup]="landlord">
+        <form [formGroup]="landlord" (change)='updateSlideNums()'>
           <ion-item>
             <ion-title class="ion-text-center">Landlord Contact</ion-title>
           </ion-item>
@@ -183,7 +183,7 @@
         </form>
       </ion-slide>
       <ion-slide>
-        <form [formGroup]="experience">
+        <form [formGroup]="experience" (change)='updateSlideNums()'>
           <ion-item>
             <ion-title class="ion-text-center">Prior Pet Experience</ion-title>
           </ion-item>
@@ -212,7 +212,7 @@
       </ion-slide>
       <ion-slide
         *ngIf='this.experience.value["ownershipExperience"] === "Some" || this.experience.value["ownershipExperience"] === "A Lot"'>
-        <form [formGroup]="vetExperience">
+        <form [formGroup]="vetExperience" (change)='updateSlideNums()'>
           <ion-item>
             <ion-label text-wrap>Veterinary Care Experience</ion-label>
             <ion-select class="ion-text-right" multiple="true" id="vetExperience" name="vetExperience"
@@ -261,7 +261,7 @@
         </form>
       </ion-slide>
       <ion-slide>
-        <form [formGroup]="household">
+        <form [formGroup]="household" (change)='updateSlideNums()'>
           <ion-item>
             <ion-title class="ion-text-center">Household Makeup</ion-title>
           </ion-item>
@@ -302,7 +302,7 @@
         </form>
       </ion-slide>
       <ion-slide>
-        <form [formGroup]="species">
+        <form [formGroup]="species" (change)='updateSlideNums()'>
           <ion-item>
             <ion-title class="ion-text-center">Build Your Ideal Pet</ion-title>
           </ion-item>
@@ -330,7 +330,7 @@
         </form>
       </ion-slide>
       <ion-slide>
-        <form [formGroup]="genderAge">
+        <form [formGroup]="genderAge" (change)='updateSlideNums()'>
           <ion-item>
             <ion-label>Gender</ion-label>
             <ion-select class="ion-text-right" multiple="true" id="gender" name="gender" formControlName="gender"
@@ -383,7 +383,7 @@
         </form>
       </ion-slide>
       <ion-slide>
-        <form [formGroup]="hairColor">
+        <form [formGroup]="hairColor" (change)='updateSlideNums()'>
           <ion-item>
             <ion-label>Hair Length</ion-label>
             <ion-select class="ion-text-right" multiple="true" id="hair" name="hair" formControlName="hair"
@@ -459,7 +459,7 @@
         </form>
       </ion-slide>
       <ion-slide>
-        <form [formGroup]="breedWeight">
+        <form [formGroup]="breedWeight" (change)='updateSlideNums()'>
           <ion-item
             *ngIf='this.species.value["species"].includes("Barn Cat") || this.species.value["species"].includes("Cat")'>
             <ion-label>Cat Breed(s)</ion-label>
@@ -527,7 +527,7 @@
         </form>
       </ion-slide>
       <ion-slide>
-        <form [formGroup]="future">
+        <form [formGroup]="future" (change)='updateSlideNums()'>
           <ion-item>
             <ion-title class="ion-text-center">Future Plans</ion-title>
           </ion-item>
@@ -576,7 +576,7 @@
         </form>
       </ion-slide>
       <ion-slide *ngIf='this.species.value["species"].includes("Barn Cat")'>
-        <form [formGroup]="barnCat">
+        <form [formGroup]="barnCat" (change)='updateSlideNums()'>
           <ion-item>
             <ion-title class="ion-text-center">Barn Cat Specific</ion-title>
           </ion-item>
@@ -660,7 +660,7 @@
         </form>
       </ion-slide>
       <ion-slide *ngIf='this.species.value["species"].includes("Cat")'>
-        <form [formGroup]="cat">
+        <form [formGroup]="cat" (change)='updateSlideNums()'>
           <ion-item>
             <ion-title class="ion-text-center">Cat Specific</ion-title>
           </ion-item>
@@ -691,7 +691,7 @@
         </form>
       </ion-slide>
       <ion-slide *ngIf='this.species.value["species"].includes("Dog")'>
-        <form [formGroup]="dog">
+        <form [formGroup]="dog" (change)='updateSlideNums()'>
           <ion-item>
             <ion-title class="ion-text-center">Dog Specific</ion-title>
           </ion-item>
