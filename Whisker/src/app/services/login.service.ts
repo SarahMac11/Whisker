@@ -150,8 +150,8 @@ export class LoginService {
 
    async signInWithGoogle() {
      await this.googlePlus.login({}).then(res => {
-        console.log(res);
         this.googeLogin = true;
+        this.loggedIn = true;
         return this.http.post(this.apiUrl + '/oauthLogin', res);
      });
    }
@@ -161,6 +161,7 @@ export class LoginService {
       .then((res: FacebookLoginResponse) => {
         console.log('Logged into FB', res);
         this.fbLogin = true;
+        this.loggedIn = true;
         return this.http.post(this.apiUrl + '/oauthLogin', res);
       })
       .catch(e => {
