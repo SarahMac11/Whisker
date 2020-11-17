@@ -12,7 +12,7 @@ export interface Animal {
     goodWithDogs: string,
     goodWithKids: string,
     bio: string,
-    status: string
+    status: string,
     added: string,
     provider: string
 }
