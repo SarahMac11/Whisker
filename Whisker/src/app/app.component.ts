@@ -14,6 +14,8 @@ import { User } from './interfaces/User';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+
+  currentUser: User;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -21,8 +23,7 @@ export class AppComponent {
     private loginService: LoginService,
     private settingsService: SettingsService,
     private router: Router,
-    private menuCtl: MenuController,
-    private currentUser: User
+    private menuCtl: MenuController
   ) {
     this.initializeApp();
   }
