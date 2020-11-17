@@ -31,6 +31,7 @@ export class AddPage implements OnInit {
       goodWithCats: ["", Validators.required],
       goodWithDogs: ["", Validators.required],
       goodWithKids: ["", Validators.required],
+      bio: ["", Validators.required],
       status: ["", Validators.required]
     });
   }
