@@ -33,11 +33,12 @@ export class SettingsService {
     return this.whiskerSettings.darkMode;
   }
 
-  get isGoogleLogin() {
-    return this.loginService.isGoogleLogin;
+  isGoogleLogin() {
+    return this.loginService.isGoogleLogin();
   }
 
-  get isFbLogin() {
-    return this.loginService.isFbLogin;
+  isFbLogin() {
+    return this.loginService.isFbLogin();
   }
+
 }

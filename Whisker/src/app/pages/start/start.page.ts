@@ -28,7 +28,7 @@ export class StartPage implements OnInit {
   async googleLogin() {
     try{
       await this.loginService.signInWithGoogle().then(()=> {
-        this.router.navigate(['/home']);
+        this.router.navigateByUrl('/home');
       });
     } catch(e) {
       console.log(e);
@@ -38,7 +38,7 @@ export class StartPage implements OnInit {
   async fbLogin() {
     try {
       await this.loginService.signInWithFacebook().then(()=> {
-        this.router.navigate(['/home']);
+        this.router.navigateByUrl('/home');
       });
     } catch(e) {
       console.log(e);
