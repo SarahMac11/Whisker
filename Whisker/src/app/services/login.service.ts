@@ -152,7 +152,9 @@ export class LoginService {
      await this.googlePlus.login({}).then(res => {
         this.googeLogin = true;
         this.loggedIn = true;
-        return this.http.post(this.apiUrl + '/oauthLogin', res);
+        this.http.post(this.apiUrl + 'oauthLogin', res).subscribe(res => {
+           this.router.navigateByUrl('/home');
+        });
      });
    }
 
