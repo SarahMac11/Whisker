@@ -76,7 +76,8 @@ export class LoginService {
       firstname: result.firstname,
       lastname: result.lastname,
       currentSessionId: result.sessionId,
-      expDate: result.expDate
+      expDate: result.expDate,
+      admin: result.admin
     };
 
     this.storage.set('loggedIn', this.user);
@@ -98,6 +99,33 @@ export class LoginService {
 
    addUser(user: User) {
      return this.http.post(this.apiUrl + 'users/addUser', user);
+   }
+
+   providerApply(info) {
+     return this.http.post(this.apiUrl + 'apply/provider', info);
+   }
+
+   getProviderApplications() {
+     return this.http.post(this.apiUrl + 'applications/provider', {
+      uid: this.user.id,
+      sid: this.user.currentSessionId
+     });
+   }
+
+   approveProvider(id: string) {
+     return this.http.post(this.apiUrl + 'apply/provider/accept', {
+       uid: this.user.id,
+       sid: this.user.currentSessionId,
+       applicationId: id
+     });
+   }
+
+   denyProvider(id: string) {
+     return this.http.post(this.apiUrl + 'apply/provider/deny', {
+       uid: this.user.id,
+       sid: this.user.currentSessionId,
+       applicationId: id
+     });
    }
 
    isLoggedIn(): boolean {

@@ -9,5 +9,6 @@ export interface User {
     currentSessionId?: String,
     sessionId?: String,
     expDate?: Date,
-    message?: String
+    message?: String,
+    admin?: boolean
 }
