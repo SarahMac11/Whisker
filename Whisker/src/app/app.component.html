@@ -2,8 +2,8 @@
   <ion-toolbar *ngIf='isMobile() && loginService.isLoggedIn()' class='mobile-bar'>
     <ion-text class='mobile-w'><h2>Whisker</h2></ion-text>
     <ion-avatar slot='end' class='app-avatar mobile' (click)='openMenu()'>
-      <img *ngIf='settingsService.isGoogleLogin() && loginService.user.imageUrl > 1 && loginService.isLoggedIn()' type="image/png" style="width:50%; object-fit:resize;" [src]='loginService.user.imageUrl'; else type="image/png" src="../assets/icon/dog_favicon.png">
-      <img *ngIf='settingsService.isFbLogin() && loginService.user.imageUrl > 1 && loginService.isLoggedIn()' type="image/png" style="width:50%; object-fit:resize;" [src]='loginService.user.imageUrl'; else type="image/png" src="../assets/icon/cat_favicon.png">
+      <img *ngIf='settingsService.isGoogleLogin()' type="image/png" style="width:50%; object-fit:resize;" [src]='loginService.user.imageUrl'; else type="image/png" src="../assets/icon/dog_favicon.png">
+      <img *ngIf='settingsService.isFbLogin()' type="image/png" style="width:50%; object-fit:resize;" [src]='loginService.user.imageUrl'; else type="image/png" src="../assets/icon/cat_favicon.png">
       <img *ngIf='!settingsService.isDarkMode() && !settingsService.isFbLogin() && !settingsService.isGoogleLogin()' type="image/png" src="../assets/icon/dog_favicon.png">
       <img *ngIf='settingsService.isDarkMode() && !settingsService.isFbLogin() && !settingsService.isGoogleLogin()' type="image/png" src="../assets/icon/cat_favicon.png">
     </ion-avatar>
@@ -16,8 +16,8 @@
       <ion-button routerLink='/messages' class='desktop-nav-button' routerLinkActive='active'>Messages</ion-button>
     </ion-buttons>
     <ion-avatar slot='end' class='app-avatar' (click)='openMenu()'>
-      <img *ngIf='settingsService.isGoogleLogin() && loginService.user.imageUrl > 1' type="image/png" style="width:50%; object-fit:resize;" [src]='loginService.user.imageUrl'; else type="image/png" src="../assets/icon/dog_favicon.png">
-      <img *ngIf='settingsService.isFbLogin() && loginService.user.imageUrl > 1' type="image/png" style="width:50%; object-fit:resize;" [src]='loginService.user.imageUrl'; else type="image/png" src="../assets/icon/cat_favicon.png">
+      <img *ngIf='settingsService.isGoogleLogin()' type="image/png" style="width:50%; object-fit:resize;" [src]='loginService.user.imageUrl'; else type="image/png" src="../assets/icon/dog_favicon.png">
+      <img *ngIf='settingsService.isFbLogin()' type="image/png" style="width:50%; object-fit:resize;" [src]='loginService.user.imageUrl'; else type="image/png" src="../assets/icon/cat_favicon.png">
       <img *ngIf='!settingsService.isDarkMode() && !settingsService.isFbLogin() && !settingsService.isGoogleLogin()' type="image/png" src="../assets/icon/dog_favicon.png">
       <img *ngIf='settingsService.isDarkMode() && !settingsService.isFbLogin() && !settingsService.isGoogleLogin()' type="image/png" src="../assets/icon/cat_favicon.png">
     </ion-avatar>
