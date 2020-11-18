@@ -11,10 +11,10 @@
       <ion-button routerLink='/messages' class='desktop-nav-button' routerLinkActive='active'>Messages</ion-button>
     </ion-buttons>
     <ion-avatar slot='end' class='app-avatar' (click)='openMenu()'>
-      <img *ngIf='settingsService.isGoogleLogin() && loginService.user.imageUrl > 1' type="image/png" [src]='loginService.user.imageUrl'; else src="../assets/icon/dog_favicon.png">
-      <img *ngIf='settingsService.isFbLogin() && loginService.user.imageUrl > 1' type="image/png" [src]='loginService.user.imageUrl'; else src="../assets/icon/cat_favicon.png">
-      <img *ngIf='!settingsService.isDarkMode()' type="image/png" src="../assets/icon/dog_favicon.png">
-      <img *ngIf='settingsService.isDarkMode()' type="image/png" src="../assets/icon/cat_favicon.png">
+      <img *ngIf='settingsService.isGoogleLogin() && loginService.user.imageUrl > 1 && loginService.isLoggedIn()' type="image/png" style="width:50%; object-fit:resize;" [src]='loginService.user.imageUrl'; else type="image/png" src="../assets/icon/dog_favicon.png">
+      <img *ngIf='settingsService.isFbLogin() && loginService.user.imageUrl > 1 && loginService.isLoggedIn()' type="image/png" style="width:50%; object-fit:resize;" [src]='loginService.user.imageUrl'; else type="image/png" src="../assets/icon/cat_favicon.png">
+      <img *ngIf='!settingsService.isDarkMode() && !settingsService.isFbLogin() && !settingsService.isGoogleLogin()' type="image/png" src="../assets/icon/dog_favicon.png">
+      <img *ngIf='settingsService.isDarkMode() && !settingsService.isFbLogin() && !settingsService.isGoogleLogin()' type="image/png" src="../assets/icon/cat_favicon.png">
     </ion-avatar>
   </ion-toolbar>
   <ion-router-outlet id='main'></ion-router-outlet>

@@ -80,7 +80,6 @@ export class LoginService {
       admin: result.admin,
       imageUrl: result.imageUrl
     };
-
     this.storage.set('loggedIn', this.user);
     this.tokenPresent = true;
     this.loggingIn = false;
@@ -151,10 +150,12 @@ export class LoginService {
 
    async signInWithGoogle() {
      await this.googlePlus.login({}).then(res => {
-        this.googeLogin = true;
-        this.loggedIn = true;
         this.http.post(this.apiUrl + 'oauthLogin', res).subscribe(res => {
-           this.router.navigateByUrl('/home');
+          this.setLoggedIn(<any> res);
+          this.googeLogin = true;
+        },
+        error => {
+          console.log(error);
         });
      });
    }
@@ -163,9 +164,10 @@ export class LoginService {
      await this.fb.login(['email', 'public_profile'])
       .then((res: FacebookLoginResponse) => {
         console.log('Logged into FB', res);
-        this.fbLogin = true;
-        this.loggedIn = true;
-        return this.http.post(this.apiUrl + '/oauthLogin', res);
+        this.http.post(this.apiUrl + 'oauthLogin', res).subscribe(res => {
+          this.setLoggedIn(<any> res);
+          this.fbLogin = true;
+        });
       })
       .catch(e => {
         console.log(e);
@@ -179,5 +181,4 @@ export class LoginService {
     isFbLogin(): boolean {
       return this.fbLogin;
     }
-
   }

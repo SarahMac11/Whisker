@@ -7,7 +7,6 @@ import { LoginService } from './services/login.service';
 import { SettingsService } from './services/settings.service';
 import { Router } from '@angular/router';
 import { User } from './interfaces/User';
-// import { User } from '../../src/app/interfaces/User';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +26,6 @@ export class AppComponent {
     private menuCtl: MenuController
   ) {
     this.initializeApp();
-    
   }
 
   initializeApp() {
