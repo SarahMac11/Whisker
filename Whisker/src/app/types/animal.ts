@@ -1,6 +1,8 @@
 export interface Animal {
     type: string,
+    image: string,
     breed: string[],
+    colors: string[],
     weight: number,
     dob: string,
     gender: string,
@@ -12,6 +14,7 @@ export interface Animal {
     goodWithDogs: string,
     goodWithKids: string,
     bio: string,
+    energyLevel: string,
     status: string,
     added: string,
     provider: string

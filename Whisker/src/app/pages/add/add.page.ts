@@ -32,6 +32,7 @@ export class AddPage implements OnInit {
       goodWithDogs: ["", Validators.required],
       goodWithKids: ["", Validators.required],
       bio: ["", Validators.required],
+      energyLevel: ["", Validators.required],
       status: ["", Validators.required]
     });
   }
