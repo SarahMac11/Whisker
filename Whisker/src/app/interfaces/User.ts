@@ -13,5 +13,6 @@ export interface User {
     expDate?: Date,
     message?: String,
     admin?: boolean,
+    providerId?: string,
     imageUrl?: any
 }

@@ -78,7 +78,8 @@ export class LoginService {
       currentSessionId: result.sessionId,
       expDate: result.expDate,
       admin: result.admin,
-      imageUrl: result.imageUrl
+      imageUrl: result.imageUrl,
+      providerId: result.providerId
     };
     this.storage.set('loggedIn', this.user);
     this.tokenPresent = true;
@@ -126,6 +127,18 @@ export class LoginService {
        sid: this.user.currentSessionId,
        applicationId: id
      });
+   }
+
+   addAnimal(animal) {
+     return this.http.post(this.apiUrl + 'add/animal', Object.assign(animal, {
+      uid: this.user.id,
+      sid: this.user.currentSessionId,
+      pid: this.user.providerId
+     }));
+   }
+
+   getProviderAnimals() {
+     return this.http.get(this.apiUrl + 'animals/' + this.user.providerId);
    }
 
    isLoggedIn(): boolean {

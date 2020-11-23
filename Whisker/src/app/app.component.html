@@ -52,6 +52,14 @@
             <ion-icon slot='start' name='settings-outline' color='danger' class='menu-icon'></ion-icon>
               <ion-label>Admin</ion-label>
           </ion-item>
+          <ion-item class='menu-item no-select' lines='none' *ngIf='this.loginService.user && this.loginService.user.providerId' routerLink='/add'>
+            <ion-icon slot='start' name='paw' color='success' class='menu-icon'></ion-icon>
+            <ion-label>Add a Pet</ion-label>
+          </ion-item>
+          <ion-item class='menu-item no-select' lines='none' *ngIf='this.loginService.user && this.loginService.user.providerId' routerLink='/providerManage'>
+            <ion-icon slot='start' name='layers-outline' class='menu-icon'></ion-icon>
+            <ion-label>Manage Pets</ion-label>
+          </ion-item>
           <ion-item class='menu-item no-select' lines='none'>
             <ion-icon slot='start' name='person-circle-outline' color='primary' class='menu-icon'></ion-icon>
             <ion-label>My Profile</ion-label>

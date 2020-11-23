@@ -57,6 +57,10 @@ const routes: Routes = [
     path: 'admin',
     loadChildren: () => import('./pages/admin-console/admin-console.module').then( m => m.AdminConsolePageModule)
   },
+  {
+    path: 'providerManage',
+    loadChildren: () => import('./pages/provider-manage/provider-manage.module').then( m => m.ProviderManagePageModule)
+  },
   // wildcard, redirect non-recognized routes to the base route
   {
     path: '**',
