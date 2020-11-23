@@ -17,6 +17,7 @@ export class RegisterPage implements OnInit {
   isRegistering: boolean = false;
   regError: boolean = false;
   regErrorMessage: string = '';
+  providerId: string = '';
   passwordConfirmValidator(passwordControl: AbstractControl): ValidatorFn {
     return ((control: AbstractControl): {[key: string]: any} | null => {
       return (passwordControl.value === control.value) ? null : {
@@ -40,6 +41,9 @@ export class RegisterPage implements OnInit {
       Validators.required,
       this.passwordConfirmValidator(this.registerForm.get('password'))
     ]);
+    if(this.route.snapshot.queryParams['pid']) {
+      this.providerId = this.route.snapshot.queryParams['pid'];
+    }
   }
 
   checkUsername() {
@@ -102,10 +106,18 @@ export class RegisterPage implements OnInit {
       lastname: this.registerForm.value['lastname'],
       email: this.registerForm.value['email']
     }
+    if (this.providerId !== '') {
+      userData = Object.assign(userData, {
+        providerId: this.providerId
+      })
+    }
     this.isRegistering = true;
     this.loginService.addUser(userData).subscribe((res: { success: boolean, error?: string}) => {
-      if (res.success) {
+      if (res.success && this.providerId === '') {
         this.router.navigate(['/confirmRegistration']);
+      }
+      else if (res.success) {
+        this.router.navigateByUrl('/login');
       }
       else {
         this.regError = true;

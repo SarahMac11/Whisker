@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar></ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-button (click)='refreshApplications()'>Refresh</ion-button>
+  <ion-text class='ion-text-center'><h4>Provider Applications</h4></ion-text>
+  <ion-progress-bar type='indeterminate' *ngIf='!this.applications'></ion-progress-bar>
+  <ion-item *ngFor='let app of this.applications'>
+    <ion-list>
+      <ion-item>Application ID: {{app.id}}</ion-item>
+      <ion-item>Name: {{app.name}}</ion-item>
+      <ion-item>Address: {{app.street + " " + app.city + " " + app.state + " " + app.zip + " " + app.country}}</ion-item>
+      <ion-item>Website: {{app.website}}</ion-item>
+      <ion-item>Animal Types: {{getTypes(app.types)}}</ion-item>
+      <ion-item>Rescue Email: {{app.email}}</ion-item>
+      <ion-item>Phone: {{app.phone}}</ion-item>
+      <ion-item>Contact: {{app.first + " " + app.last + " (" + app.role + ") - " + app.contactEmail}}</ion-item>
+      <ion-item>
+        <ion-button color='success' (click)='approve(app.id)'>Approve</ion-button>
+        <ion-button color='danger' (click)='deny(app.id)'>Deny</ion-button>
+      </ion-item>
+    </ion-list>
+  </ion-item>
+  <p *ngIf='this.applications && this.applications.length === 0' class='ion-text-center'>There are no pending applicaitons.</p>
+</ion-content>

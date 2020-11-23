@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { LoginService } from './services/login.service';
 import { SettingsService } from './services/settings.service';
 import { Router } from '@angular/router';
+import { User } from './interfaces/User';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,8 @@ import { Router } from '@angular/router';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+
+  currentUser: User;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,

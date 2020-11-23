@@ -18,10 +18,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/messages/messages.module').then( m => m.MessagesPageModule)
   },
   {
-    path: 'browse',
-    loadChildren: () => import('./tab2/tab2.module').then( m => m.Tab2PageModule)
-  },
-  {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
@@ -41,12 +37,35 @@ const routes: Routes = [
     path: 'verify',
     loadChildren: () => import('./pages/verify/verify.module').then( m => m.VerifyPageModule)
   },
+  {
+    path: 'add',
+    loadChildren: () => import('./pages/add/add.module').then( m => m.AddPageModule)
+  },
+  {
+    path: 'provider',
+    loadChildren: () => import('./pages/provider/provider.module').then( m => m.ProviderPageModule)
+  },
+  {
+    path: 'adoption-survey',
+    loadChildren: () => import('./pages/adoption-survey/adoption-survey.module').then( m => m.AdoptionSurveyPageModule)
+  },
+  {
+    path: 'confirmProviderApplication',
+    loadChildren: () => import('./pages/confirm-provider-application/confirm-provider-application.module').then( m => m.ConfirmProviderApplicationPageModule)
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./pages/admin-console/admin-console.module').then( m => m.AdminConsolePageModule)
+  },
+  {
+    path: 'providerManage',
+    loadChildren: () => import('./pages/provider-manage/provider-manage.module').then( m => m.ProviderManagePageModule)
+  },
   // wildcard, redirect non-recognized routes to the base route
   {
     path: '**',
     redirectTo: ''
   }
-  
 ];
 @NgModule({
   imports: [

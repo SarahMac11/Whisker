@@ -10,9 +10,11 @@ import { LoginService } from 'src/app/services/login.service';
 export class HomePage implements OnInit {
 
   constructor(private router: Router, private loginService: LoginService) { 
-    if(!loginService.isLoggedIn()) {
-      this.router.navigateByUrl('');
-    }
+    setTimeout(() => {
+      if(!loginService.isLoggedIn()) {
+        this.router.navigateByUrl('');
+      }
+    }, 1000);
   }
 
   ngOnInit() {
