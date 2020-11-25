@@ -1,0 +1,23 @@
+#flex-display {
+    display: flex;
+
+}
+
+.animal-card {
+    width: 15%;
+    height: 300px;
+}
+.card-content {
+    height: 70%;
+    display: flex;
+    align-items: flex-end;
+}
+.card-content-button {
+    margin: 0 auto;
+}
+.animal-card-image {
+ position: absolute;
+}
+.transparent-bg {
+    background-color: rgba(255,255,255,0.9);
+}
