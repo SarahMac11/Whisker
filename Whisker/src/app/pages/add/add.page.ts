@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
+import { LoginService } from 'src/app/services/login.service';
 import catBreeds from 'src/assets/catBreeds.json';
 import dogBreeds from 'src/assets/dogBreeds.json';
 
@@ -14,8 +17,9 @@ export class AddPage implements OnInit {
   dogBreeds: Array<String> = dogBreeds;
 
   addAnimal: FormGroup;
+  addAnimalOriginalValue;
   
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router, private toastCtl: ToastController) {
     this.addAnimal = fb.group({
       type: ["", Validators.required],
       name: ["", Validators.required],
@@ -24,6 +28,7 @@ export class AddPage implements OnInit {
       weight: ["", Validators.required],
       dob: ["", Validators.required],
       gender: ["", Validators.required],
+      spayedneutered: ["", Validators.required],
       declawed: "",
       specialNeeds: ["", Validators.required],
       specialNeedsReason: "",
@@ -31,16 +36,44 @@ export class AddPage implements OnInit {
       goodWithCats: ["", Validators.required],
       goodWithDogs: ["", Validators.required],
       goodWithKids: ["", Validators.required],
-      bio: ["", Validators.required],
-      energyLevel: ["", Validators.required],
-      status: ["", Validators.required]
+      status: ["", Validators.required],
+      bio: [""],
+      url: [""],
+      images: [[]]
     });
+    this.addAnimalOriginalValue = this.addAnimal.value;
+    let list = [];
   }
 
   ngOnInit() {
+    if (!this.loginService.user || !this.loginService.user.providerId || this.loginService.user.providerId === "") {
+      this.router.navigateByUrl('/home');
+    }
   }
 
+  addImage() {
+    if(!this.addAnimal.controls.images.value.includes(this.addAnimal.value.url)) {
+      this.addAnimal.value.images.push(this.addAnimal.value.url);
+      this.addAnimal.controls.url.setValue("");
+    }
+  }
   submit() {
-    console.log(this.addAnimal.value);
+    this.loginService.addAnimal(Object.assign(this.addAnimal.value, {url: undefined})).subscribe(async(res: {ok: boolean, message: string}) => {
+      if (res.ok) {
+        this.addAnimal.reset(this.addAnimalOriginalValue);
+        const toast = await this.toastCtl.create({
+        message: 'Animal successfully added!',
+        duration: 2500
+        });
+        toast.present();
+      }
+      else {
+        const toast = await this.toastCtl.create({
+          message: res.message,
+          duration: 2500
+        });
+        toast.present();
+      }
+    });
   }
 }

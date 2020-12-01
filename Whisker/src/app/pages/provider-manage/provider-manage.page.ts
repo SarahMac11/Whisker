@@ -4,23 +4,22 @@ import { Animal } from 'src/app/interfaces/Animal';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
-  selector: 'app-browse-pets',
-  templateUrl: './browse-pets.page.html',
-  styleUrls: ['./browse-pets.page.scss'],
+  selector: 'app-provider-manage',
+  templateUrl: './provider-manage.page.html',
+  styleUrls: ['./provider-manage.page.scss'],
 })
-export class BrowsePetsPage implements OnInit {
+export class ProviderManagePage implements OnInit {
 
-  animals: Animal[] = [];
+  animals: Animal[];
   isLoading: boolean = true;
-
-  constructor(private loginService: LoginService, private router: Router) {}
+  constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit() {
     setTimeout(() => {
       if (!this.loginService.user || !this.loginService.user.providerId || this.loginService.user.providerId === "") {
         this.router.navigateByUrl('/home');
       }
-      this.loginService.getAnimals(1).subscribe((res: Animal[]) => {
+      this.loginService.getProviderAnimals().subscribe((res: Animal[]) => {
         this.animals = res;
         console.dir(this.animals)
         this.isLoading = false;

@@ -77,9 +77,10 @@ export class LoginService {
       lastname: result.lastname,
       currentSessionId: result.sessionId,
       expDate: result.expDate,
-      admin: result.admin
+      admin: result.admin,
+      imageUrl: result.imageUrl,
+      providerId: result.providerId
     };
-
     this.storage.set('loggedIn', this.user);
     this.tokenPresent = true;
     this.loggingIn = false;
@@ -128,6 +129,22 @@ export class LoginService {
      });
    }
 
+   addAnimal(animal) {
+     return this.http.post(this.apiUrl + 'add/animal', Object.assign(animal, {
+      uid: this.user.id,
+      sid: this.user.currentSessionId,
+      pid: this.user.providerId
+     }));
+   }
+
+   getProviderAnimals() {
+     return this.http.get(this.apiUrl + 'animals/' + this.user.providerId);
+   }
+
+   getAnimals(pageNum) {
+     return this.http.get(this.apiUrl + 'animals/page/' + pageNum);
+    }
+
    isLoggedIn(): boolean {
      return this.loggedIn;
    }
@@ -150,9 +167,13 @@ export class LoginService {
 
    async signInWithGoogle() {
      await this.googlePlus.login({}).then(res => {
-        this.googeLogin = true;
-        this.loggedIn = true;
-        return this.http.post(this.apiUrl + '/oauthLogin', res);
+        this.http.post(this.apiUrl + 'oauthLogin', res).subscribe(res => {
+          this.setLoggedIn(<any> res);
+          this.googeLogin = true;
+        },
+        error => {
+          console.log(error);
+        });
      });
    }
 
@@ -160,9 +181,10 @@ export class LoginService {
      await this.fb.login(['email', 'public_profile'])
       .then((res: FacebookLoginResponse) => {
         console.log('Logged into FB', res);
-        this.fbLogin = true;
-        this.loggedIn = true;
-        return this.http.post(this.apiUrl + '/oauthLogin', res);
+        this.http.post(this.apiUrl + 'oauthLogin', res).subscribe(res => {
+          this.setLoggedIn(<any> res);
+          this.fbLogin = true;
+        });
       })
       .catch(e => {
         console.log(e);
@@ -176,5 +198,4 @@ export class LoginService {
     isFbLogin(): boolean {
       return this.fbLogin;
     }
-
   }
