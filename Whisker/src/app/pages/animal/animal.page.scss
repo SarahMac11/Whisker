@@ -73,10 +73,30 @@
 .margin-right {
     margin-right: 5px;
 }
+.margin-left {
+    margin-left: 5px;
+}
 #details-left,#details-right {
     display: inline-block;
     width: 40%;
 }
 .small {
     font-size: 0.8em;
+}
+#bio {
+    padding-bottom: 15px;
+    border-bottom: 1px solid grey;
+}
+#divider {
+    margin: 10px 0;
+    border-bottom: 1px solid grey;
+}
+.icon-button {
+    border-radius: 10px;
+}
+#lower-buttons {
+    margin: auto;
+}
+.underline {
+    text-decoration: underline;
 }

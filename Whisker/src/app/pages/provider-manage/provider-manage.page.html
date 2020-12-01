@@ -12,11 +12,18 @@
       <img class='animal-card-image' *ngIf='animal.images && animal.images.length > 0' [src]='animal.images[0]'>
         <ion-card-header class='transparent-bg'>
           <ion-card-subtitle [color]='statusColor(animal.status)'>{{animal.status}}</ion-card-subtitle>
-          <ion-card-title>{{animal.name}}</ion-card-title>
+          <ion-card-title class='name'>{{animal.name}}</ion-card-title>
         </ion-card-header>
         <ion-card-content class='card-content'>
           <ion-button class='card-content-button' [routerLink]='"/animal/" + animal.id'>View Listing</ion-button>
         </ion-card-content>
     </ion-card>
+  </div>
+  <div>
+  <div class='ion-text-center' *ngIf='this.animals && this.animals.length === 0'>
+    <h4>
+      You currently have no pet listings. Add a pet to see their listings here!
+    </h4>
+  </div>
   </div>
 </ion-content>

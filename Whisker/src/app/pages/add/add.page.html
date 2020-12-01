@@ -40,6 +40,14 @@
       <span>lbs</span>
     </ion-item>
     <ion-item>
+      <ion-label>Size</ion-label>
+      <ion-select id="size" name="size" formControlName="size">
+        <ion-select-option>Small</ion-select-option>
+        <ion-select-option>Medium</ion-select-option>
+        <ion-select-option>Large</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
       <ion-label>Date of Birth</ion-label>
       <ion-datetime displayFormat="MM/DD/YYYY" id="dob" name="dob" formControlName="dob"></ion-datetime>
     </ion-item>
@@ -53,6 +61,13 @@
     <ion-item>
       <ion-label>Spayed/Neutered</ion-label>
       <ion-select id="spayedneutered" name="spayedneutered" formControlName="spayedneutered">
+        <ion-select-option>Yes</ion-select-option>
+        <ion-select-option>No</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Microchipped</ion-label>
+      <ion-select id="microchipped" name="microchipped" formControlName="microchipped">
         <ion-select-option>Yes</ion-select-option>
         <ion-select-option>No</ion-select-option>
       </ion-select>
@@ -81,6 +96,30 @@
         <ion-select-option>Short</ion-select-option>
         <ion-select-option>Medium</ion-select-option>
         <ion-select-option>Long</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Training Level</ion-label>
+      <ion-select id="training" name="training" formControlName="training">
+        <ion-select-option>Well Trained</ion-select-option>
+        <ion-select-option>Somewhat Trained</ion-select-option>
+        <ion-select-option>Untrained</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Care Level (Attention Needed)</ion-label>
+      <ion-select id="carelevel" name="carelevel" formControlName="carelevel">
+        <ion-select-option>High</ion-select-option>
+        <ion-select-option>Normal</ion-select-option>
+        <ion-select-option>Low</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Ideal Environment</ion-label>
+      <ion-select id="environment" name="environment" formControlName="environment">
+        <ion-select-option>Inside/Outside</ion-select-option>
+        <ion-select-option>Inside Only</ion-select-option>
+        <ion-select-option>Outside Only</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
@@ -126,12 +165,6 @@
         <ion-select-option>On Hold</ion-select-option>
         <ion-select-option>Adopted</ion-select-option>
       </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label>Bio</ion-label>
-      <ion-textarea id='bio' name='bio' formControlName='bio'>
-
-      </ion-textarea>
     </ion-item>
     <ion-item>
       <ion-label>Add Image URLs</ion-label>

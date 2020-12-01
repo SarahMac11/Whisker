@@ -12,6 +12,7 @@ export class BrowsePetsPage implements OnInit {
 
   animals: Animal[] = [];
   isLoading: boolean = true;
+  activeTab: string = "all";
 
   constructor(private loginService: LoginService, private router: Router) {}
 
@@ -32,6 +33,10 @@ export class BrowsePetsPage implements OnInit {
     if (status === 'Available') return 'success';
     else if (status === 'On Hold') return 'warning';
     else return 'danger';
+  }
+
+  selectDisplay(tab: string) {
+    this.activeTab = tab;
   }
 
 }
