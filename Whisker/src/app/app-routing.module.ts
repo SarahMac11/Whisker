@@ -62,6 +62,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/provider-manage/provider-manage.module').then( m => m.ProviderManagePageModule)
   },
   {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
     path: 'animal/:id',
     loadChildren: () => import('./pages/animal/animal.module').then( m => m.AnimalPageModule)
   },
@@ -69,6 +73,10 @@ const routes: Routes = [
   {
     path: '**',
     redirectTo: ''
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
   }
 ];
 @NgModule({

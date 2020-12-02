@@ -1,0 +1,9 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <img *ngIf='settingsService.isGoogleLogin()' type="image/png" [src]='loginService.user.imageUrl'>
+</ion-content>

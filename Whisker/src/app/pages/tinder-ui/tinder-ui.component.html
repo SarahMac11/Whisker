@@ -1,0 +1,28 @@
+<div class="tinder" [hidden]="!cards.length">
+  <div class="tinder--status">
+      <div>
+      </div>
+
+      <div>
+      </div>
+  </div>
+
+  <div class="tinder--cards">
+    <div #tinderCard class="tinder--card" *ngFor="let card of cards; let i = index"
+        [ngStyle]="{ zIndex: cards.length - i, transform: 'scale(' + (20 - i) / 20 + ') translateY(-' + 20 * i + 'px)' }">
+
+        <img #tinderCardImage [src]="card.img" (load)="tinderCardImage.style.opacity = 1">
+        <h3>{{ card.title }}</h3>
+        <p>{{ card.description }}</p>
+
+    </div>
+</div>
+
+  <div class="tinder--buttons">
+    <button>
+    </button>
+
+    <button>
+    </button>
+  </div>
+</div>
