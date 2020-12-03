@@ -69,15 +69,19 @@ const routes: Routes = [
     path: 'animal/:id',
     loadChildren: () => import('./pages/animal/animal.module').then( m => m.AnimalPageModule)
   },
+  {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'about',
+    loadChildren: () => import('./pages/about/about.module').then( m => m.AboutPageModule)
+  },
   // wildcard, redirect non-recognized routes to the base route
   {
     path: '**',
     redirectTo: ''
   },
-  {
-    path: 'profile',
-    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
-  }
 ];
 @NgModule({
   imports: [
