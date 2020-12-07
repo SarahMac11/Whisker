@@ -23,10 +23,11 @@
   <div class="tinder--cards" (pan)="handlePan($event)" (panend)="handlePanEnd($event)">
 
       <div #tinderCard class="tinder--card" (transitionend)="handleShift()" *ngFor="let card of cards; let i = index"
-          [ngStyle]="{ zIndex: cards.length - i, transform: 'scale(' + (20 - i) / 20 + ') translateY(-' + 20 * i + 'px)' }">
+          [ngStyle]="{ zIndex: cards.length - i, transform: 'scale(' + (20 - i) / 20 + ') translateY(-' + 20 * i + 'px)' }"
+          [routerLink]='"/animal/" + card.id'>
 
           <img #tinderCardImage [src]="card.petImage" (load)="tinderCardImage.style.opacity = 1">
-          <h3>{{ card.petName }}</h3>
+          <h3 [routerLink]='"/animal/" + card.id'>{{ card.petName }}</h3>
           <p>{{ card.petBio }}</p>
           <!-- <ion-button class='card-content-button' [routerLink]='"/animal/" + animal.id'>View Listing</ion-button> -->
 
