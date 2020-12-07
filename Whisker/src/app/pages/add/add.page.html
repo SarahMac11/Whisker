@@ -14,6 +14,7 @@
     <ion-item>
       <ion-label>Type</ion-label>
       <ion-select id="type" name="type" formControlName="type">
+        <ion-select-option>Barn Cat</ion-select-option>
         <ion-select-option>Cat</ion-select-option>
         <ion-select-option>Dog</ion-select-option>
       </ion-select>
@@ -22,7 +23,7 @@
       <ion-label>Name</ion-label>
       <ion-input class="ion-text-right" type="text" id="name" name="name" formControlName="name"></ion-input>
     </ion-item>
-    <ion-item *ngIf='this.addAnimal.value["type"] === "Cat"'>
+    <ion-item *ngIf='this.addAnimal.value["type"] === "Cat" || this.addAnimal.value["type"] === "Barn Cat"'>
       <ion-label>Cat Breed(s)</ion-label>
       <ion-select multiple="true" id="catBreeds" name="catBreeds" formControlName="catBreeds">
         <ion-select-option *ngFor="let catBreed of catBreeds">{{ catBreed }}</ion-select-option>
@@ -34,6 +35,37 @@
         <ion-select-option *ngFor="let dogBreed of dogBreeds">{{ dogBreed }}</ion-select-option>
       </ion-select>
     </ion-item>
+    <ion-item
+            *ngIf='this.addAnimal.value["type"] === "Cat" || this.addAnimal.value["type"] === "Barn Cat"'>
+            <ion-label>Cat Color(s)</ion-label>
+            <ion-select class="ion-text-right" multiple="true" id="catColors" name="catColors"
+              formControlName="catColors" [interfaceOptions]="customPopoverOptions" interface="popover">
+              <ion-select-option>Black</ion-select-option>
+              <ion-select-option>Brown Tabby</ion-select-option>
+              <ion-select-option>Buff</ion-select-option>
+              <ion-select-option>Calico</ion-select-option>
+              <ion-select-option>Color Point</ion-select-option>
+              <ion-select-option>Dilute</ion-select-option>
+              <ion-select-option>Grey</ion-select-option>
+              <ion-select-option>Grey Tabby</ion-select-option>
+              <ion-select-option>Orange</ion-select-option>
+              <ion-select-option>Tortoiseshell</ion-select-option>
+              <ion-select-option>White</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item *ngIf='this.addAnimal.value["type"] === "Dog"'>
+            <ion-label>Dog Color(s)</ion-label>
+            <ion-select class="ion-text-right" multiple="true" id="dogColors" name="dogColors"
+              formControlName="dogColors" [interfaceOptions]="customPopoverOptions" interface="popover">
+              <ion-select-option>Black</ion-select-option>
+              <ion-select-option>Brindle</ion-select-option>
+              <ion-select-option>Brown</ion-select-option>
+              <ion-select-option>Grey</ion-select-option>
+              <ion-select-option>Red</ion-select-option>
+              <ion-select-option>White</ion-select-option>
+              <ion-select-option>Yellow</ion-select-option>
+            </ion-select>
+          </ion-item>
     <ion-item>
       <ion-label>Weight</ion-label>
       <ion-input class="ion-text-right" type="number" id="weight" name="weight" formControlName="weight"></ion-input>

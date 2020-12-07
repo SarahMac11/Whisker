@@ -25,6 +25,8 @@ export class AddPage implements OnInit {
       name: ["", Validators.required],
       catBreeds: "",
       dogBreeds: "",
+      catColors: "",
+      dogColors: "",
       weight: ["", Validators.required],
       size: ["", Validators.required],
       dob: ["", Validators.required],
