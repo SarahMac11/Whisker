@@ -141,6 +141,15 @@ export class LoginService {
      return this.http.get(this.apiUrl + 'animals/' + this.user.providerId);
    }
 
+   getAnimals(pageNum) {
+     return this.http.get(this.apiUrl + 'animals/page/' + pageNum);
+    }
+   getAnimal(animalId: string) {
+     return this.http.get(this.apiUrl + 'animal/' + animalId);
+   }
+   getProvider(pid: string) {
+     return this.http.get(this.apiUrl + 'provider/' + pid);
+   }
    isLoggedIn(): boolean {
      return this.loggedIn;
    }

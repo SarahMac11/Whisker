@@ -61,11 +61,27 @@ const routes: Routes = [
     path: 'providerManage',
     loadChildren: () => import('./pages/provider-manage/provider-manage.module').then( m => m.ProviderManagePageModule)
   },
+  {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'animal/:id',
+    loadChildren: () => import('./pages/animal/animal.module').then( m => m.AnimalPageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'about',
+    loadChildren: () => import('./pages/about/about.module').then( m => m.AboutPageModule)
+  },
   // wildcard, redirect non-recognized routes to the base route
   {
     path: '**',
     redirectTo: ''
-  }
+  },
 ];
 @NgModule({
   imports: [

@@ -26,6 +26,7 @@ export class AddPage implements OnInit {
       catBreeds: "",
       dogBreeds: "",
       weight: ["", Validators.required],
+      size: ["", Validators.required],
       dob: ["", Validators.required],
       gender: ["", Validators.required],
       spayedneutered: ["", Validators.required],
@@ -33,6 +34,11 @@ export class AddPage implements OnInit {
       specialNeeds: ["", Validators.required],
       specialNeedsReason: "",
       hair: ["", Validators.required],
+      training: ["", Validators.required],
+      carelevel: ["", Validators.required],
+      energyLevel: ["", Validators.required],
+      environment: ["", Validators.required],
+      microchipped: ["", Validators.required],
       goodWithCats: ["", Validators.required],
       goodWithDogs: ["", Validators.required],
       goodWithKids: ["", Validators.required],
@@ -52,7 +58,7 @@ export class AddPage implements OnInit {
   }
 
   addImage() {
-    if(!this.addAnimal.controls.images.value.includes(this.addAnimal.value.url)) {
+    if(this.addAnimal.value.url.length > 0 && !this.addAnimal.controls.images.value.includes(this.addAnimal.value.url)) {
       this.addAnimal.value.images.push(this.addAnimal.value.url);
       this.addAnimal.controls.url.setValue("");
     }

@@ -5,5 +5,25 @@
 </ion-header>
 
 <ion-content>
-  browsePets works!
+  <ion-toolbar>
+    <ion-buttons slot='start'>
+      <ion-button (click)='selectDisplay("all")' [class.active-tab]='this.activeTab === "all"'>All Pets</ion-button>
+      <ion-button (click)='selectDisplay("matches")' [class.active-tab]='this.activeTab === "matches"'>Top Matches</ion-button>
+      <ion-button (click)='selectDisplay("favorites")' [class.active-tab]='this.activeTab === "favorites"'>Favorites</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-progress-bar type='indeterminate' *ngIf='isLoading'></ion-progress-bar>
+
+  <div id='flex-display' *ngIf='this.animals != [] && !isLoading'>
+    <ion-card *ngFor='let animal of animals' class='animal-card'>
+      <img class='animal-card-image' *ngIf='animal.images && animal.images.length > 0' [src]='animal.images[0]'>
+        <ion-card-header class='transparent-bg'>
+          <ion-card-subtitle [color]='statusColor(animal.status)'>{{animal.status}}</ion-card-subtitle>
+          <ion-card-title class='name'>{{animal.name}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content class='card-content'>
+          <ion-button class='card-content-button' [routerLink]='"/animal/" + animal.id'>View Listing</ion-button>
+        </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

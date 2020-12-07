@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>animal</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-progress-bar type='indeterminate' *ngIf='this.isLoading'></ion-progress-bar>
+<div id='animal-content' *ngIf='!this.isLoading && this.animal'>
+  <div id='animal-left'>
+  <div id='animal-image-container' [class]='(this.animal.type === "Dog") ? "dog-image-container" : "cat-image-container"'>
+    <img id='animal-image' [src]='this.imageSrc' alt='Animal Image' *ngIf='this.imageSrc && this.imageSrc !== ""'>
+    <div [id]='(this.settingsService.isDarkMode()) ? "animal-image-buttons-dark" : "animal-image-buttons"'>
+      <ion-text id='image-pager' class='ion-text-center'>{{this.imageIndex + 1}} of {{this.animal.images.length}}</ion-text>
+      <ion-buttons>
+        <ion-button id='animal-image-button-left' (click)='prevImage()' [disabled]='this.imageIndex === 0'>
+          <ion-icon name='chevron-back'></ion-icon>
+        </ion-button>
+        <ion-button id='animal-image-button-right' (click)='nextImage()' [disabled]='this.imageIndex === (this.animal.images.length - 1)'>
+          <ion-icon name='chevron-forward'></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </div>
+  </div>
+  <ion-text id='animal-name' class='ion-text-center'><h3 class='no-bottom-margin'>{{this.animal.name}}</h3></ion-text>
+  <div id='left-details'>
+    <ion-text><p class='no-top-margin'>Type: {{this.animal.type}}</p></ion-text>
+    <ion-text><p>Breed: {{getBreeds()}}</p></ion-text>
+    <ion-text><p>Weight: {{this.animal.weight}}lbs</p></ion-text>
+    <ion-text><p>Gender: {{this.animal.gender}}</p></ion-text>
+    <ion-text><p>Age: {{age()}} years {{months()}} months</p></ion-text>
+    <ion-button routerLink='/browsePets'><ion-icon name='chevron-back' class='margin-right'></ion-icon>Back</ion-button>
+  </div>
+  </div>
+  <div id='animal-right'>
+    <div id='provider-box'>
+      <ion-text><h5>Listed by <span class='underline'>{{this.provider.name}} of {{this.provider.city}}, {{this.provider.state}}</span></h5></ion-text>
+      <ion-text><p>{{this.provider.street}} {{this.provider.city}}, {{this.provider.state}} {{this.provider.zip}} {{this.provider.country}} | {{this.provider.phone}}</p>
+                <a [href]='this.provider.website' target='_blank'>{{this.provider.website}}</a></ion-text>
+    </div>
+    <br>
+    <label><strong>About Me</strong></label>
+    <p id='bio'>{{this.animal.bio}}</p>
+    <hr>
+    <div id='details-left'>
+      <ion-text><p>Size: {{this.animal.size}}</p></ion-text>
+      <ion-text><p>Hair Length: {{this.animal.hair}}</p></ion-text>
+      <ion-text><p>Care Level: {{this.animal.carelevel}}</p></ion-text>
+      <ion-text color='success' *ngIf='this.animal.goodWithDogs === "Yes"'><p>Good with Dogs</p></ion-text>
+      <ion-text color='danger' *ngIf='this.animal.goodWithDogs === "No" && this.animal.type === "Dog"'><p>Not Good with Other Dogs</p></ion-text>
+      <ion-text color='danger' *ngIf='this.animal.goodWithDogs === "No" && this.animal.type !== "Dog"'><p>Not Good with Dogs</p></ion-text>
+      <ion-text color='warning' *ngIf='this.animal.goodWithDogs === "Unknown"'><p>Unknown if Good with Dogs</p></ion-text>
+      <ion-text color='success' *ngIf='this.animal.goodWithCats === "Yes"'><p>Good with Cats</p></ion-text>
+      <ion-text color='danger' *ngIf='this.animal.goodWithCats === "No" && this.animal.type !== "Dog"'><p>Not Good with Other Cats</p></ion-text>
+      <ion-text color='danger' *ngIf='this.animal.goodWithCats === "No" && this.animal.type === "Dog"'><p>Not Good with Cats</p></ion-text>
+      <ion-text color='warning' *ngIf='this.animal.goodWithCats === "Unknown"'><p>Unknown if Good with Cats</p></ion-text>
+      <ion-text color='success' *ngIf='this.animal.goodWithKids === "Yes"'><p>Good with Kids</p></ion-text>
+      <ion-text color='danger' *ngIf='this.animal.goodWithKids === "No"'><p>Not Good with Kids</p></ion-text>
+      <ion-text color='warning' *ngIf='this.animal.goodWithKids === "Unknown"'><p>Unknown if Good with Kids</p></ion-text>
+    </div>
+    <div id='details-right'>
+      <ion-text><p>Training: {{this.animal.training}}</p></ion-text>
+      <ion-text><p>Ideal Environment: {{this.animal.environment}}</p></ion-text>
+      <ion-text><p>Spayed/Neutered: {{this.animal.spayedneutered}}</p></ion-text>
+      <ion-text><p>Microchipped: {{this.animal.microchipped}}</p></ion-text>
+      <ion-text *ngIf='this.animal.type !== "Dog"'><p>Declawed: {{this.animal.declawed}}</p></ion-text>
+
+    </div>
+    <div id='divider'></div>
+    <div *ngIf='this.animal.specialNeeds === "Yes"'>
+      <ion-icon color='warning' name='warning' class='margin-right'></ion-icon> This animal has special needs.
+      <ion-text><p class='small'>{{this.animal.specialNeedsReason}}</p></ion-text>
+    </div>
+    <ion-text><p class='small'>All animals on Whisker have up to date vaccinations.</p></ion-text>
+    <ion-buttons id='lower-buttons'>
+      <ion-button class='icon-button margin-left-auto'>Share  <ion-icon name='share-social-outline' class='margin-left'></ion-icon></ion-button>
+      <ion-button class='icon-button'>Favorite  <ion-icon name='paw-outline' color='success' class='margin-left'></ion-icon></ion-button>
+    </ion-buttons>
+  </div>
+</div>
+</ion-content>

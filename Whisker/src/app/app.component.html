@@ -2,10 +2,9 @@
   <ion-toolbar *ngIf='isMobile() && loginService.isLoggedIn()' class='mobile-bar'>
     <ion-text class='mobile-w'><h2>Whisker</h2></ion-text>
     <ion-avatar slot='end' class='app-avatar mobile' (click)='openMenu()'>
-      <img *ngIf='settingsService.isGoogleLogin()' type="image/png" style="width:50%; object-fit:resize;" [src]='loginService.user.imageUrl'; else type="image/png" src="../assets/icon/dog_favicon.png">
-      <img *ngIf='settingsService.isFbLogin()' type="image/png" style="width:50%; object-fit:resize;" [src]='loginService.user.imageUrl'; else type="image/png" src="../assets/icon/cat_favicon.png">
-      <img *ngIf='!settingsService.isDarkMode() && !settingsService.isFbLogin() && !settingsService.isGoogleLogin()' type="image/png" src="../assets/icon/dog_favicon.png">
-      <img *ngIf='settingsService.isDarkMode() && !settingsService.isFbLogin() && !settingsService.isGoogleLogin()' type="image/png" src="../assets/icon/cat_favicon.png">
+      <ion-icon *ngIf='settingsService.isGoogleLogin()' type="image/png" [src]='loginService.user.imageUrl'; else type="image/png" src="../assets/icon/dog_favicon.png"></ion-icon>
+      <img *ngIf='!settingsService.isDarkMode() && !settingsService.isGoogleLogin()' type="image/png" src="../assets/icon/dog_favicon.png">
+      <img *ngIf='settingsService.isDarkMode() && !settingsService.isGoogleLogin()' type="image/png" src="../assets/icon/cat_favicon.png">
     </ion-avatar>
   </ion-toolbar>
   <ion-toolbar *ngIf='!isMobile() && loginService.isLoggedIn()' class='desktop-bar'>
@@ -16,10 +15,9 @@
       <ion-button routerLink='/messages' class='desktop-nav-button' routerLinkActive='active'>Messages</ion-button>
     </ion-buttons>
     <ion-avatar slot='end' class='app-avatar' (click)='openMenu()'>
-      <img *ngIf='settingsService.isGoogleLogin()' type="image/png" style="width:50%; object-fit:resize;" [src]='loginService.user.imageUrl'; else type="image/png" src="../assets/icon/dog_favicon.png">
-      <img *ngIf='settingsService.isFbLogin()' type="image/png" style="width:50%; object-fit:resize;" [src]='loginService.user.imageUrl'; else type="image/png" src="../assets/icon/cat_favicon.png">
-      <img *ngIf='!settingsService.isDarkMode() && !settingsService.isFbLogin() && !settingsService.isGoogleLogin()' type="image/png" src="../assets/icon/dog_favicon.png">
-      <img *ngIf='settingsService.isDarkMode() && !settingsService.isFbLogin() && !settingsService.isGoogleLogin()' type="image/png" src="../assets/icon/cat_favicon.png">
+      <ion-icon *ngIf='settingsService.isGoogleLogin()' type="image/png" [src]='loginService.user.imageUrl'; else type="image/png" src="../assets/icon/dog_favicon.png"></ion-icon>
+      <img *ngIf='!settingsService.isDarkMode() && !settingsService.isGoogleLogin()' type="image/png" src="../assets/icon/dog_favicon.png">
+      <img *ngIf='settingsService.isDarkMode() && !settingsService.isGoogleLogin()' type="image/png" src="../assets/icon/cat_favicon.png">
     </ion-avatar>
   </ion-toolbar>
   <ion-router-outlet id='main'></ion-router-outlet>
@@ -60,9 +58,9 @@
             <ion-icon slot='start' name='layers-outline' class='menu-icon'></ion-icon>
             <ion-label>Manage Pets</ion-label>
           </ion-item>
-          <ion-item class='menu-item no-select' lines='none'>
-            <ion-icon slot='start' name='person-circle-outline' color='primary' class='menu-icon'></ion-icon>
-            <ion-label>My Profile</ion-label>
+          <ion-item class='menu-item no-select' lines='none' routerLink='/profile'>
+            <ion-icon slot='start' name='layers-outline' class='menu-icon'></ion-icon>
+            <ion-label>Profile</ion-label>
           </ion-item>
           <ion-item class='menu-item no-select' lines='none' routerLink='/adoption-survey'>
             <ion-icon slot='start' name='search-outline' color='secondary' class='menu-icon'></ion-icon>
@@ -77,9 +75,9 @@
             <ion-icon name="moon-outline" class='menu-icon' *ngIf='settingsService.isDarkMode()'></ion-icon>
             <ion-label>Change Theme</ion-label>
           </ion-item>
-          <ion-item class='menu-item no-select' lines='none'>
-            <ion-icon slot='start' name='paw-outline' color='success' class='menu-icon'></ion-icon>
-            <ion-label>About Whisker</ion-label>
+          <ion-item class='menu-item no-select' lines='none' routerLink='/about'>
+            <ion-icon slot='start' name='layers-outline' class='menu-icon'></ion-icon>
+            <ion-label>About</ion-label>
           </ion-item>
           <ion-item class='menu-item no-select' lines='none' (click)='logout()'>
             <ion-icon slot='start' name='log-out-outline' color='warning' class='menu-icon'></ion-icon>

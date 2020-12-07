@@ -675,19 +675,19 @@
               <ion-select-option>Indoor</ion-select-option>
               <ion-select-option>Outdoor</ion-select-option>
             </ion-select>
-            <ion-grid>
-              <ion-row>
-                <ion-col>
-                  <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back
-                  </ion-button>
-                </ion-col>
-                <ion-col>
-                  <ion-button expand="full" color="dark" (click)="swipeNext(cat)"
-                    *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
           </ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button expand='full' color="light" (click)="swipePrev()" *ngIf='this.slideNumber !== 1'>Back
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button expand="full" color="dark" (click)="swipeNext(cat)"
+                  *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
         </form>
       </ion-slide>
       <ion-slide *ngIf='this.species.value["species"].includes("Dog")'>

@@ -27,4 +27,10 @@ export class ProviderManagePage implements OnInit {
     }, 1000);
   }
 
+  statusColor(status: string): string {
+    if (status === 'Available') return 'success';
+    else if (status === 'On Hold') return 'warning';
+    else return 'danger';
+  }
+
 }
