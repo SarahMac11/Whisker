@@ -44,6 +44,10 @@
   cursor: -webkit-grab;
   cursor: -moz-grab;
   cursor: grab;
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .moving.tinder--card {
