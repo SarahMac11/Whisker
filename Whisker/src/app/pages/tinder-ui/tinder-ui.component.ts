@@ -39,6 +39,7 @@ export class TinderUiComponent {
     };
     this.shiftRequired = true;
     this.transitionInProgress = true;
+    this.handleShift();
   };
 
   handlePan(event) {

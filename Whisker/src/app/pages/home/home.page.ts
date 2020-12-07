@@ -11,7 +11,7 @@ import { LoginService } from 'src/app/services/login.service';
 export class HomePage {
 
   cards;
-
+  loading = true;
   animals: Animal[] = [];
 
   constructor(private router: Router, private loginService: LoginService) { 
@@ -24,22 +24,27 @@ export class HomePage {
     }, 1000);
   }
 
+  logChoice(event) {
+  }
+
   loadTinderCards() {
     this.loginService.getAnimals(1).subscribe((res: Animal[]) => {
       this.animals = res;
-      console.dir(this.animals)
+      console.dir(this.animals);
+      this.animals.forEach(element => {
+        this.cards.push({
+          petImage: element.images[0],
+          petName: element.name,
+          petBio: element.bio,
+          id: element.id
+        });     
+      });
+      this.loading = false;
     });     
-    
-    this.animals.forEach(element => {
-      this.cards.push({
-        petImage: element.images[0],
-        petName: element.name,
-        petBio: element.bio
-      });     
-    });
   };
 
   ngOnInit() {
+    this.loadTinderCards();
   }
 
 }
