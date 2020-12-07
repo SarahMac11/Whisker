@@ -1,9 +1,15 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>profile</ion-title>
+    <ion-title id="title" class="ion-text-center dancing">Profile</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <img *ngIf='settingsService.isGoogleLogin()' type="image/png" [src]='loginService.user.imageUrl'>
+      <div class="profile-picture big-profile-picture">
+        <img *ngIf='settingsService.isGoogleLogin()' type="image/png" [src]='loginService.user.imageUrl'; else type="image/png" src="../assets/icon/dog_favicon.png">
+        <img *ngIf='!settingsService.isDarkMode() && !settingsService.isGoogleLogin()' type="image/png" src="../assets/icon/dog_favicon.png">
+        <img *ngIf='settingsService.isDarkMode() && !settingsService.isGoogleLogin()' type="image/png" src="../assets/icon/cat_favicon.png">
+      </div>
+      <h2 class="profile-name dark">{{loginService.user.lastname}}, {{loginService.user.firstname}}</h2>
+      <h3 class="profile-info">{{loginService.user.email}}</h3>
 </ion-content>
