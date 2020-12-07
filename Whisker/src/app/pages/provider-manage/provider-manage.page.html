@@ -1,10 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>providerManage</ion-title>
+    
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <h1>Manage Listings</h1>
   <ion-progress-bar type='indeterminate' *ngIf='isLoading'></ion-progress-bar>
 
   <div id='flex-display' *ngIf='this.animals != [] && !isLoading'>
@@ -14,6 +15,7 @@
           <ion-card-subtitle [color]='statusColor(animal.status)'>{{animal.status}}</ion-card-subtitle>
           <ion-card-title class='name'>{{animal.name}}</ion-card-title>
         </ion-card-header>
+        <br><br>
         <ion-card-content class='card-content'>
           <ion-button class='card-content-button' [routerLink]='"/animal/" + animal.id'>View Listing</ion-button>
         </ion-card-content>
