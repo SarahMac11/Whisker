@@ -36,7 +36,8 @@ export class HomePage {
           petImage: element.images[0],
           petName: element.name,
           petBio: element.bio,
-          id: element.id
+          id: element.id,
+          match: Math.round(Math.random() * 100)
         });     
       });
       this.loading = false;

@@ -16,27 +16,11 @@ ion-header {
     font-family: 'Dancing Script', cursive;
 }
 
-img {
-    width: 50vw;
-}
-
-#mission {
-    margin: 3vw;
-}
-
-.indent {
-    text-indent: 50px;
-}
-
-.removeUnderline {
-    text-decoration: none;
-}
-
 .profile-item {
     text-align: center;
 }
-  
-  .profile-picture {
+
+.profile-picture {
     border: 1px solid rgba(0, 0, 0, 0.25);
     padding: 3px;
     border-radius: 100%;
@@ -47,16 +31,16 @@ img {
     width: 128px;
     height: 128px;
     overflow: hidden;
-  }
-  
-  .profile-picture img {
+}
+
+.profile-picture img {
     width: 128px;
     border-radius: 100%;
-  }
-  
-  .profile-name {
+}
+
+.profile-name {
     padding-top: 20px;
     font-size: x-large !important;
     font-weight: bold !important;
     text-transform: capitalize;
-  }
+}
