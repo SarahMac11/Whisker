@@ -2,6 +2,7 @@ import { Component, Input, ViewChildren, QueryList, ElementRef, EventEmitter, Ou
 import { Storage } from '@ionic/storage';
 import { Animal } from 'src/app/interfaces/Animal';
 import { LoginService } from 'src/app/services/login.service';
+import { SettingsService } from 'src/app/services/settings.service';
 
 @Component({
   selector: 'app-tinder-ui',
@@ -30,7 +31,7 @@ export class TinderUiComponent {
   heartVisible: boolean;
   crossVisible: boolean;
 
-  constructor(private renderer: Renderer2, private loginService: LoginService, private storage: Storage) { }
+  constructor(private renderer: Renderer2, private loginService: LoginService, private storage: Storage, private settingsService: SettingsService) { }
 
   userClickedButton(event, heart) {
     event.preventDefault();
