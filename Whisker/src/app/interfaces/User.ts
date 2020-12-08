@@ -14,5 +14,6 @@ export interface User {
     message?: String,
     admin?: boolean,
     providerId?: string,
-    imageUrl?: any
+    imageUrl?: any,
+    favorites?: string[]
 }

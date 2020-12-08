@@ -14,8 +14,20 @@
   </ion-toolbar>
   <ion-progress-bar type='indeterminate' *ngIf='isLoading'></ion-progress-bar>
 
-  <div id='flex-display' *ngIf='this.animals != [] && !isLoading'>
+  <div id='flex-display' *ngIf='this.animals != [] && !isLoading && this.activeTab === "all"'>
     <ion-card *ngFor='let animal of animals' class='animal-card'>
+      <img class='animal-card-image' *ngIf='animal.images && animal.images.length > 0' [src]='animal.images[0]'>
+        <ion-card-header class='transparent-bg'>
+          <ion-card-subtitle [color]='statusColor(animal.status)'>{{animal.status}}</ion-card-subtitle>
+          <ion-card-title class='name'>{{animal.name}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content class='card-content'>
+          <ion-button class='card-content-button' [routerLink]='"/animal/" + animal.id'>Details</ion-button>
+        </ion-card-content>
+    </ion-card>
+  </div>
+  <div id='flex-display' *ngIf='!isLoading && this.activeTab === "favorites"'>
+    <ion-card *ngFor='let animal of this.loginService.favoriteAnimals' class='animal-card'>
       <img class='animal-card-image' *ngIf='animal.images && animal.images.length > 0' [src]='animal.images[0]'>
         <ion-card-header class='transparent-bg'>
           <ion-card-subtitle [color]='statusColor(animal.status)'>{{animal.status}}</ion-card-subtitle>
