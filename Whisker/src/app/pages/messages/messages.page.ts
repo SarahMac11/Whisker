@@ -24,13 +24,13 @@ export class MessagesPage implements OnInit {
   ngOnInit() {
     this.friends = [
       {
-        username: "CMHS",
+        username: "cmhs",
         fullname: "Central Missouri Humane Society",
         avatar: "../../assets/avatars/CMHS.jpg",
         message: "Due to COVID, we have been experiencing some delays in our response. We will get back to you when..."
       },
       {
-        username: "HSMO",
+        username: "hsmo314",
         fullname: "Humane Society of Missouri",
         avatar: "../../assets/avatars/heart.jpg",
         message: "Hello, are you still interested in adopting Tristen?"
@@ -42,19 +42,19 @@ export class MessagesPage implements OnInit {
         message: "Hi Karen, when would you be available for me to pick up Corona Cat?"
       },
       {
-        username: "SecondChance",
+        username: "secondchance2",
         fullname: "Second Chance",
         avatar: "../../assets/avatars/SecondChance.jpeg",
         message: "Is Tiger still pending adoption?"
       },
       {
-        username: "JeffCityAnimalShelter",
+        username: "jeffcityanimalshelter",
         fullname: "Jefferson City Animal Shelter",
         avatar: "../../assets/avatars/paw-icon.png",
         message: "We still need you to fill out your adoption form. You can find the link here at our website..." 
       },
       {
-        username: "COMOAnimalShelter",
+        username: "comoanimalshelter",
         fullname: "Columbia Animal Shelter",
         avatar: "../../assets/avatars/cat_icon.jpg",
         message: "Sounds good! You can reach me at 314-555-1234."
