@@ -18,7 +18,7 @@
       <ion-row>
         <ion-col size="4" class="ion-no-padding position-relative"></ion-col>
         <ion-col size="4">
-          <img *ngIf='settingsService.isGoogleLogin()' type="image/png" alt="" class="image-round border-tertiary margin-top" [src]='loginService.user.imageUrl'; else type="image/png" src="../assets/icon/dog_favicon.png">
+          <img *ngIf='settingsService.isGoogleLogin()' type="image/png" alt="" class="image-round border-tertiary margin-top" style="display: block; margin-left: auto; margin-right: auto;" [src]='loginService.user.imageUrl'>
           <img *ngIf='!settingsService.isDarkMode() && !settingsService.isGoogleLogin()' type="image/png" alt="" class="image-round border-tertiary margin-top" src="../assets/icon/dog_favicon.png">
           <img *ngIf='settingsService.isDarkMode() && !settingsService.isGoogleLogin()' type="image/png" alt="" class="image-round border-tertiary margin-top" src="../assets/icon/cat_favicon.png">
         </ion-col>
@@ -62,11 +62,10 @@
         <ion-col size="8" style="padding-left: 230px;">
           <strong class="text-tertiary">Preferred Name</strong> <br>
           <ion-input placeholder="{{loginService.user.firstname}} {{loginService.user.lastname}}"></ion-input>
-          <!-- <small class="text-muted">{{loginService.user.firstname}} {{loginService.user.lastname}}</small> -->
         </ion-col>
         <ion-col size="3">
           <strong class="text-tertiary">Email</strong> <br>
-          <ion-input placeholder="{{loginService.user.email}}"></ion-input>
+          <ion-input placeholder="{{loginService.user.username}}"></ion-input>
         </ion-col>
       </ion-row>
       <ion-row>
