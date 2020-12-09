@@ -1,0 +1,46 @@
+#title {
+    padding-top: 50px;
+    font-size: 3em;
+    margin: 2.5vh auto;
+}
+
+ion-content {
+    margin: 3vw;
+}
+
+ion-header {
+    border-bottom: 10px solid;
+}
+
+.dancing {
+    font-family: 'Dancing Script', cursive;
+}
+
+.profile-item {
+    text-align: center;
+}
+
+.profile-picture {
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    padding: 3px;
+    border-radius: 100%;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    margin: 0 auto;
+    width: 128px;
+    height: 128px;
+    overflow: hidden;
+}
+
+.profile-picture img {
+    width: 128px;
+    border-radius: 100%;
+}
+
+.profile-name {
+    padding-top: 20px;
+    font-size: x-large !important;
+    font-weight: bold !important;
+    text-transform: capitalize;
+}

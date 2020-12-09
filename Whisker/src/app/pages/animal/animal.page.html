@@ -29,7 +29,7 @@
     <ion-text><p>Weight: {{this.animal.weight}}lbs</p></ion-text>
     <ion-text><p>Gender: {{this.animal.gender}}</p></ion-text>
     <ion-text><p>Age: {{age()}} years {{months()}} months</p></ion-text>
-    <ion-button routerLink='/browsePets'><ion-icon name='chevron-back' class='margin-right'></ion-icon>Back</ion-button>
+    <ion-button routerLink='/home'><ion-icon name='chevron-back' class='margin-right'></ion-icon>Back</ion-button>
   </div>
   </div>
   <div id='animal-right'>
@@ -74,7 +74,12 @@
     <ion-text><p class='small'>All animals on Whisker have up to date vaccinations.</p></ion-text>
     <ion-buttons id='lower-buttons'>
       <ion-button class='icon-button margin-left-auto'>Share  <ion-icon name='share-social-outline' class='margin-left'></ion-icon></ion-button>
-      <ion-button class='icon-button'>Favorite  <ion-icon name='paw-outline' color='success' class='margin-left'></ion-icon></ion-button>
+      <ion-button class='icon-button' (click)='favorite()' *ngIf='!this.loginService.user.favorites || !this.loginService.user.favorites.includes(this.animal.id)'>
+        Favorite  <ion-icon name='paw-outline' color='success' class='margin-left'></ion-icon>
+      </ion-button>
+      <ion-button disabled class='icon-button' *ngIf='this.loginService.user.favorites && this.loginService.user.favorites.includes(this.animal.id)'>
+        Favorited  <ion-icon name='paw' color='success' class='margin-left'></ion-icon>
+      </ion-button>
     </ion-buttons>
   </div>
 </div>

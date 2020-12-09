@@ -1,9 +1,100 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>profile</ion-title>
+    <ion-title id="title" class="ion-text-center dancing">Profile</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <img *ngIf='settingsService.isGoogleLogin()' type="image/png" [src]='loginService.user.imageUrl'>
+
+  <div class="vertical-padding">
+    <div class="ion-text-center">
+      <h4>{{loginService.user.firstname}} {{loginService.user.lastname}}</h4>
+    </div>
+    <div class="ion-text-center">
+      <span class="text-muted ion-no-margin text-job">{{loginService.user.username}}</span>
+    </div>
+  
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="4" class="ion-no-padding position-relative"></ion-col>
+        <ion-col size="4">
+          <img *ngIf='settingsService.isGoogleLogin()' type="image/png" alt="" class="image-round border-tertiary margin-top" style="display: block; margin-left: auto; margin-right: auto;" [src]='loginService.user.imageUrl'>
+          <img *ngIf='!settingsService.isDarkMode() && !settingsService.isGoogleLogin()' type="image/png" alt="" class="image-round border-tertiary margin-top" src="../assets/icon/dog_favicon.png">
+          <img *ngIf='settingsService.isDarkMode() && !settingsService.isGoogleLogin()' type="image/png" alt="" class="image-round border-tertiary margin-top" src="../assets/icon/cat_favicon.png">
+        </ion-col>
+        <ion-col size="4" class="ion-no-padding position-relative"></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <ion-grid fixed class="border-bottom border-top">
+    <ion-row class="ion-no-padding">
+      <ion-col size="4">
+        <div class="ion-text-center">
+          <span class="text-statics-big text-primary">{{(this.loginService.user.favorites) ? this.loginService.user.favorites.length : "0"}}</span> <br>
+          <small>Favorites</small>
+        </div>
+      </ion-col>
+      <ion-col size="4">
+        <div class="ion-text-center">
+          <span class="text-statics-big text-primary">6</span> <br>
+          <small>Messages</small>
+        </div>
+      </ion-col>
+      <ion-col size="4">
+        <div class="ion-text-center">
+          <span class="text-statics-big text-primary">3</span> <br>
+          <small>Unread Messages</small>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="vertical-padding">
+    <p class="ion-text-center text-profile" style="color: rgb(134, 134, 134);">
+      Click into boxes to edit your information
+    </p>
+  </div>
+
+  <div class="ion-padding">
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="8" style="padding-left: 230px;">
+          <strong class="text-tertiary">Preferred Name</strong> <br>
+          <ion-input placeholder="{{loginService.user.firstname}} {{loginService.user.lastname}}"></ion-input>
+        </ion-col>
+        <ion-col size="3">
+          <strong class="text-tertiary">Email</strong> <br>
+          <ion-input placeholder="{{loginService.user.username}}"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="8" style="padding-left: 230px;">
+          <strong class="text-tertiary">Phone</strong> <br>
+          <ion-input placeholder="+52 1234567"></ion-input>
+        </ion-col>
+        <ion-col size="3">
+          <strong class="text-tertiary">Location</strong> <br>
+          <ion-input placeholder="Missouri"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="8" style="padding-left: 230px;">
+          <strong class="text-tertiary">Zip code</strong> <br>
+          <ion-input placeholder="65201"></ion-input>
+        </ion-col>
+        <ion-col size="3">
+          <strong class="text-tertiary">Address</strong> <br>
+          <ion-input placeholder="123 Tiger Ave"></ion-input>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="tertiary" size="small" routerLink='/messages'>
+      <ion-icon name="chatbubbles"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
 </ion-content>

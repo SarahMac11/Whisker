@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Storage } from '@ionic/storage';
 import { Animal } from 'src/app/interfaces/Animal';
 import { LoginService } from 'src/app/services/login.service';
 import { SettingsService } from 'src/app/services/settings.service';
@@ -16,7 +17,7 @@ export class AnimalPage implements OnInit {
   imageSrc: string;
   imageIndex: number = 0;
   isLoading: boolean = true;
-  constructor(private route: ActivatedRoute, private loginService: LoginService, private settingsService: SettingsService) { }
+  constructor(private route: ActivatedRoute, private loginService: LoginService, private settingsService: SettingsService, private storage: Storage) { }
 
   ngOnInit() {
     this.loginService.getAnimal(this.animalId).subscribe((res: Animal) => {
@@ -69,5 +70,14 @@ export class AnimalPage implements OnInit {
 
     if (breedList.length > 1) breedString += " Mix";
     return breedString;
+  }
+  favorite() {
+    this.loginService.addFavorite(this.animal.id).subscribe((res: {ok: boolean}) => {
+      if (res.ok) {
+        (this.loginService.user.favorites) ? this.loginService.user.favorites.push(this.animal.id) : this.loginService.user.favorites = [this.animal.id];
+        this.storage.set('loggedIn', this.loginService.user);
+        this.loginService.getAnimal(this.animal.id).subscribe((res: Animal) => {this.loginService.favoriteAnimals.push(res)});
+      }
+    });
   }
 }

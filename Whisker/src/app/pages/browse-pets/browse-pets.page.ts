@@ -18,7 +18,7 @@ export class BrowsePetsPage implements OnInit {
 
   ngOnInit() {
     setTimeout(() => {
-      if (!this.loginService.user || !this.loginService.user.providerId || this.loginService.user.providerId === "") {
+      if (!this.loginService.user) {
         this.router.navigateByUrl('/home');
       }
       this.loginService.getAnimals(1).subscribe((res: Animal[]) => {

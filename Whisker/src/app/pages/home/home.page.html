@@ -6,9 +6,10 @@
 
 <ion-content>
     <app-tinder-ui [cards]="cards" (choiceMade)="logChoice($event)"></app-tinder-ui>
+    <ion-text class='ion-text-center' *ngIf='!loading && cards.length === 0'><h3>There are no animals left to swipe through :'(</h3></ion-text>
 </ion-content>
-  <ion-footer>
-    <ion-toolbar>
-      <ion-button expand="full" (click)="loadTinderCards()" style="color: rgb(226,166,75);">Load Pets!</ion-button>
-    </ion-toolbar>
-  </ion-footer>
+<!-- 
+  moved this to ngOnInit(), kinda gets in the way
+  <ion-toolbar>
+  <ion-button expand="full" (click)="loadTinderCards()" style="color: rgb(226,166,75);">Load Pets!</ion-button>
+</ion-toolbar> -->

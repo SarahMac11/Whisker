@@ -1,9 +1,25 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>messages</ion-title>
+    <ion-title id="title" class="ion-text-center dancing">My Messages</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  messages works!
+<ion-content padding-top>
+  <ion-list>
+    <ion-item-sliding #sliding *ngFor="let friend of friends">
+      <ion-item>
+        <ion-avatar item-start>
+          <img [src]="friend.avatar">
+        </ion-avatar>
+        <h2 ion-text style="padding-left: 5px;">{{ friend.fullname }} <span ion-text style="color: rgb(226,166,75);">({{ friend.username }})</span> 
+        <span ion-text style="flex: 1; font-size: small; color: rgb(134, 134, 134); padding-left: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 50px;">{{ friend.message }}</span></h2>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button style="color: rgb(226,166,75);">
+          <ion-icon name="person"></ion-icon>
+          Profile
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>
