@@ -5,6 +5,8 @@ export interface Animal {
     name: string,
     catBreeds?: string[],
     dogBreeds?: string[],
+    catColors?: string[],
+    dogColors?: string[],
     weight: number,
     dob: string,
     dobDate?: Date,
