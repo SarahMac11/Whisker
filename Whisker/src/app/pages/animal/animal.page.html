@@ -74,7 +74,12 @@
     <ion-text><p class='small'>All animals on Whisker have up to date vaccinations.</p></ion-text>
     <ion-buttons id='lower-buttons'>
       <ion-button class='icon-button margin-left-auto'>Share  <ion-icon name='share-social-outline' class='margin-left'></ion-icon></ion-button>
-      <ion-button class='icon-button'>Favorite  <ion-icon name='paw-outline' color='success' class='margin-left'></ion-icon></ion-button>
+      <ion-button class='icon-button' (click)='favorite()' *ngIf='!this.loginService.user.favorites || !this.loginService.user.favorites.includes(this.animal.id)'>
+        Favorite  <ion-icon name='paw-outline' color='success' class='margin-left'></ion-icon>
+      </ion-button>
+      <ion-button disabled class='icon-button' *ngIf='this.loginService.user.favorites && this.loginService.user.favorites.includes(this.animal.id)'>
+        Favorited  <ion-icon name='paw' color='success' class='margin-left'></ion-icon>
+      </ion-button>
     </ion-buttons>
   </div>
 </div>

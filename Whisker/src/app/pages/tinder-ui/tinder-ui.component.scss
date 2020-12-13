@@ -49,6 +49,9 @@
     display: none;
   }
 }
+.tinder--card.dark-card {
+  background: #000000 !important;
+}
 
 .moving.tinder--card {
   transition: none;

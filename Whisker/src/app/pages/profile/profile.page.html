@@ -31,7 +31,7 @@
     <ion-row class="ion-no-padding">
       <ion-col size="4">
         <div class="ion-text-center">
-          <span class="text-statics-big text-primary">5</span> <br>
+          <span class="text-statics-big text-primary">{{(this.loginService.user.favorites) ? this.loginService.user.favorites.length : "0"}}</span> <br>
           <small>Favorites</small>
         </div>
       </ion-col>

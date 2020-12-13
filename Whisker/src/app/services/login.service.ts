@@ -5,6 +5,7 @@ import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
+import { Animal } from '../interfaces/Animal';
 
 @Component({
   providers: [GooglePlus, Facebook]
@@ -22,6 +23,7 @@ export class LoginService {
   private fbLogin: boolean = false;
   private googeLogin: boolean = false;
   user: User;
+  favoriteAnimals: Animal[] = [];
 
   // CHANGE THIS TO WHISKER'S, HAVE THIS HERE FOR A BASE TO WORK WITH
   apiUrl = 'https://www.whiskerapp.org:9000/';
@@ -35,6 +37,11 @@ export class LoginService {
           if (res.ok) {
             this.loggedIn = true;
             this.user = user;
+            if (this.user.favorites) {
+              this.user.favorites.forEach(aid => {
+                this.getAnimal(aid).subscribe((res: Animal) => {this.favoriteAnimals.push(res)});
+              });
+            }
             // this.router.navigate(['/home']);
           }
           else {
@@ -79,8 +86,14 @@ export class LoginService {
       expDate: result.expDate,
       admin: result.admin,
       imageUrl: result.imageUrl,
-      providerId: result.providerId
+      providerId: result.providerId,
+      favorites: result.favorites
     };
+    if (this.user.favorites) {
+      this.user.favorites.forEach(aid => {
+        this.getAnimal(aid).subscribe((res: Animal) => {this.favoriteAnimals.push(res)});
+      });
+    }
     this.storage.set('loggedIn', this.user);
     this.tokenPresent = true;
     this.loggingIn = false;
@@ -168,6 +181,12 @@ export class LoginService {
    }
    isTokenPresent(): boolean {
      return this.tokenPresent;
+   }
+   addFavorite(aid: string) {
+     return this.http.post(this.apiUrl + 'favorites/add/' + aid, {
+       uid: this.user.id,
+       sid: this.user.currentSessionId
+     });
    }
 
    async signInWithGoogle() {

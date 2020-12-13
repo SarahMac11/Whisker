@@ -1,4 +1,8 @@
 import { Component, Input, ViewChildren, QueryList, ElementRef, EventEmitter, Output, Renderer2  } from '@angular/core';
+import { Storage } from '@ionic/storage';
+import { Animal } from 'src/app/interfaces/Animal';
+import { LoginService } from 'src/app/services/login.service';
+import { SettingsService } from 'src/app/services/settings.service';
 
 @Component({
   selector: 'app-tinder-ui',
@@ -10,7 +14,9 @@ export class TinderUiComponent {
   @Input('cards') cards: Array<{
     petImage: string,
     petName: string,
-    petBio: string
+    petBio: string,
+    id: string,
+    match: number
   }>;
 
   @ViewChildren('tinderCard') tinderCards: QueryList<ElementRef>;
@@ -25,13 +31,21 @@ export class TinderUiComponent {
   heartVisible: boolean;
   crossVisible: boolean;
 
-  constructor(private renderer: Renderer2) { }
+  constructor(private renderer: Renderer2, private loginService: LoginService, private storage: Storage, private settingsService: SettingsService) { }
 
   userClickedButton(event, heart) {
     event.preventDefault();
     if (!this.cards.length) return false;
     if (heart) {
       this.tinderCardsArray[0].nativeElement.style.transform = 'translate(' + this.moveOutWidth + 'px, -100px) rotate(-30deg)';
+      var id = this.cards[0].id;
+      if (!this.loginService.user.favorites || !this.loginService.user.favorites.includes(this.cards[0].id)) this.loginService.addFavorite(this.cards[0].id).subscribe((res: {ok: boolean}) => {
+        if (res.ok) {
+          (this.loginService.user.favorites) ? this.loginService.user.favorites.push(id) : this.loginService.user.favorites = [id];
+          this.storage.set('loggedIn', this.loginService.user);
+          this.loginService.getAnimal(id).subscribe((res: Animal) => {this.loginService.favoriteAnimals.push(res)});
+        }
+      });
       this.toggleChoiceIndicator(false,true);
     } else {
       this.tinderCardsArray[0].nativeElement.style.transform = 'translate(-' + this.moveOutWidth + 'px, -100px) rotate(30deg)';
