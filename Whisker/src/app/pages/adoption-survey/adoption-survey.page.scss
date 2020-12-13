@@ -19,3 +19,6 @@ ion-button {
     transition: opacity 0.75s;
     margin-top: 10vh;
 }
+ion-select {
+    max-width: 100% !important;
+}
