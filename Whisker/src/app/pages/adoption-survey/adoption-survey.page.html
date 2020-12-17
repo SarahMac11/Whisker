@@ -18,17 +18,17 @@
           </ion-item>
           <ion-item>
             <ion-label>First Name</ion-label>
-            <ion-input class="ion-text-right" type="text" id="first" name="first" formControlName="first" required>
+            <ion-input class="ion-text-right" type="text" id="first" name="first" formControlName="first" readonly required>
             </ion-input>
           </ion-item>
           <ion-item>
             <ion-label>Last Name</ion-label>
-            <ion-input class="ion-text-right" type="text" id="last" name="last" formControlName="last" required>
+            <ion-input class="ion-text-right" type="text" id="last" name="last" formControlName="last" readonly required>
             </ion-input>
           </ion-item>
           <ion-item>
             <ion-label>Email</ion-label>
-            <ion-input class="ion-text-right" type="email" id="email" name="email" formControlName="email" required>
+            <ion-input class="ion-text-right" type="email" id="email" name="email" formControlName="email" readonly required>
             </ion-input>
           </ion-item>
           <ion-item>
@@ -710,7 +710,7 @@
                 </ion-button>
               </ion-col>
               <ion-col>
-                <ion-button expand="full" color="dark" (click)="validInputs(dog)"
+                <ion-button expand="full" color="dark" (click)="swipeNext(dog)"
                 *ngIf='this.slideNumber !== this.numSlides'>Next</ion-button>
               </ion-col>
             </ion-row>
@@ -718,9 +718,13 @@
         </form>
       </ion-slide>
       <ion-slide>
-        <form>
+        <form [formGroup]="submit">
           <ion-item>
             <ion-title class="ion-text-center">Submit Your Adoption Survey!</ion-title>
+          </ion-item>
+          <ion-item>
+            <ion-checkbox checked="false" id="agreement" name="agreement" formControlName="agreement"></ion-checkbox>
+            <ion-label class="checkbox">I agree these responses are accurate and my own</ion-label>
           </ion-item>
           <ion-grid>
             <ion-row>
@@ -729,7 +733,7 @@
                 </ion-button>
               </ion-col>
               <ion-col>
-                <ion-button expand="full" color="dark" (click)="submit()">Submit</ion-button>
+                <ion-button expand="full" color="dark" (click)="submitSurvey()">Submit</ion-button>
               </ion-col>
             </ion-row>
           </ion-grid>

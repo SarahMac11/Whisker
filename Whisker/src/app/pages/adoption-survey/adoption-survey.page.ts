@@ -18,6 +18,9 @@ export class AdoptionSurveyPage implements OnInit {
 
   @ViewChild('slider')  slides: IonSlides;
 
+  first: string;
+  last: string;
+  email: string;
   contact: FormGroup;
   address: FormGroup;
   housing: FormGroup;
@@ -33,6 +36,7 @@ export class AdoptionSurveyPage implements OnInit {
   barnCat: FormGroup;
   cat: FormGroup;
   dog: FormGroup;
+  submit: FormGroup;
 
   slideNumber: number;
   numSlides: number;
@@ -41,17 +45,15 @@ export class AdoptionSurveyPage implements OnInit {
   locked: boolean = false;
 
   constructor(private fb: FormBuilder, private loginService: LoginService) {
-    this.contact = fb.group({
-      first: ["", Validators.compose([Validators.required, Validators.pattern('[a-zA-Z]*'), Validators.minLength(0)])],
-      last: ["", Validators.compose([Validators.required, Validators.pattern('[a-zA-Z]*'), Validators.minLength(0)])],
-      email: ["", Validators.compose([Validators.required])],
-      phone: ["", Validators.compose([Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(10)])],
-    });
 
-    if (this.loginService.user) {
-      this.contact.value.first = this.loginService.user.firstname;
-      this.contact.value['last'] = this.loginService.user.lastname;
-      this.contact.value['email'] = this.loginService.user.email;
+    if(this.loginService.user) {
+      this.contact = fb.group({
+        first: [loginService.user.firstname, Validators.required],
+        last: [loginService.user.lastname, Validators.required],
+        email: [loginService.user.email, Validators.required],
+        phone: ["", Validators.compose([Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(10)])],
+      });
+      this.contact.valueChanges.subscribe(() => this.updateSlideNums());
     }
 
     this.address = fb.group({
@@ -163,6 +165,10 @@ export class AdoptionSurveyPage implements OnInit {
       dogIndoorOutdoor: ""
     });
     this.dog.valueChanges.subscribe(() => this.updateSlideNums());
+
+    this.submit = fb.group({
+      agreement: ""
+    });
   }
 
   ngOnInit() {
@@ -196,11 +202,11 @@ export class AdoptionSurveyPage implements OnInit {
   }
 
   validInputs(page: FormGroup) {
-    // this.print(page);
-    // if(!page.valid) {
-    //   alert("Invalid input");
-    //   return false;
-    // }
+    this.print(page);
+    if(!page.valid) {
+      alert("Invalid input");
+      return false;
+    }
     return true;
   }
 
@@ -218,5 +224,9 @@ export class AdoptionSurveyPage implements OnInit {
     this.slides.slidePrev();
     this.slideNumber--;
     this.slides.lockSwipes(true);
+  }
+
+  submitSurvey() {
+    // add to database
   }
 }
