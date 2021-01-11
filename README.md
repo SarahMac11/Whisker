@@ -4,17 +4,42 @@
 https://github.com/hudso1898/whiskerServ
 
 
-## Communication Plan
-Meet Tuesdays after class until 3:15pm via Zoom
-Meet Fridays via Zoom
-Communicate progress through updates to the project plan
-General questions can be sent to the Catstone Slack
+## Project Description
+Our mission is to connect animals in need to people who will provide love and care to them. Our goal is to ensure all animals who need a home can find one, and for people to find the perfect addition to their families. Through Whisker, these pairings are made possible.
 
-## Version Control
+## Languages
+- TypeScript
+- JavaScript
+- HTML
+- CSS
 
-What version control method did you choose?
-Git and GitHub
+## Databases
+MongoDB
 
-Why is this the best version control method for your group?
+## Architecture
+- AWS EC2
+- AWS RDS (merged into EC2)
+- Ubuntu instances, Apache2 web servers
+- pm2 (NodeJS server management)
+- Email service (Gmail with nodemailer)
 
-All members are familiar with and comfortable using GitHub as it has been a requirement in other courses. We have also encountered git tools in our internships and professional experiences. As the most popular VCS in the industry, we feel it is appropriate to use it. It is also a very appropriate choice for the nature of our application, as an Ionic project with a Node/Express backend server.
+## Technologies Used
+- Ionic
+- Angular
+- NodeJS
+- Express
+- MongoDB
+- Visual Studio Code
+- GitHub
+
+## Testing
+- Unit
+- Integration
+- System
+
+## Project Management
+- Agile
+- Complete Sprints every two weeks
+- Communicate via Slack
+- Zoom meetings as necessary
+- Track progress on Trello board and project plan
