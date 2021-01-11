@@ -1,9 +1,7 @@
 # Whisker
 
-### Helpful links for Ionic and Angular
-https://ionicframework.com/docs
-
-https://angular.io/docs
+### Link to Whisker Node.js server-side code
+https://github.com/hudso1898/whiskerServ
 
 
 ## Communication Plan
